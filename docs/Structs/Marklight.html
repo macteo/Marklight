@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Marklight Struct Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/Marklight" class="dashAnchor"></a>
+    <a title="Marklight Struct Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">Marklight Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/macteo/marklight"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">Marklight Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        Marklight Struct Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/MarklightTextStorage.html">MarklightTextStorage</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Marklight.html">Marklight</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Marklight</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Marklight</span></code></pre>
+
+                </div>
+              </div>
+            <p>Marklight struct that parses a <code>String</code> inside a <code>NSTextStorage</code>
+subclass, looking for markdown syntax to be highlighted. Internally many 
+regular expressions are used to detect the syntax. The highlights will be 
+applied as attributes to the <code>NSTextStorage</code>&rsquo;s <code>NSAttributedString</code>. You should 
+create your our <code>NSTextStorage</code> subclass or use the readily available 
+<code><a href="../Classes/MarklightTextStorage.html">MarklightTextStorage</a></code> class.</p>
+
+<div class="aside aside-see">
+          <p class="aside-title">See</p>
+          <code><a href="../Classes/MarklightTextStorage.html">MarklightTextStorage</a></code>
+
+        </div>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZvV9Marklight9Marklight11syntaxColorCSo7UIColor"></a>
+                    <a name="//apple_ref/swift/Variable/syntaxColor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZvV9Marklight9Marklight11syntaxColorCSo7UIColor">syntaxColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>UIColor</code> used to highlight markdown syntax. Default value is light grey.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">var</span> <span class="nv">syntaxColor</span> <span class="o">=</span> <span class="kt">UIColor</span><span class="o">.</span><span class="nf">lightGrayColor</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/macteo/marklight/tree/master/Marklight/Marklight.swift#L148">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZvV9Marklight9Marklight12codeFontNameSS"></a>
+                    <a name="//apple_ref/swift/Variable/codeFontName" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZvV9Marklight9Marklight12codeFontNameSS">codeFontName</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Font used for blocks and inline code. Default value is <em>Menlo</em>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">var</span> <span class="nv">codeFontName</span> <span class="o">=</span> <span class="s">"Menlo"</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/macteo/marklight/tree/master/Marklight/Marklight.swift#L153">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZvV9Marklight9Marklight9codeColorCSo7UIColor"></a>
+                    <a name="//apple_ref/swift/Variable/codeColor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZvV9Marklight9Marklight9codeColorCSo7UIColor">codeColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>UIColor</code> used for blocks and inline code. Default value is dark grey.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">var</span> <span class="nv">codeColor</span> <span class="o">=</span> <span class="kt">UIColor</span><span class="o">.</span><span class="nf">darkGrayColor</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/macteo/marklight/tree/master/Marklight/Marklight.swift#L158">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZvV9Marklight9Marklight13quoteFontNameSS"></a>
+                    <a name="//apple_ref/swift/Variable/quoteFontName" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZvV9Marklight9Marklight13quoteFontNameSS">quoteFontName</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Font used for quote blocks. Default value is <em>Menlo</em>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">var</span> <span class="nv">quoteFontName</span> <span class="o">=</span> <span class="s">"Menlo"</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/macteo/marklight/tree/master/Marklight/Marklight.swift#L163">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZvV9Marklight9Marklight10quoteColorCSo7UIColor"></a>
+                    <a name="//apple_ref/swift/Variable/quoteColor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZvV9Marklight9Marklight10quoteColorCSo7UIColor">quoteColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>UIColor</code> used for quote blocks. Default value is dark grey.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">var</span> <span class="nv">quoteColor</span> <span class="o">=</span> <span class="kt">UIColor</span><span class="o">.</span><span class="nf">darkGrayColor</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/macteo/marklight/tree/master/Marklight/Marklight.swift#L168">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZvV9Marklight9Marklight16quoteIndendationV12CoreGraphics7CGFloat"></a>
+                    <a name="//apple_ref/swift/Variable/quoteIndendation" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZvV9Marklight9Marklight16quoteIndendationV12CoreGraphics7CGFloat">quoteIndendation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Quote indentation in points. Default 20.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">var</span> <span class="nv">quoteIndendation</span> <span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">20</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/macteo/marklight/tree/master/Marklight/Marklight.swift#L173">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZvV9Marklight9Marklight13fontTextStyleSS"></a>
+                    <a name="//apple_ref/swift/Variable/fontTextStyle" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZvV9Marklight9Marklight13fontTextStyleSS">fontTextStyle</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Dynamic type font text style, default <code>UIFontTextStyleBody</code>.</p>
+
+<div class="aside aside-see">
+          <p class="aside-title">See</p>
+          <a href="xcdoc://?url=developer.apple.com/library/ios/documentation/UIKit/Reference/UIFontDescriptor_Class/index.html#//apple_ref/doc/constant_group/Text_Styles">Text 
+Styles</a>
+
+        </div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">var</span> <span class="nv">fontTextStyle</span> <span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="kt">UIFontTextStyleBody</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/macteo/marklight/tree/master/Marklight/Marklight.swift#L182">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Processing"></a>
+                <a name="//apple_ref/swift/Section/Processing" class="dashAnchor"></a>
+                <a href="#/Processing">
+                  <h3 class="section-name">Processing</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFV9Marklight9Marklight14processEditingFMS0_FCSo13NSTextStorageT_"></a>
+                    <a name="//apple_ref/swift/Method/processEditing(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFV9Marklight9Marklight14processEditingFMS0_FCSo13NSTextStorageT_">processEditing(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This function should be called by the <code>-processEditing</code> method in your 
+    <code>NSTextStorage</code> subclass and this is the function that is being called 
+    for every change in the <code>UITextView</code>&rsquo;s text.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">processEditing</span><span class="p">(</span><span class="nv">textStorage</span><span class="p">:</span> <span class="kt">NSTextStorage</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>textStorage</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>your <code>NSTextStorage</code> subclass as the highlights will be applied to its attributed string through the <code>-addAttribute:value:range:</code> method.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/macteo/marklight/tree/master/Marklight/Marklight.swift#L251-L399">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2015 <a class="link" href="http://macteo.it" target="_blank" rel="external">MacTeo</a>. All rights reserved. (Last updated: 2015-12-31)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.4.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
