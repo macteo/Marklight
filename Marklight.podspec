@@ -3,7 +3,7 @@
 
 Pod::Spec.new do |s|
   s.name                  = "Marklight"
-  s.version               = "0.1.0"
+  s.version               = "0.1.1"
   s.summary               = "Markdown syntax highlighter for iOS."
 
 # This description is used to generate tags and improve search results.
@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
   s.social_media_url      = "http://twitter.com/macteo"
   s.platform              = :ios
   s.ios.deployment_target = "8.0"
-  s.source                = { :git => "https://github.com/macteo/Marklight.git", :tag => "v0.1.0" }
+  s.source                = { :git => "https://github.com/macteo/Marklight.git", :tag => s.version }
   s.source_files          = "Marklight/**/*.{swift}"
   s.requires_arc          = true
 end
