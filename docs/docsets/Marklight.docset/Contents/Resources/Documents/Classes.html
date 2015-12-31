@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Classes  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+  </head>
+  <body>
+    <a title="Classes  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">Marklight Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/macteo/marklight"><img src="img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">Marklight Reference</a>
+        <img id="carat" src="img/carat.png" />
+        Classes  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/MarklightTextStorage.html">MarklightTextStorage</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/Marklight.html">Marklight</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Classes</h1>
+            <p>The following classes are available globally.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:C9Marklight20MarklightTextStorage"></a>
+                    <a name="//apple_ref/swift/Class/MarklightTextStorage" class="dashAnchor"></a>
+                    <a class="token" href="#/s:C9Marklight20MarklightTextStorage">MarklightTextStorage</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>NSTextStorage</code> subclass that uses <code><a href="Structs/Marklight.html">Marklight</a></code> to highlight markdown syntax
+on a <code>UITextView</code>.
+In your <code>UIViewController</code> subclass keep a strong instance of the this
+<code>MarklightTextStorage</code> class.
+<code>swift
+let textStorage = MarklightTextStorage()
+</code></p>
+
+<p>Customise the appearance as desired:</p>
+
+<ul>
+<li>Dynamic text style.</li>
+<li>Markdown syntax color.</li>
+<li>Code&rsquo;s font and color.</li>
+<li>Quotes&rsquo; font and color.</li>
+</ul>
+
+<p>As per Apple&rsquo;s documentation it should be enough to assign the
+<code>UITextView</code>&rsquo;s <code>NSLayoutManager</code> to the <code>NSTextStorage</code> subclass, in our
+case <code>MarklightTextStorage</code>.</p>
+
+<pre class="highlight swift"><code> <span class="n">textStorage</span><span class="o">.</span><span class="nf">addLayoutManager</span><span class="p">(</span><span class="n">textView</span><span class="o">.</span><span class="n">layoutManager</span><span class="p">)</span>
+</code></pre>
+
+<p>However I&rsquo;m experiencing some crashes if I want to preload some text instead
+of letting the user start from scratch with a new text. A workaround is 
+proposed below.</p>
+
+<p>For simplicity we assume you have a <code>String</code> to be highlighted inside an
+editable <code>UITextView</code> loaded from a storyboard.</p>
+
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">string</span> <span class="o">=</span> <span class="s">"# My awesome markdown string"</span>
+</code></pre>
+
+<p>Convert <code>string</code> to an <code>NSAttributedString</code></p>
+
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">attributedString</span> <span class="o">=</span> <span class="kt">NSAttributedString</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="n">string</span><span class="p">)</span>
+</code></pre>
+
+<p>Set the loaded string to the <code>UITextView</code></p>
+
+<pre class="highlight swift"><code><span class="n">textView</span><span class="o">.</span><span class="n">attributedText</span> <span class="o">=</span> <span class="n">attributedString</span>
+</code></pre>
+
+<p>Append the loaded string to the <code>NSTextStorage</code></p>
+
+<pre class="highlight swift"><code><span class="n">textStorage</span><span class="o">.</span><span class="nf">appendAttributedString</span><span class="p">(</span><span class="n">attributedString</span><span class="p">)</span>
+</code></pre>
+
+<p>For more informations on how to implement your own <code>NSTextStorage</code> subclass,
+follow Apple&rsquo;s official documentation.</p>
+
+<div class="aside aside-see">
+          <p class="aside-title">See</p>
+          <a href="xcdoc://?url=developer.apple.com/library/ios/documentation/UIKit/Reference/NSTextStorageDelegate_Protocol_TextKit/index.html#//apple_ref/swift/intf/c:objc(pl)NSTextStorage"><code>NSTextStorage</code></a>
+
+        </div><div class="aside aside-see">
+          <p class="aside-title">See</p>
+          <code><a href="Structs/Marklight.html">Marklight</a></code>
+
+        </div>
+
+                        <a href="Classes/MarklightTextStorage.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">MarklightTextStorage</span><span class="p">:</span> <span class="kt">NSTextStorage</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/macteo/marklight/tree/master/Marklight/MarklightTextStorage.swift#L69-L289">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2015 <a class="link" href="http://macteo.it" target="_blank" rel="external">MacTeo</a>. All rights reserved. (Last updated: 2015-12-31)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.4.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

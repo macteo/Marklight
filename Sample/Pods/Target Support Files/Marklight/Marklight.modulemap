@@ -1,0 +1,6 @@
+framework module Marklight {
+  umbrella header "Marklight-umbrella.h"
+
+  export *
+  module * { export * }
+}

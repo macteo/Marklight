@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Marklight  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+  </head>
+  <body>
+    <a title="Marklight  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">Marklight Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/macteo/marklight"><img src="img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">Marklight Reference</a>
+        <img id="carat" src="img/carat.png" />
+        Marklight  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/MarklightTextStorage.html">MarklightTextStorage</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/Marklight.html">Marklight</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <a href='#marklight' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='marklight'>Marklight</h1>
+
+<p>Markdown syntax highlighter for iOS.</p>
+
+<p><a href="https://cocoapods.org/?q=desman"><img src="https://img.shields.io/cocoapods/v/Marklight.svg" alt="CocoaPods"></a> <a href="https://raw.githubusercontent.com/macteo/marklight/master/LICENSE"><img src="https://img.shields.io/cocoapods/l/Marklight.svg" alt="License MIT"></a> <a href="http://cocoadocs.org/docsets/Marklight"><img src="https://img.shields.io/cocoapods/p/marklight.svg" alt="Platforms"></a> <a href="http://cocoadocs.org/docsets/Marklight"><img src="https://img.shields.io/cocoapods/v/marklight.svg" alt="Version"></a> <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage compatible"></a> <img src="https://travis-ci.org/macteo/Markingbird.svg" alt=""></p>
+
+<p>Regular expressions are taken from on <a href="https://github.com/kristopherjohnson/Markingbird">Markingbird</a>: markdown parser and html generator.</p>
+<a href='#features' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='features'>Features</h2>
+
+<ul>
+<li>[x] Applicable to any <code>UITextView</code>.</li>
+<li>[x] <code>NSTextStorage</code> subclass ready to use.</li>
+<li>[x] Struct optimized for performances.</li>
+<li>[x] Swift 2.1 compatible.</li>
+<li>[x] Dynamic text style supported.</li>
+<li>[x] Customizable syntax color.</li>
+<li>[x] Choose font and color for code blocks.</li>
+<li>[x] Choose font and color for quotes.</li>
+<li>[x] Choose dynamic type font text style.</li>
+<li>[x] Quote indentation.</li>
+<li>[x] Documented.</li>
+<li>[ ] Parsing tests.</li>
+<li>[ ] Performance tests.</li>
+<li>[ ] OS X compatibility.</li>
+</ul>
+<a href='#requirements' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='requirements'>Requirements</h2>
+
+<ul>
+<li>iOS 8.0+</li>
+<li>Xcode 7.2+</li>
+</ul>
+<a href='#installation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='installation'>Installation</h2>
+<a href='#cocoapods' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='cocoapods'>CocoaPods</h3>
+
+<p><a href="http://cocoapods.org">CocoaPods</a> is a dependency manager for Cocoa projects. You can install it with the following command:</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>gem install cocoapods
+</code></pre>
+
+<blockquote>
+<p>CocoaPods 0.39.0+ is required to build Marklight.</p>
+</blockquote>
+
+<p>To integrate Marklight into your Xcode project using CocoaPods, specify it in your <code>Podfile</code>:</p>
+<pre class="highlight ruby"><code><span class="n">source</span> <span class="s1">'https://github.com/CocoaPods/Specs.git'</span>
+<span class="n">platform</span> <span class="ss">:ios</span><span class="p">,</span> <span class="s1">'8.0'</span>
+<span class="n">use_frameworks!</span>
+
+<span class="n">pod</span> <span class="s1">'Marklight'</span>
+</code></pre>
+
+<p>Then, run the following command:</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>pod install
+</code></pre>
+<a href='#carthage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='carthage'>Carthage</h3>
+
+<p><a href="https://github.com/Carthage/Carthage">Carthage</a> is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks.</p>
+
+<p>You can install <a href="https://github.com/Carthage/Carthage">Carthage</a> with <a href="http://brew.sh/">Homebrew</a> using the following command:</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>brew update
+<span class="gp">$ </span>brew install carthage
+</code></pre>
+
+<p>To integrate Marklight into your Xcode project using <a href="https://github.com/Carthage/Carthage">Carthage</a>, specify it in your <code>Cartfile</code>:</p>
+<pre class="highlight plaintext"><code>github "macteo/Marklight"
+</code></pre>
+
+<p>Run <code>carthage update --platform iOS</code> to build the framework and drag the built <code>Marklight.framework</code> into your Xcode project.</p>
+<a href='#manually' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='manually'>Manually</h3>
+
+<p>Add the <em>Marklight</em> Xcode project to your own. Then add the <code>Marklight</code> framework as desired to the embedded binaries of your app&rsquo;s target.</p>
+<a href='#usage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='usage'>Usage</h2>
+
+<p>In this repository you can find a sample project with few lines of code in the <code>ViewController</code> class for a jumpstart.</p>
+
+<p><em>Sample code is written in Swift but Objective-C should be supported too, if you find an incompatibility please open an issue.</em></p>
+<a href='#integration' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='integration'>Integration</h3>
+
+<p>The easiest way to crete a user editable <code>UITextView</code> with markdown syntax highlight is to use the provided <code>MarklightTextStorage</code> class as <code>NSTextStorage</code> and add the <code>UITextView</code>&rsquo;s <code>textLayout</code> to the <code>MarklightTextStorage</code> text storage.</p>
+
+<p>Import <em>Marklight</em> modules into your Swift class</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">Marklight</span>
+</code></pre>
+
+<p>or if you are writing in Objective-C</p>
+<pre class="highlight objective_c"><code><span class="cp">#import &lt;Marklight/Marklight-Swift.h&gt;
+</span></code></pre>
+
+<blockquote>
+<p>Keep in mind the you have to let the project generate the Bridging Header otherwise the integration may fail.</p>
+</blockquote>
+
+<p>In your <code>UIViewController</code> subclass keep a strong instance of the this <code>MarklightTextStorage</code> class.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">textStorage</span> <span class="o">=</span> <span class="kt">MarklightTextStorage</span><span class="p">()</span>
+</code></pre>
+
+<p>Customize the appearance as desired:</p>
+
+<ul>
+<li>Dynamic text style.</li>
+<li>Markdown syntax color.</li>
+<li>Code&rsquo;s font and color.</li>
+<li>Quotes&rsquo; font and color.</li>
+</ul>
+
+<p>As per Apple&rsquo;s documentation it should be enough to assign the <code>UITextView</code>&rsquo;s <code>NSLayoutManager</code> to the <code>NSTextStorage</code> subclass, in our case <code>MarklightTextStorage</code>.</p>
+<pre class="highlight swift"><code> <span class="n">textStorage</span><span class="o">.</span><span class="nf">addLayoutManager</span><span class="p">(</span><span class="n">textView</span><span class="o">.</span><span class="n">layoutManager</span><span class="p">)</span>
+</code></pre>
+
+<p>However I&rsquo;m experiencing some crashes if I want to preload some text instead of letting the user start from scratch with a new text. A workaround is proposed below.</p>
+
+<p>For simplicity we assume you have a <code>String</code> to be highlighted inside an editable <code>UITextView</code> loaded from a storyboard.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">string</span> <span class="o">=</span> <span class="s">"# My awesome markdown string"</span>
+</code></pre>
+
+<p>Convert <code>string</code> to an <code>NSAttributedString</code></p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">attributedString</span> <span class="o">=</span> <span class="kt">NSAttributedString</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="n">string</span><span class="p">)</span>
+</code></pre>
+
+<p>Set the loaded string to the <code>UITextView</code></p>
+<pre class="highlight swift"><code><span class="n">textView</span><span class="o">.</span><span class="n">attributedText</span> <span class="o">=</span> <span class="n">attributedString</span>
+</code></pre>
+
+<p>Append the loaded string to the <code>NSTextStorage</code></p>
+<pre class="highlight swift"><code><span class="n">textStorage</span><span class="o">.</span><span class="nf">appendAttributedString</span><span class="p">(</span><span class="n">attributedString</span><span class="p">)</span>
+</code></pre>
+
+<p>Enjoy.</p>
+<a href='#acknowledgements' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='acknowledgements'>Acknowledgements</h2>
+
+<p>Matteo Gavagnin – <a href="http://twitter.com/macteo">@macteo</a></p>
+
+<hr>
+
+<p>Marklight is heavily based on <a href="https://github.com/kristopherjohnson/Markingbird">Markingbird</a>, so many thanks to <a href="http://undefinedvalue.com">Kristopher Johnson</a> and every previous contribution on which <a href="https://github.com/kristopherjohnson/Markingbird">Markingbird</a> is based upon.</p>
+<a href='#license' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='license'>License</h2>
+
+<p>Marklight is released under the MIT license. See <a href="https://raw.githubusercontent.com/macteo/Marklight/master/LICENSE">LICENSE</a> for details.</p>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2015 <a class="link" href="http://macteo.it" target="_blank" rel="external">MacTeo</a>. All rights reserved. (Last updated: 2015-12-31)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.4.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
