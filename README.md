@@ -1,7 +1,7 @@
 # Marklight
 Markdown syntax highlighter for iOS.
 
-[![CocoaPods](https://img.shields.io/cocoapods/v/Marklight.svg)](https://cocoapods.org/?q=desman) [![License MIT](https://img.shields.io/cocoapods/l/Marklight.svg)](https://raw.githubusercontent.com/macteo/marklight/master/LICENSE) [![Version](https://img.shields.io/cocoapods/v/marklight.svg)](http://cocoadocs.org/docsets/Marklight) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) ![](https://travis-ci.org/macteo/Marklight.svg)
+[![CocoaPods](https://img.shields.io/cocoapods/v/Marklight.svg)](https://cocoapods.org/?q=desman) [![License MIT](https://img.shields.io/cocoapods/l/Marklight.svg)](https://raw.githubusercontent.com/macteo/marklight/master/LICENSE) [![Version](https://img.shields.io/cocoapods/v/marklight.svg)](http://cocoadocs.org/docsets/Marklight) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![travis-ci](https://travis-ci.org/macteo/Marklight.svg?branch=master)](https://travis-ci.org/macteo/Marklight)
 
 ## Description
 

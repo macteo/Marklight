@@ -2,7 +2,7 @@
 //  Marklight
 //
 //  Created by Matteo Gavagnin on 01/01/16.
-//  Copyright © 2016 Dolomate. LICENSE for details.
+//  Copyright © 2016 MacTeo. LICENSE for details.
 //
 
 #import <UIKit/UIKit.h>
