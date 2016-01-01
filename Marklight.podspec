@@ -1,17 +1,9 @@
-#  Be sure to run `pod spec lint Marklight.podspec' to ensure this is a
-#  valid spec and to remove all comments including this before submitting the spec.
-
 Pod::Spec.new do |s|
   s.name                  = "Marklight"
-  s.version               = "0.1.1"
+  s.version               = "0.1.2"
   s.summary               = "Markdown syntax highlighter for iOS."
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description           = <<-DESC
+  Marklight is a drop in component to easily add realtime markdown syntax highlight on any user editable text view on iOS applications.
                             DESC
   s.homepage              = "https://github.com/macteo/Marklight"
   s.license               = { :type => "MIT", :file => "LICENSE" }
@@ -19,7 +11,7 @@ Pod::Spec.new do |s|
   s.social_media_url      = "http://twitter.com/macteo"
   s.platform              = :ios
   s.ios.deployment_target = "8.0"
-  s.source                = { :git => "https://github.com/macteo/Marklight.git", :tag => s.version }
+  s.source                = { :git => "https://github.com/macteo/Marklight.git", :tag => "v#{s.version}" }
   s.source_files          = "Marklight/**/*.{swift}"
   s.requires_arc          = true
 end

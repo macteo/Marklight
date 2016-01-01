@@ -1,8 +1,8 @@
-# An h1 header
+# H1 header
 
 Paragraphs are separated by a blank line.
 
-2nd paragraph. *Italic*, **bold**, and `monospace`. 
+2nd paragraph: you can write `monospace`, *italic* and **bold**. 
 
 Itemized lists look like:
 
@@ -10,14 +10,12 @@ Itemized lists look like:
 * that one
 * the other one
 
-> Block quotes are
-> written like so.
+> Block quotes are written like so.
 > 
-> They can span multiple paragraphs,
-> if you like.
+> They can span multiple paragraphs, if you like.
 
 
-## An h2 header
+## H2 header
 
 Here's a numbered list:
 
