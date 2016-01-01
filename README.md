@@ -10,7 +10,7 @@ Marklight doesn't include html generation from markdown, but you can use one of 
 
 Regular expressions are taken from [Markingbird](https://github.com/kristopherjohnson/Markingbird): markdown parser and html generator.
 
-![Marklight Gif](https://raw.githubusercontent.com/macteo/Marklight/master/Assets/marklight.gif)![Screenshot 0](https://raw.githubusercontent.com/macteo/Marklight/master/Assets/Screenshot-0.png)![Screenshot 1](https://raw.githubusercontent.com/macteo/Marklight/master/Assets/Screenshot-1.png)
+![Marklight Gif](https://raw.githubusercontent.com/macteo/Marklight/master/Assets/marklight.gif)![Screenshot 0](https://raw.githubusercontent.com/macteo/Marklight/master/Assets/screenshot-0.png)![Screenshot 1](https://raw.githubusercontent.com/macteo/Marklight/master/Assets/screenshot-1.png)
 
 ## Features
 
