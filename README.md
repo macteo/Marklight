@@ -1,9 +1,16 @@
 # Marklight
 Markdown syntax highlighter for iOS.
 
-[![CocoaPods](https://img.shields.io/cocoapods/v/Marklight.svg)](https://cocoapods.org/?q=desman) [![License MIT](https://img.shields.io/cocoapods/l/Marklight.svg)](https://raw.githubusercontent.com/macteo/marklight/master/LICENSE) [![Platforms](https://img.shields.io/cocoapods/p/marklight.svg)](http://cocoadocs.org/docsets/Marklight) [![Version](https://img.shields.io/cocoapods/v/marklight.svg)](http://cocoadocs.org/docsets/Marklight) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) ![](https://travis-ci.org/macteo/Marklight.svg)
+[![CocoaPods](https://img.shields.io/cocoapods/v/Marklight.svg)](https://cocoapods.org/?q=desman) [![License MIT](https://img.shields.io/cocoapods/l/Marklight.svg)](https://raw.githubusercontent.com/macteo/marklight/master/LICENSE) [![Version](https://img.shields.io/cocoapods/v/marklight.svg)](http://cocoadocs.org/docsets/Marklight) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) ![](https://travis-ci.org/macteo/Marklight.svg)
 
-Regular expressions are taken from on [Markingbird](https://github.com/kristopherjohnson/Markingbird): markdown parser and html generator.
+## Description
+
+Marklight is a drop in component to easily add realtime markdown syntax highlight on any user editable text view on iOS applications.
+Marklight doesn't include html generation from markdown, but you can use one of the many other components available like [Markingbird](https://github.com/kristopherjohnson/Markingbird).
+
+Regular expressions are taken from [Markingbird](https://github.com/kristopherjohnson/Markingbird): markdown parser and html generator.
+
+![Marklight Gif](https://raw.githubusercontent.com/macteo/Marklight/master/Assets/marklight.gif)![Screenshot 0](https://raw.githubusercontent.com/macteo/Marklight/master/Assets/Screenshot-0.png)![Screenshot 1](https://raw.githubusercontent.com/macteo/Marklight/master/Assets/Screenshot-1.png)
 
 ## Features
 
@@ -12,7 +19,7 @@ Regular expressions are taken from on [Markingbird](https://github.com/kristophe
 - [x] Struct optimized for performances.
 - [x] Swift 2.1 compatible.
 - [x] Dynamic text style supported.
-- [x] Customizable syntax color.
+- [x] Choose markdown syntax color.
 - [x] Choose font and color for code blocks.
 - [x] Choose font and color for quotes.
 - [x] Choose dynamic type font text style.
