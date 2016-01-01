@@ -3,7 +3,7 @@
 //  MarklightTests
 //
 //  Created by Matteo Gavagnin on 30/12/15.
-//  Copyright © 2015 Dolomate. All rights reserved.
+//  Copyright © 2016 MacTeo. All rights reserved.
 //
 
 import XCTest
