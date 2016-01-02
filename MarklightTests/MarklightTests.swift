@@ -62,7 +62,6 @@ class MarklightTests: XCTestCase {
         if let attribute = self.textStorage.attribute(NSFontAttributeName, atIndex: 2, effectiveRange: &range!) as? UIFont {
             let textSize = UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleBody).pointSize
             XCTAssert(attribute == UIFont.boldSystemFontOfSize(textSize))
-            print("range length \(range?.length)")
             XCTAssert(range?.length == 7)
         } else {
             XCTFail()
@@ -77,7 +76,6 @@ class MarklightTests: XCTestCase {
         if let attribute = self.textStorage.attribute(NSFontAttributeName, atIndex: 2, effectiveRange: &range!) as? UIFont {
             let textSize = UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleBody).pointSize
             XCTAssert(attribute == UIFont.boldSystemFontOfSize(textSize))
-            print("range length \(range?.length)")
             XCTAssert(range?.length == 7)
         } else {
             XCTFail()
