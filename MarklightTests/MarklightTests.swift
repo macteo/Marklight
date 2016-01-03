@@ -102,5 +102,43 @@ class MarklightTests: XCTestCase {
         // TODO: test following attributes
     }
     
+    func testList() {
+        let string = ["* First", "* Second", "* Third"].joinWithSeparator("\n")
+        let attributedString = NSAttributedString(string: string)
+        self.textStorage.replaceCharactersInRange(NSMakeRange(0, 0), withAttributedString: attributedString)
+        var range : NSRange? = NSMakeRange(0, 1)
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 0, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.lightGrayColor())
+            XCTAssert(range?.length == 1)
+        } else {
+            XCTFail()
+        }
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 8, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.lightGrayColor())
+            XCTAssert(range?.length == 1)
+        } else {
+            XCTFail()
+        }
+    }
+    
+    func testAnchor() {
+        let string = ["[Example](http://www.example.com)",""].joinWithSeparator("\n")
+        let attributedString = NSAttributedString(string: string)
+        self.textStorage.replaceCharactersInRange(NSMakeRange(0, 0), withAttributedString: attributedString)
+        var range : NSRange? = NSMakeRange(0, 1)
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 0, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.lightGrayColor())
+            XCTAssert(range?.length == 1)
+        } else {
+            XCTFail()
+        }
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 8, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.lightGrayColor())
+            XCTAssert(range?.length == 25)
+        } else {
+            XCTFail()
+        }
+    }
+    
     // TODO: test the remaining markdown syntax
 }
