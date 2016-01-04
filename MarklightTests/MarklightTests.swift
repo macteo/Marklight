@@ -140,5 +140,26 @@ class MarklightTests: XCTestCase {
         }
     }
     
+    // TODO: test anchor inline?
+    
+    func testImage() {
+        let string = ["![Example](http://www.example.com/image.png)",""].joinWithSeparator("\n")
+        let attributedString = NSAttributedString(string: string)
+        self.textStorage.replaceCharactersInRange(NSMakeRange(0, 0), withAttributedString: attributedString)
+        var range : NSRange? = NSMakeRange(0, 1)
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 0, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.lightGrayColor())
+            XCTAssert(range?.length == 2)
+        } else {
+            XCTFail()
+        }
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 9, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.lightGrayColor())
+            XCTAssert(range?.length == 35)
+        } else {
+            XCTFail()
+        }
+    }
+    
     // TODO: test the remaining markdown syntax
 }
