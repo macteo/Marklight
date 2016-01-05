@@ -161,5 +161,31 @@ class MarklightTests: XCTestCase {
         }
     }
     
+    func testCodeBlock() {
+        let string = ["```","func testCodeBlock()","```",""].joinWithSeparator("\n")
+        let attributedString = NSAttributedString(string: string)
+        self.textStorage.replaceCharactersInRange(NSMakeRange(0, 0), withAttributedString: attributedString)
+        var range : NSRange? = NSMakeRange(0, 1)
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 0, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.lightGrayColor())
+            XCTAssert(range?.length == 3)
+        } else {
+            XCTFail()
+        }
+        if let attribute = self.textStorage.attribute(NSFontAttributeName, atIndex: 3, effectiveRange: &range!) as? UIFont {
+            let textSize = UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleBody).pointSize
+            XCTAssert(attribute == UIFont(name: "Menlo", size: textSize))
+            XCTAssert(range?.length == 22)
+        } else {
+            XCTFail()
+        }
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 25, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.lightGrayColor())
+            XCTAssert(range?.length == 3)
+        } else {
+            XCTFail()
+        }
+    }
+    
     // TODO: test the remaining markdown syntax
 }
