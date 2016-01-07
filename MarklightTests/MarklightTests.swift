@@ -187,6 +187,26 @@ class MarklightTests: XCTestCase {
         }
     }
     
+    func testIndentedCodeBlock() {
+        let string = ["    func testCodeBlock() {","    }",""].joinWithSeparator("\n")
+        let attributedString = NSAttributedString(string: string)
+        self.textStorage.replaceCharactersInRange(NSMakeRange(0, 0), withAttributedString: attributedString)
+        var range : NSRange? = NSMakeRange(0, 1)
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 0, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.darkGrayColor())
+            XCTAssert(range?.length == 33)
+        } else {
+            XCTFail()
+        }
+        if let attribute = self.textStorage.attribute(NSFontAttributeName, atIndex: 0, effectiveRange: &range!) as? UIFont {
+            let textSize = UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleBody).pointSize
+            XCTAssert(attribute == UIFont(name: "Menlo", size: textSize))
+            XCTAssert(range?.length == 33)
+        } else {
+            XCTFail()
+        }
+    }
+    
     func testCodeSpan() {
         let string = ["This is a phrase with inline `code`",""].joinWithSeparator("\n")
         let attributedString = NSAttributedString(string: string)
@@ -208,6 +228,25 @@ class MarklightTests: XCTestCase {
         if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 34, effectiveRange: &range!) as? UIColor {
             XCTAssert(attribute == UIColor.lightGrayColor())
             XCTAssert(range?.length == 1)
+        } else {
+            XCTFail()
+        }
+    }
+    
+    func testQuote() {
+        let string = ["> This is a quoted line","> This another one", ""].joinWithSeparator("\n")
+        let attributedString = NSAttributedString(string: string)
+        self.textStorage.replaceCharactersInRange(NSMakeRange(0, 0), withAttributedString: attributedString)
+        var range : NSRange? = NSMakeRange(0, 1)
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 0, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.lightGrayColor())
+            XCTAssert(range?.length == 2)
+        } else {
+            XCTFail()
+        }
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 24, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.lightGrayColor())
+            XCTAssert(range?.length == 2)
         } else {
             XCTFail()
         }
