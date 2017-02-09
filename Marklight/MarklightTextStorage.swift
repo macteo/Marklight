@@ -66,42 +66,42 @@ import UIKit
     - see: `Marklight`
  */
 
-public class MarklightTextStorage: NSTextStorage {
+open class MarklightTextStorage: NSTextStorage {
 
     // We store here the `NSAttributedString`.
-    private var imp = NSMutableAttributedString()
+    fileprivate var imp = NSMutableAttributedString(string: "")
     
     // MARK: Syntax highlight customisation
     
     /**
     `UIColor` used to highlight markdown syntax. Default value is light grey.
     */
-    public var syntaxColor = UIColor.lightGrayColor()
+    open var syntaxColor = UIColor.lightGray
     
     /**
      Font used for blocks and inline code. Default value is *Menlo*.
      */
-    public var codeFontName = "Menlo"
+    open var codeFontName = "Menlo"
     
     /**
      `UIColor` used for blocks and inline code. Default value is dark grey.
      */
-    public var codeColor = UIColor.darkGrayColor()
+    open var codeColor = UIColor.darkGray
     
     /**
      Font used for quote blocks. Default value is *Menlo*.
      */
-    public var quoteFontName = "Menlo"
+    open var quoteFontName = "Menlo"
     
     /**
      `UIColor` used for quote blocks. Default value is dark grey.
      */
-    public var quoteColor = UIColor.darkGrayColor()
+    open var quoteColor = UIColor.darkGray
     
     /**
      Quote indentation in points. Default 20.
      */
-    public var quoteIndendation : CGFloat = 20
+    open var quoteIndendation : CGFloat = 20
     
     /**
      Dynamic type font text style, default `UIFontTextStyleBody`.
@@ -110,7 +110,7 @@ public class MarklightTextStorage: NSTextStorage {
        [Text 
        Styles](xcdoc://?url=developer.apple.com/library/ios/documentation/UIKit/Reference/UIFontDescriptor_Class/index.html#//apple_ref/doc/constant_group/Text_Styles)
      */
-    public var fontTextStyle : String = UIFontTextStyleBody
+    open var fontTextStyle : String = UIFontTextStyle.body.rawValue
     
     // MARK: Syntax highlighting
     
@@ -127,7 +127,7 @@ public class MarklightTextStorage: NSTextStorage {
     - see:
     [`NSTextStorage`](xcdoc://?url=developer.apple.com/library/ios/documentation/UIKit/Reference/NSTextStorage_Class_TextKit/index.html#//apple_ref/doc/uid/TP40013282)
     */
-    override public func processEditing() {
+    override open func processEditing() {
         // removeParagraphAttributes()
         removeWholeAttributes()
         
@@ -171,11 +171,11 @@ public class MarklightTextStorage: NSTextStorage {
     `UITextView`.
      */
     func observeTextSize() {
-        NSNotificationCenter.defaultCenter().addObserverForName(UIContentSizeCategoryDidChangeNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIContentSizeCategoryDidChange, object: nil, queue: OperationQueue.main) { (notification) -> Void in
             let wholeRange = NSMakeRange(0, (self.string as NSString).length)
-            self.invalidateAttributesInRange(wholeRange)
+            self.invalidateAttributes(in: wholeRange)
             for layoutManager in self.layoutManagers {
-                layoutManager.invalidateDisplayForCharacterRange(wholeRange)
+                layoutManager.invalidateDisplay(forCharacterRange: wholeRange)
             }
         }
     }
@@ -185,7 +185,7 @@ public class MarklightTextStorage: NSTextStorage {
     internal notifications.
      */
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
         
     // MARK: Reading Text
@@ -198,7 +198,7 @@ public class MarklightTextStorage: NSTextStorage {
     - see:
     [`NSTextStorage`](xcdoc://?url=developer.apple.com/library/ios/documentation/UIKit/Reference/NSTextStorage_Class_TextKit/index.html#//apple_ref/doc/uid/TP40013282)
      */
-    override public var string : String {
+    override open var string : String {
         return imp.string
     }
     
@@ -217,8 +217,10 @@ public class MarklightTextStorage: NSTextStorage {
      - returns: The attributes for the character at index.     - see:
      [`NSTextStorage`](xcdoc://?url=developer.apple.com/library/ios/documentation/UIKit/Reference/NSTextStorage_Class_TextKit/index.html#//apple_ref/doc/uid/TP40013282)
      */
-    override public func attributesAtIndex(location: Int, effectiveRange range: NSRangePointer) -> [String : AnyObject] {
-        return imp.attributesAtIndex(location, effectiveRange: range)
+
+    
+    open override func attributes(at location: Int, effectiveRange range: NSRangePointer?) -> [String : Any] {
+        return imp.attributes(at: location, effectiveRange: range) as [String : AnyObject]
     }
     
     // MARK: Text Editing
@@ -236,10 +238,10 @@ public class MarklightTextStorage: NSTextStorage {
     - see:
     [`NSTextStorage`](xcdoc://?url=developer.apple.com/library/ios/documentation/UIKit/Reference/NSTextStorage_Class_TextKit/index.html#//apple_ref/doc/uid/TP40013282)
     */
-    override public func replaceCharactersInRange(range: NSRange, withString str: String) {
+    override open func replaceCharacters(in range: NSRange, with str: String) {
         beginEditing()
-        imp.replaceCharactersInRange(range, withString: str)
-        edited([.EditedCharacters], range: range, changeInLength: (str as NSString).length - range.length)
+        imp.replaceCharacters(in: range, with: str)
+        edited([.editedCharacters], range: range, changeInLength: (str as NSString).length - range.length)
         endEditing()
     }
     
@@ -262,28 +264,30 @@ public class MarklightTextStorage: NSTextStorage {
      - see:
         [`NSTextStorage`](xcdoc://?url=developer.apple.com/library/ios/documentation/UIKit/Reference/NSTextStorage_Class_TextKit/index.html#//apple_ref/doc/uid/TP40013282)
      */
-    override public func setAttributes(attrs: [String : AnyObject]?, range: NSRange) {
+    
+    
+    open override func setAttributes(_ attrs: [String : Any]?, range: NSRange) {
         beginEditing()
         imp.setAttributes(attrs, range: range)
-        edited([.EditedAttributes], range: range, changeInLength: 0)
+        edited([.editedAttributes], range: range, changeInLength: 0)
         endEditing()
     }
     
     // Remove every attribute to the whole text
-    private func removeParagraphAttributes() {
-        let textSize = UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleBody).pointSize
-        let paragraphRange = (string as NSString).paragraphRangeForRange(self.editedRange)
+    fileprivate func removeParagraphAttributes() {
+        let textSize = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyle.body).pointSize
+        let paragraphRange = (string as NSString).paragraphRange(for: self.editedRange)
         self.removeAttribute(NSForegroundColorAttributeName, range: paragraphRange)
-        self.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(textSize), range: paragraphRange)
-        self.addAttribute(NSParagraphStyleAttributeName, value: NSMutableParagraphStyle.defaultParagraphStyle(), range: paragraphRange)
+        self.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: textSize), range: paragraphRange)
+        self.addAttribute(NSParagraphStyleAttributeName, value: NSMutableParagraphStyle.default, range: paragraphRange)
     }
     
     // Remove every attribute the the paragraph containing the last edit.
-    private func removeWholeAttributes() {
-        let textSize = UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleBody).pointSize
+    fileprivate func removeWholeAttributes() {
+        let textSize = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyle.body).pointSize
         let wholeRange = NSMakeRange(0, (self.string as NSString).length)
         self.removeAttribute(NSForegroundColorAttributeName, range: wholeRange)
-        self.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(textSize), range: wholeRange)
-        self.addAttribute(NSParagraphStyleAttributeName, value: NSMutableParagraphStyle.defaultParagraphStyle(), range: wholeRange)
+        self.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: textSize), range: wholeRange)
+        self.addAttribute(NSParagraphStyleAttributeName, value: NSMutableParagraphStyle.default, range: wholeRange)
     }
 }
