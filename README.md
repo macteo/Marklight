@@ -3,6 +3,7 @@ Markdown syntax highlighter for iOS.
 
 [![License MIT](https://img.shields.io/cocoapods/l/Marklight.svg)](https://raw.githubusercontent.com/macteo/marklight/master/LICENSE) [![Version](https://img.shields.io/cocoapods/v/Marklight.svg)](https://cocoapods.org/?q=marklight) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![travis-ci](https://travis-ci.org/macteo/Marklight.svg?branch=master)](https://travis-ci.org/macteo/Marklight)
 [![codecov.io](https://codecov.io/github/macteo/Marklight/coverage.svg?branch=master)](https://codecov.io/github/macteo/Marklight?branch=master)
+![Swift 3](https://img.shields.io/badge/language-Swift%203-EB7943.svg) ![iOS 8+](https://img.shields.io/badge/iOS-8+-EB7943.svg)
 
 ## Description
 
@@ -18,7 +19,7 @@ Regular expressions are taken from [Markingbird](https://github.com/kristopherjo
 - [x] Applicable to any `UITextView`.
 - [x] `NSTextStorage` subclass ready to use.
 - [x] Struct optimized for performances.
-- [x] Swift 2.1 compatible.
+- [x] Swift 3.0 compatible.
 - [x] Dynamic text style supported.
 - [x] Choose markdown syntax color.
 - [x] Choose font and color for code blocks.
@@ -33,7 +34,7 @@ Regular expressions are taken from [Markingbird](https://github.com/kristopherjo
 ## Requirements
 
 - iOS 8.0+
-- Xcode 7.2+
+- Xcode 8.2+
 
 ## Installation
 
@@ -45,7 +46,7 @@ Regular expressions are taken from [Markingbird](https://github.com/kristopherjo
 $ gem install cocoapods
 ```
 
-> CocoaPods 0.39.0+ is required to build Marklight.
+> CocoaPods 1.0.0+ is required to build Marklight.
 
 To integrate Marklight into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
@@ -158,7 +159,7 @@ Enjoy.
 
 ## Acknowledgements
 
-Matteo Gavagnin – [@macteo](http://twitter.com/macteo)
+Matteo Gavagnin – [@macteo](https://twitter.com/macteo)
 
 ---
 

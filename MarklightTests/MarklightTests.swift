@@ -22,12 +22,12 @@ class MarklightTests: XCTestCase {
     }
     
     func testAtxH1() {
-        let string = ["# Header", ""].joinWithSeparator("\n")
+        let string = ["# Header", ""].joined(separator: "\n")
         let attributedString = NSAttributedString(string: string)
-        self.textStorage.replaceCharactersInRange(NSMakeRange(0, 0), withAttributedString: attributedString)
+        self.textStorage.replaceCharacters(in: NSMakeRange(0, 0), with: attributedString)
         var range : NSRange? = NSMakeRange(0, 1)
-        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 0, effectiveRange: &range!) as? UIColor {
-            XCTAssert(attribute == UIColor.lightGrayColor())
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, at: 0, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.lightGray)
             XCTAssert(range?.length == 1)
         } else {
             XCTFail()
@@ -35,19 +35,19 @@ class MarklightTests: XCTestCase {
     }
     
     func testAtxH2() {
-        let string = ["## Header ##", ""].joinWithSeparator("\n")
+        let string = ["## Header ##", ""].joined(separator: "\n")
         let attributedString = NSAttributedString(string: string)
-        self.textStorage.replaceCharactersInRange(NSMakeRange(0, 0), withAttributedString: attributedString)
+        self.textStorage.replaceCharacters(in: NSMakeRange(0, 0), with: attributedString)
         var range : NSRange? = NSMakeRange(0, 1)
-        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 0, effectiveRange: &range!) as? UIColor {
-            XCTAssert(attribute == UIColor.lightGrayColor())
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, at: 0, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.lightGray)
             XCTAssert(range?.length == 2)
         } else {
             XCTFail()
         }
-        if let attribute = self.textStorage.attribute(NSFontAttributeName, atIndex: 2, effectiveRange: &range!) as? UIFont {
-            let textSize = UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleBody).pointSize
-            XCTAssert(attribute == UIFont.boldSystemFontOfSize(textSize))
+        if let attribute = self.textStorage.attribute(NSFontAttributeName, at: 2, effectiveRange: &range!) as? UIFont {
+            let textSize = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyle.body).pointSize
+            XCTAssert(attribute == UIFont.boldSystemFont(ofSize: textSize))
             XCTAssert(range?.length == 8)
         } else {
             XCTFail()
@@ -55,13 +55,13 @@ class MarklightTests: XCTestCase {
     }
     
     func testSetexH1() {
-        let string = ["Header", "========", ""].joinWithSeparator("\n")
+        let string = ["Header", "========", ""].joined(separator: "\n")
         let attributedString = NSAttributedString(string: string)
-        self.textStorage.replaceCharactersInRange(NSMakeRange(0, 0), withAttributedString: attributedString)
+        self.textStorage.replaceCharacters(in: NSMakeRange(0, 0), with: attributedString)
         var range : NSRange? = NSMakeRange(0, 1)
-        if let attribute = self.textStorage.attribute(NSFontAttributeName, atIndex: 2, effectiveRange: &range!) as? UIFont {
-            let textSize = UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleBody).pointSize
-            XCTAssert(attribute == UIFont.boldSystemFontOfSize(textSize))
+        if let attribute = self.textStorage.attribute(NSFontAttributeName, at: 2, effectiveRange: &range!) as? UIFont {
+            let textSize = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyle.body).pointSize
+            XCTAssert(attribute == UIFont.boldSystemFont(ofSize: textSize))
             XCTAssert(range?.length == 7)
         } else {
             XCTFail()
@@ -69,13 +69,13 @@ class MarklightTests: XCTestCase {
     }
     
     func testSetexH2() {
-        let string = ["Header", "------", ""].joinWithSeparator("\n")
+        let string = ["Header", "------", ""].joined(separator: "\n")
         let attributedString = NSAttributedString(string: string)
-        self.textStorage.replaceCharactersInRange(NSMakeRange(0, 0), withAttributedString: attributedString)
+        self.textStorage.replaceCharacters(in: NSMakeRange(0, 0), with: attributedString)
         var range : NSRange? = NSMakeRange(0, 1)
-        if let attribute = self.textStorage.attribute(NSFontAttributeName, atIndex: 2, effectiveRange: &range!) as? UIFont {
-            let textSize = UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleBody).pointSize
-            XCTAssert(attribute == UIFont.boldSystemFontOfSize(textSize))
+        if let attribute = self.textStorage.attribute(NSFontAttributeName, at: 2, effectiveRange: &range!) as? UIFont {
+            let textSize = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyle.body).pointSize
+            XCTAssert(attribute == UIFont.boldSystemFont(ofSize: textSize))
             XCTAssert(range?.length == 7)
         } else {
             XCTFail()
@@ -83,18 +83,18 @@ class MarklightTests: XCTestCase {
     }
     
     func testReferenceLinks() {
-        let string = ["[Example][1]","", "[1]: http://example.com/", ""].joinWithSeparator("\n")
+        let string = ["[Example][1]","", "[1]: http://example.com/", ""].joined(separator: "\n")
         let attributedString = NSAttributedString(string: string)
-        self.textStorage.replaceCharactersInRange(NSMakeRange(0, 0), withAttributedString: attributedString)
+        self.textStorage.replaceCharacters(in: NSMakeRange(0, 0), with: attributedString)
         var range : NSRange? = NSMakeRange(0, 1)
-        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 0, effectiveRange: &range!) as? UIColor {
-            XCTAssert(attribute == UIColor.lightGrayColor())
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, at: 0, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.lightGray)
             XCTAssert(range?.length == 1)
         } else {
             XCTFail()
         }
-        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 8, effectiveRange: &range!) as? UIColor {
-            XCTAssert(attribute == UIColor.lightGrayColor())
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, at: 8, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.lightGray)
             XCTAssert(range?.length == 2)
         } else {
             XCTFail()
@@ -103,18 +103,18 @@ class MarklightTests: XCTestCase {
     }
     
     func testList() {
-        let string = ["* First", "* Second", "* Third"].joinWithSeparator("\n")
+        let string = ["* First", "* Second", "* Third"].joined(separator: "\n")
         let attributedString = NSAttributedString(string: string)
-        self.textStorage.replaceCharactersInRange(NSMakeRange(0, 0), withAttributedString: attributedString)
+        self.textStorage.replaceCharacters(in: NSMakeRange(0, 0), with: attributedString)
         var range : NSRange? = NSMakeRange(0, 1)
-        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 0, effectiveRange: &range!) as? UIColor {
-            XCTAssert(attribute == UIColor.lightGrayColor())
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, at: 0, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.lightGray)
             XCTAssert(range?.length == 1)
         } else {
             XCTFail()
         }
-        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 8, effectiveRange: &range!) as? UIColor {
-            XCTAssert(attribute == UIColor.lightGrayColor())
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, at: 8, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.lightGray)
             XCTAssert(range?.length == 1)
         } else {
             XCTFail()
@@ -122,18 +122,18 @@ class MarklightTests: XCTestCase {
     }
     
     func testAnchor() {
-        let string = ["[Example](http://www.example.com)",""].joinWithSeparator("\n")
+        let string = ["[Example](http://www.example.com)",""].joined(separator: "\n")
         let attributedString = NSAttributedString(string: string)
-        self.textStorage.replaceCharactersInRange(NSMakeRange(0, 0), withAttributedString: attributedString)
+        self.textStorage.replaceCharacters(in: NSMakeRange(0, 0), with: attributedString)
         var range : NSRange? = NSMakeRange(0, 1)
-        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 0, effectiveRange: &range!) as? UIColor {
-            XCTAssert(attribute == UIColor.lightGrayColor())
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, at: 0, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.lightGray)
             XCTAssert(range?.length == 1)
         } else {
             XCTFail()
         }
-        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 8, effectiveRange: &range!) as? UIColor {
-            XCTAssert(attribute == UIColor.lightGrayColor())
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, at: 8, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.lightGray)
             XCTAssert(range?.length == 25)
         } else {
             XCTFail()
@@ -143,18 +143,18 @@ class MarklightTests: XCTestCase {
     // TODO: test anchor inline?
     
     func testImage() {
-        let string = ["![Example](http://www.example.com/image.png)",""].joinWithSeparator("\n")
+        let string = ["![Example](http://www.example.com/image.png)",""].joined(separator: "\n")
         let attributedString = NSAttributedString(string: string)
-        self.textStorage.replaceCharactersInRange(NSMakeRange(0, 0), withAttributedString: attributedString)
+        self.textStorage.replaceCharacters(in: NSMakeRange(0, 0), with: attributedString)
         var range : NSRange? = NSMakeRange(0, 1)
-        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 0, effectiveRange: &range!) as? UIColor {
-            XCTAssert(attribute == UIColor.lightGrayColor())
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, at: 0, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.lightGray)
             XCTAssert(range?.length == 2)
         } else {
             XCTFail()
         }
-        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 9, effectiveRange: &range!) as? UIColor {
-            XCTAssert(attribute == UIColor.lightGrayColor())
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, at: 9, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.lightGray)
             XCTAssert(range?.length == 35)
         } else {
             XCTFail()
@@ -162,25 +162,25 @@ class MarklightTests: XCTestCase {
     }
     
     func testCodeBlock() {
-        let string = ["```","func testCodeBlock()","```",""].joinWithSeparator("\n")
+        let string = ["```","func testCodeBlock()","```",""].joined(separator: "\n")
         let attributedString = NSAttributedString(string: string)
-        self.textStorage.replaceCharactersInRange(NSMakeRange(0, 0), withAttributedString: attributedString)
+        self.textStorage.replaceCharacters(in: NSMakeRange(0, 0), with: attributedString)
         var range : NSRange? = NSMakeRange(0, 1)
-        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 0, effectiveRange: &range!) as? UIColor {
-            XCTAssert(attribute == UIColor.lightGrayColor())
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, at: 0, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.lightGray)
             XCTAssert(range?.length == 3)
         } else {
             XCTFail()
         }
-        if let attribute = self.textStorage.attribute(NSFontAttributeName, atIndex: 3, effectiveRange: &range!) as? UIFont {
-            let textSize = UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleBody).pointSize
+        if let attribute = self.textStorage.attribute(NSFontAttributeName, at: 3, effectiveRange: &range!) as? UIFont {
+            let textSize = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyle.body).pointSize
             XCTAssert(attribute == UIFont(name: "Menlo", size: textSize))
             XCTAssert(range?.length == 22)
         } else {
             XCTFail()
         }
-        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 25, effectiveRange: &range!) as? UIColor {
-            XCTAssert(attribute == UIColor.lightGrayColor())
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, at: 25, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.lightGray)
             XCTAssert(range?.length == 3)
         } else {
             XCTFail()
@@ -188,18 +188,18 @@ class MarklightTests: XCTestCase {
     }
     
     func testIndentedCodeBlock() {
-        let string = ["    func testCodeBlock() {","    }",""].joinWithSeparator("\n")
+        let string = ["    func testCodeBlock() {","    }",""].joined(separator: "\n")
         let attributedString = NSAttributedString(string: string)
-        self.textStorage.replaceCharactersInRange(NSMakeRange(0, 0), withAttributedString: attributedString)
+        self.textStorage.replaceCharacters(in: NSMakeRange(0, 0), with: attributedString)
         var range : NSRange? = NSMakeRange(0, 1)
-        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 0, effectiveRange: &range!) as? UIColor {
-            XCTAssert(attribute == UIColor.darkGrayColor())
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, at: 0, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.darkGray)
             XCTAssert(range?.length == 33)
         } else {
             XCTFail()
         }
-        if let attribute = self.textStorage.attribute(NSFontAttributeName, atIndex: 0, effectiveRange: &range!) as? UIFont {
-            let textSize = UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleBody).pointSize
+        if let attribute = self.textStorage.attribute(NSFontAttributeName, at: 0, effectiveRange: &range!) as? UIFont {
+            let textSize = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyle.body).pointSize
             XCTAssert(attribute == UIFont(name: "Menlo", size: textSize))
             XCTAssert(range?.length == 33)
         } else {
@@ -208,25 +208,25 @@ class MarklightTests: XCTestCase {
     }
     
     func testCodeSpan() {
-        let string = ["This is a phrase with inline `code`",""].joinWithSeparator("\n")
+        let string = ["This is a phrase with inline `code`",""].joined(separator: "\n")
         let attributedString = NSAttributedString(string: string)
-        self.textStorage.replaceCharactersInRange(NSMakeRange(0, 0), withAttributedString: attributedString)
+        self.textStorage.replaceCharacters(in: NSMakeRange(0, 0), with: attributedString)
         var range : NSRange? = NSMakeRange(0, 1)
-        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 29, effectiveRange: &range!) as? UIColor {
-            XCTAssert(attribute == UIColor.lightGrayColor())
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, at: 29, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.lightGray)
             XCTAssert(range?.length == 1)
         } else {
             XCTFail()
         }
-        if let attribute = self.textStorage.attribute(NSFontAttributeName, atIndex: 30, effectiveRange: &range!) as? UIFont {
-            let textSize = UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleBody).pointSize
+        if let attribute = self.textStorage.attribute(NSFontAttributeName, at: 30, effectiveRange: &range!) as? UIFont {
+            let textSize = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyle.body).pointSize
             XCTAssert(attribute == UIFont(name: "Menlo", size: textSize))
             XCTAssert(range?.length == 4)
         } else {
             XCTFail()
         }
-        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 34, effectiveRange: &range!) as? UIColor {
-            XCTAssert(attribute == UIColor.lightGrayColor())
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, at: 34, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.lightGray)
             XCTAssert(range?.length == 1)
         } else {
             XCTFail()
@@ -234,18 +234,18 @@ class MarklightTests: XCTestCase {
     }
     
     func testQuote() {
-        let string = ["> This is a quoted line","> This another one", ""].joinWithSeparator("\n")
+        let string = ["> This is a quoted line","> This another one", ""].joined(separator: "\n")
         let attributedString = NSAttributedString(string: string)
-        self.textStorage.replaceCharactersInRange(NSMakeRange(0, 0), withAttributedString: attributedString)
+        self.textStorage.replaceCharacters(in: NSMakeRange(0, 0), with: attributedString)
         var range : NSRange? = NSMakeRange(0, 1)
-        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 0, effectiveRange: &range!) as? UIColor {
-            XCTAssert(attribute == UIColor.lightGrayColor())
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, at: 0, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.lightGray)
             XCTAssert(range?.length == 2)
         } else {
             XCTFail()
         }
-        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 24, effectiveRange: &range!) as? UIColor {
-            XCTAssert(attribute == UIColor.lightGrayColor())
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, at: 24, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.lightGray)
             XCTAssert(range?.length == 2)
         } else {
             XCTFail()
@@ -253,25 +253,25 @@ class MarklightTests: XCTestCase {
     }
     
     func testItalic() {
-        let string = ["*italic* word", ""].joinWithSeparator("\n")
+        let string = ["*italic* word", ""].joined(separator: "\n")
         let attributedString = NSAttributedString(string: string)
-        self.textStorage.replaceCharactersInRange(NSMakeRange(0, 0), withAttributedString: attributedString)
+        self.textStorage.replaceCharacters(in: NSMakeRange(0, 0), with: attributedString)
         var range : NSRange? = NSMakeRange(0, 1)
-        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 0, effectiveRange: &range!) as? UIColor {
-            XCTAssert(attribute == UIColor.lightGrayColor())
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, at: 0, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.lightGray)
             XCTAssert(range?.length == 1)
         } else {
             XCTFail()
         }
-        if let attribute = self.textStorage.attribute(NSFontAttributeName, atIndex: 1, effectiveRange: &range!) as? UIFont {
-            let textSize = UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleBody).pointSize
-            XCTAssert(attribute == UIFont.italicSystemFontOfSize(textSize))
+        if let attribute = self.textStorage.attribute(NSFontAttributeName, at: 1, effectiveRange: &range!) as? UIFont {
+            let textSize = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyle.body).pointSize
+            XCTAssert(attribute == UIFont.italicSystemFont(ofSize: textSize))
             XCTAssert(range?.length == 6)
         } else {
             XCTFail()
         }
-        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, atIndex: 7, effectiveRange: &range!) as? UIColor {
-            XCTAssert(attribute == UIColor.lightGrayColor())
+        if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, at: 7, effectiveRange: &range!) as? UIColor {
+            XCTAssert(attribute == UIColor.lightGray)
             XCTAssert(range?.length == 1)
         } else {
             XCTFail()
