@@ -2,7 +2,7 @@
 
 Paragraphs are separated by a blank line.
 
-2nd paragraph: you can write `monospace`, *italic* and **bold**. 
+2nd paragraph: you can write `monospace`, single word *italic* or *an entire phrase in italic*. **Bold** is also supported, even on **multiple words**.
 
 Itemized lists look like:
 
@@ -49,8 +49,8 @@ Now a nested list:
 
 3. Dump everything in the pot.
 
-Here's a link to [a website](http://example.com), to a [local doc](local-doc.html), and to a [section heading in the current doc](#an-h2-header). Here's a footnote [^1].
+Here's a link to [a website](http://example.com), to a [local doc](local-doc.html), and to a [section heading in the current doc](#an-h2-header). Here's a reference link [1].
 
-[^1]: Footnote text goes here.
+[1]: Footnote text goes here.
 
 ![example image](example-image.jpg)

@@ -112,6 +112,11 @@ open class MarklightTextStorage: NSTextStorage {
      */
     open var fontTextStyle : String = UIFontTextStyle.body.rawValue
     
+    /**
+     If the markdown syntax should be hidden or visible
+     */
+    open var hideSyntax = false
+        
     // MARK: Syntax highlighting
     
     /**
@@ -138,6 +143,7 @@ open class MarklightTextStorage: NSTextStorage {
         Marklight.quoteColor = quoteColor
         Marklight.quoteIndendation = quoteIndendation
         Marklight.fontTextStyle = fontTextStyle
+        Marklight.hideSyntax = hideSyntax
         
         Marklight.processEditing(self)
         
