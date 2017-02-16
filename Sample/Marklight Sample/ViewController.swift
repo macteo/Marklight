@@ -29,7 +29,7 @@ class ViewController: UIViewController, UITextViewDelegate {
         textStorage.syntaxColor = UIColor.blue
         textStorage.codeFontName = "Courier"
         textStorage.fontTextStyle = UIFontTextStyle.subheadline.rawValue
-        textStorage.hideSyntax = false
+        textStorage.hideSyntax = true
         
         let layoutManager = NSLayoutManager()
         

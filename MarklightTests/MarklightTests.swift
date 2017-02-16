@@ -261,14 +261,14 @@ class MarklightTests: XCTestCase {
         var range : NSRange? = NSMakeRange(0, string.lengthOfBytes(using: .utf8))
         if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, at: 0, effectiveRange: &range!) as? UIColor {
             XCTAssert(attribute == UIColor.lightGray)
-            XCTAssert(range?.length == 2)
+            XCTAssert(range?.length == 1)
         } else {
             XCTFail()
         }
         if let attribute = self.textStorage.attribute(NSFontAttributeName, at: 1, effectiveRange: &range!) as? UIFont {
             let textSize = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyle.body).pointSize
             XCTAssert(attribute == UIFont.italicSystemFont(ofSize: textSize))
-            XCTAssert(range?.length == 2)
+            XCTAssert(range?.length == 6)
         } else {
             XCTFail()
         }

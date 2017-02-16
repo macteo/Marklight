@@ -1,6 +1,6 @@
-# H1 header
+_Paragraphs_ are separated by a blank line.
 
-Paragraphs are separated by a blank line.
+# H1 header
 
 2nd paragraph: you can write `monospace`, single word *italic* or *an entire phrase in italic*. **Bold** is also supported, even on **multiple words**.
 

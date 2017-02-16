@@ -330,7 +330,6 @@ public struct Marklight {
                     textStorage.addAttribute(NSForegroundColorAttributeName, value: hiddenColor, range: preRange)
                     textStorage.addAttribute(NSForegroundColorAttributeName, value: hiddenColor, range: postRange)
                 }
-
             }
         }
         
@@ -467,7 +466,12 @@ public struct Marklight {
         // We detect and process strict italics
         Marklight.strictItalicRegex.matches(textStorage.string, range: paragraphRange) { (result) -> Void in
             textStorage.addAttribute(NSFontAttributeName, value: italicFont, range: result!.range)
-            let preRange = NSMakeRange(result!.range.location + 1, 1)
+            let substring = (textStorage.string as NSString).substring(with: NSMakeRange(result!.range.location, 1))
+            var start = 0
+            if substring == " " {
+                start = 1
+            }
+            let preRange = NSMakeRange(result!.range.location + start, 1)
             let postRange = NSMakeRange(result!.range.location + result!.range.length - 1, 1)
             textStorage.addAttribute(NSForegroundColorAttributeName, value: Marklight.syntaxColor, range: preRange)
             textStorage.addAttribute(NSForegroundColorAttributeName, value: Marklight.syntaxColor, range: postRange)
@@ -482,7 +486,12 @@ public struct Marklight {
         // We detect and process strict bolds
         Marklight.strictBoldRegex.matches(textStorage.string, range: paragraphRange) { (result) -> Void in
             textStorage.addAttribute(NSFontAttributeName, value: boldFont, range: result!.range)
-            let preRange = NSMakeRange(result!.range.location + 1, 2)
+            let substring = (textStorage.string as NSString).substring(with: NSMakeRange(result!.range.location, 1))
+            var start = 0
+            if substring == " " {
+                start = 1
+            }
+            let preRange = NSMakeRange(result!.range.location + start, 2)
             let postRange = NSMakeRange(result!.range.location + result!.range.length - 2, 2)
             textStorage.addAttribute(NSForegroundColorAttributeName, value: Marklight.syntaxColor, range: preRange)
             textStorage.addAttribute(NSForegroundColorAttributeName, value: Marklight.syntaxColor, range: postRange)
