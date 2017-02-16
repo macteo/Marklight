@@ -454,7 +454,7 @@ public struct Marklight {
             textStorage.addAttribute(NSFontAttributeName, value: quoteFont, range: result!.range)
             textStorage.addAttribute(NSForegroundColorAttributeName, value: quoteColor, range: result!.range)
             textStorage.addAttribute(NSParagraphStyleAttributeName, value: quoteIndendationStyle, range: result!.range)
-            Marklight.blockQuoteOpeningRegex.matches(textStorage.string, range: paragraphRange) { (innerResult) -> Void in
+            Marklight.blockQuoteOpeningRegex.matches(textStorage.string, range: result!.range) { (innerResult) -> Void in
                 textStorage.addAttribute(NSForegroundColorAttributeName, value: Marklight.syntaxColor, range: innerResult!.range)
                 if Marklight.hideSyntax {
                     textStorage.addAttribute(NSFontAttributeName, value: hiddenFont, range: innerResult!.range)
@@ -530,6 +530,34 @@ public struct Marklight {
                 textStorage.addAttribute(NSFontAttributeName, value: hiddenFont, range: postRange)
                 textStorage.addAttribute(NSForegroundColorAttributeName, value: hiddenColor, range: preRange)
                 textStorage.addAttribute(NSForegroundColorAttributeName, value: hiddenColor, range: postRange)
+            }
+        }
+        
+        // We detect and process inline links not formatted
+        Marklight.autolinkRegex.matches(textStorage.string, range: paragraphRange) { (result) -> Void in
+            let substring = (textStorage.string as NSString).substring(with: result!.range)
+            guard substring.lengthOfBytes(using: .utf8) > 0 else { return }
+            textStorage.addAttribute(NSLinkAttributeName, value: substring, range: result!.range)
+            
+            if Marklight.hideSyntax {
+                Marklight.autolinkPrefixRegex.matches(textStorage.string, range: result!.range) { (innerResult) -> Void in
+                    textStorage.addAttribute(NSFontAttributeName, value: hiddenFont, range: innerResult!.range)
+                    textStorage.addAttribute(NSForegroundColorAttributeName, value: hiddenColor, range: innerResult!.range)
+                }
+            }
+        }
+        
+        // We detect and process inline mailto links not formatted
+        Marklight.autolinkEmailRegex.matches(textStorage.string, range: paragraphRange) { (result) -> Void in
+            let substring = (textStorage.string as NSString).substring(with: result!.range)
+            guard substring.lengthOfBytes(using: .utf8) > 0 else { return }
+            textStorage.addAttribute(NSLinkAttributeName, value: substring, range: result!.range)
+            
+            if Marklight.hideSyntax {
+                Marklight.mailtoRegex.matches(textStorage.string, range: result!.range) { (innerResult) -> Void in
+                    textStorage.addAttribute(NSFontAttributeName, value: hiddenFont, range: innerResult!.range)
+                    textStorage.addAttribute(NSForegroundColorAttributeName, value: hiddenColor, range: innerResult!.range)
+                }
             }
         }
     }
@@ -900,7 +928,6 @@ public struct Marklight {
         _Italic_
     */
 
-    
     fileprivate static let strictItalicPattern = "(^|[\\W_])(?:(?!\\1)|(?=^))(\\*|_)(?=\\S)((?:(?!\\2).)*?\\S)\\2(?!\\2)(?=[\\W_]|$)"
     
     fileprivate static let strictItalicRegex = Regex(pattern: strictItalicPattern, options: [.anchorsMatchLines])
@@ -908,6 +935,29 @@ public struct Marklight {
     fileprivate static let italicPattern = "(\\*|_) (?=\\S) (.+?) (?<=\\S) \\1"
     
     fileprivate static let italicRegex = Regex(pattern: italicPattern, options: [.allowCommentsAndWhitespace, .anchorsMatchLines])
+    
+    fileprivate static let autolinkPattern = "((https?|ftp):[^'\">\\s]+)"
+    
+    fileprivate static let autolinkRegex = Regex(pattern: autolinkPattern, options: [.allowCommentsAndWhitespace, .dotMatchesLineSeparators])
+    
+    fileprivate static let autolinkPrefixPattern = "((https?|ftp)://)"
+    
+    fileprivate static let autolinkPrefixRegex = Regex(pattern: autolinkPrefixPattern, options: [.allowCommentsAndWhitespace, .dotMatchesLineSeparators])
+    
+    fileprivate static let autolinkEmailPattern = [
+        "(?:mailto:)?",
+        "(",
+        "  [-.\\w]+",
+        "  \\@",
+        "  [-a-z0-9]+(\\.[-a-z0-9]+)*\\.[a-z]+",
+        ")"
+        ].joined(separator: "\n")
+    
+    fileprivate static let autolinkEmailRegex = Regex(pattern: autolinkEmailPattern, options: [.allowCommentsAndWhitespace, .dotMatchesLineSeparators])
+    
+    fileprivate static let mailtoPattern = "mailto:"
+    
+    fileprivate static let mailtoRegex = Regex(pattern: mailtoPattern, options: [.allowCommentsAndWhitespace, .dotMatchesLineSeparators])
     
     fileprivate struct Regex {
         fileprivate let regularExpression: NSRegularExpression!

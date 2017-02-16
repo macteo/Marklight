@@ -35,6 +35,10 @@ define foobar() {
 }
 ```
 
+https://example.com
+
+mailto:m@example.com
+
 ### An h3 header ###
 
 Now a nested list:
