@@ -306,7 +306,6 @@ public struct Marklight {
         
         // We detect and process lists
         Marklight.listRegex.matches(textStorage.string, range: wholeRange) { (result) -> Void in
-            let substring = (textStorage.string as NSString).substring(with: result!.range)
             Marklight.listOpeningRegex.matches(textStorage.string, range: result!.range) { (innerResult) -> Void in
                 textStorage.addAttribute(NSForegroundColorAttributeName, value: Marklight.syntaxColor, range: innerResult!.range)
             }
@@ -352,7 +351,7 @@ public struct Marklight {
                 guard substring.lengthOfBytes(using: .utf8) > 0 else { return }
 
                 destinationLink = substring
-                textStorage.addAttribute(NSLinkAttributeName, value: destinationLink, range: range)
+                textStorage.addAttribute(NSLinkAttributeName, value: substring, range: range)
                 
                 if Marklight.hideSyntax {
                     textStorage.addAttribute(NSFontAttributeName, value: hiddenFont, range: innerResult!.range)
@@ -457,7 +456,6 @@ public struct Marklight {
             textStorage.addAttribute(NSForegroundColorAttributeName, value: quoteColor, range: result!.range)
             textStorage.addAttribute(NSParagraphStyleAttributeName, value: quoteIndendationStyle, range: result!.range)
             Marklight.blockQuoteOpeningRegex.matches(textStorage.string, range: paragraphRange) { (innerResult) -> Void in
-                let substring = (textStorage.string as NSString).substring(with: innerResult!.range)
                 textStorage.addAttribute(NSForegroundColorAttributeName, value: Marklight.syntaxColor, range: innerResult!.range)
                 if Marklight.hideSyntax {
                     textStorage.addAttribute(NSFontAttributeName, value: hiddenFont, range: innerResult!.range)
