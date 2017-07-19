@@ -236,7 +236,6 @@ open class MarklightTextStorage: NSTextStorage {
     
     // Remove every attribute the the paragraph containing the last edit.
     fileprivate func removeParagraphAttributes() {
-        let textSize = MarklightTextStorage.unstyledTextSize
         let paragraphRange = (string as NSString).paragraphRange(for: self.editedRange)
         imp.removeAttribute(NSForegroundColorAttributeName, range: paragraphRange)
         imp.addAttribute(NSFontAttributeName, value: MarklightFont.systemFont(ofSize: textSize), range: paragraphRange)
@@ -245,7 +244,6 @@ open class MarklightTextStorage: NSTextStorage {
 
     // Remove every attribute to the whole text
     fileprivate func removeWholeAttributes() {
-        let textSize = MarklightTextStorage.unstyledTextSize
         let wholeRange = NSMakeRange(0, (self.string as NSString).length)
         imp.removeAttribute(NSForegroundColorAttributeName, range: wholeRange)
         imp.addAttribute(NSFontAttributeName, value: MarklightFont.systemFont(ofSize: textSize), range: wholeRange)
@@ -255,9 +253,6 @@ open class MarklightTextStorage: NSTextStorage {
     // MARK: - iOS-Only Font Text Style Support
 
     #if os(iOS)
-
-    /// Text size for unstyled text.
-    public static var unstyledTextSize: CGFloat { return UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyle.body).pointSize }
 
     // MARK: Initialisers
 
@@ -349,8 +344,7 @@ open class MarklightTextStorage: NSTextStorage {
 
     #elseif os(macOS)
 
-    public static var unstyledTextSize: CGFloat { return NSFont.systemFontSize() }
-    open var textSize: CGFloat = MarklightTextStorage.unstyledTextSize
+    open var textSize: CGFloat = NSFont.systemFontSize()
 
     #endif
 }
