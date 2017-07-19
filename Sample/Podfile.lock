@@ -1,5 +1,5 @@
 PODS:
-  - Marklight (0.1.0)
+  - Marklight (1.1.0)
 
 DEPENDENCIES:
   - Marklight (from `..`)
@@ -9,6 +9,8 @@ EXTERNAL SOURCES:
     :path: ".."
 
 SPEC CHECKSUMS:
-  Marklight: 02b696eda57dc6f458c6ff6cab4f606975fe5381
+  Marklight: afab332b2dc2f4a16086dd4b87b11e57f4121cd8
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: e1babba2ad2c23da4a542819b99cd4e5678499c9
+
+COCOAPODS: 1.2.1
