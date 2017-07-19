@@ -170,6 +170,16 @@ open class MarklightTextStorage: NSTextStorage {
         observeTextSize()
     }
     
+    @available(iOSApplicationExtension 11.0, *)
+    required public init(itemProviderData data: Data, typeIdentifier: String) throws {
+        if #available(iOS 11.0, *) {
+            try super.init(itemProviderData: data, typeIdentifier: typeIdentifier)
+        } else {
+            // TODO: return an appropriate error
+            throw NSError(domain: "Marklight", code: 1, userInfo: nil)
+        }
+    }
+    
     /**
     Internal method to register to notifications determined by dynamic type size
     changes and redraw the attributed text with the appropriate text size.
@@ -225,8 +235,8 @@ open class MarklightTextStorage: NSTextStorage {
      */
 
     
-    open override func attributes(at location: Int, effectiveRange range: NSRangePointer?) -> [String : Any] {
-        return imp.attributes(at: location, effectiveRange: range) as [String : AnyObject]
+    open override func attributes(at location: Int, effectiveRange range: NSRangePointer?) -> [NSAttributedStringKey : Any] {
+        return imp.attributes(at: location, effectiveRange: range) as [NSAttributedStringKey : AnyObject]
     }
     
     // MARK: Text Editing
@@ -272,7 +282,7 @@ open class MarklightTextStorage: NSTextStorage {
      */
     
     
-    open override func setAttributes(_ attrs: [String : Any]?, range: NSRange) {
+    open override func setAttributes(_ attrs: [NSAttributedStringKey : Any]?, range: NSRange) {
         beginEditing()
         imp.setAttributes(attrs, range: range)
         edited([.editedAttributes], range: range, changeInLength: 0)
@@ -283,17 +293,17 @@ open class MarklightTextStorage: NSTextStorage {
     fileprivate func removeParagraphAttributes() {
         let textSize = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyle.body).pointSize
         let paragraphRange = (string as NSString).paragraphRange(for: self.editedRange)
-        self.removeAttribute(NSForegroundColorAttributeName, range: paragraphRange)
-        self.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: textSize), range: paragraphRange)
-        self.addAttribute(NSParagraphStyleAttributeName, value: NSMutableParagraphStyle.default, range: paragraphRange)
+        self.removeAttribute(NSAttributedStringKey.foregroundColor, range: paragraphRange)
+        self.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: textSize), range: paragraphRange)
+        self.addAttribute(NSAttributedStringKey.paragraphStyle, value: NSMutableParagraphStyle.default, range: paragraphRange)
     }
     
     // Remove every attribute the the paragraph containing the last edit.
     fileprivate func removeWholeAttributes() {
         let textSize = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyle.body).pointSize
         let wholeRange = NSMakeRange(0, (self.string as NSString).length)
-        self.removeAttribute(NSForegroundColorAttributeName, range: wholeRange)
-        self.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: textSize), range: wholeRange)
-        self.addAttribute(NSParagraphStyleAttributeName, value: NSMutableParagraphStyle.default, range: wholeRange)
+        self.removeAttribute(NSAttributedStringKey.foregroundColor, range: wholeRange)
+        self.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: textSize), range: wholeRange)
+        self.addAttribute(NSAttributedStringKey.paragraphStyle, value: NSMutableParagraphStyle.default, range: wholeRange)
     }
 }
