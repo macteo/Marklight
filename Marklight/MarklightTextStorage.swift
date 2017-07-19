@@ -11,6 +11,11 @@
     import AppKit
 #endif
 
+extension NSString {
+    func paragraphRange(at location: Int) -> NSRange {
+        return paragraphRange(for: NSRange(location: location, length: 0))
+    }
+}
 
 /**
     `NSTextStorage` subclass that uses `Marklight` to highlight markdown syntax
@@ -139,7 +144,21 @@ open class MarklightTextStorage: NSTextStorage {
         self.isBusyProcessing = true
         defer { self.isBusyProcessing = false }
 
-        removeParagraphAttributes()
+        let editedAndAdjacentParagraphRange = self.editedAndAdjacentParagraphRange
+        let editedParagraphRange = self.editedParagraphRange
+        defer {
+            // Include surrounding paragraphs in layout manager's styling pass
+            // after finishing the real edit. Mostly needed for Setex headings.
+            layoutManagers.first?.processEditing(
+                for: self,
+                edited: .editedAttributes,
+                range: editedRange,
+                changeInLength: 0,
+                invalidatedRange: editedAndAdjacentParagraphRange)
+        }
+
+        resetMarklightAttributes(range: editedAndAdjacentParagraphRange)
+//        removeParagraphAttributes()
 //        removeWholeAttributes()
 
         Marklight.syntaxColor = syntaxColor
@@ -151,10 +170,57 @@ open class MarklightTextStorage: NSTextStorage {
         Marklight.textSize = textSize
         Marklight.hideSyntax = hideSyntax
         
-        Marklight.processEditing(self)
+        Marklight.processEditing(self, affectedRange: editedAndAdjacentParagraphRange)
 
         super.processEditing()
     }
+
+    fileprivate var editedParagraphRange: NSRange {
+        return (self.string as NSString).paragraphRange(for: self.editedRange)
+    }
+
+    fileprivate var editedAndAdjacentParagraphRange: NSRange {
+        let textStorageNSString = (self.string as NSString)
+        let editedParagraphRange = textStorageNSString.paragraphRange(for: self.editedRange)
+
+        let previousParagraphRange: NSRange
+        if editedParagraphRange.location > 0 {
+            previousParagraphRange = textStorageNSString.paragraphRange(at: editedParagraphRange.location - 1)
+        } else {
+            previousParagraphRange = NSRange(location: editedParagraphRange.location, length: 0)
+        }
+
+        let nextParagraphRange: NSRange
+        let locationAfterEditedParagraph = editedParagraphRange.location + editedParagraphRange.length
+        if locationAfterEditedParagraph < textStorageNSString.length {
+            nextParagraphRange = textStorageNSString.paragraphRange(at: locationAfterEditedParagraph + 1)
+        } else {
+            nextParagraphRange = NSRange.init(location: 0, length: 0)
+        }
+
+        return NSRange(
+            location: previousParagraphRange.location,
+            length: [previousParagraphRange, editedParagraphRange, nextParagraphRange].map { $0.length }.reduce(0, +))
+    }
+
+    fileprivate func resetMarklightAttributes(range: NSRange) {
+        imp.removeAttribute(NSForegroundColorAttributeName, range: range)
+        imp.addAttribute(NSFontAttributeName, value: MarklightFont.systemFont(ofSize: textSize), range: range)
+        imp.addAttribute(NSParagraphStyleAttributeName, value: NSParagraphStyle(), range: range)
+    }
+
+    // Remove every attribute the the paragraph containing the last edit.
+    fileprivate func removeParagraphAttributes() {
+        let paragraphRange = (string as NSString).paragraphRange(for: self.editedRange)
+        resetMarklightAttributes(range: paragraphRange)
+    }
+
+    // Remove every attribute to the whole text
+    fileprivate func removeWholeAttributes() {
+        let wholeRange = NSMakeRange(0, (self.string as NSString).length)
+        resetMarklightAttributes(range: wholeRange)
+    }
+
 
     // MARK: Reading Text
     
@@ -246,22 +312,6 @@ open class MarklightTextStorage: NSTextStorage {
         imp.setAttributes(attrs, range: range)
         edited([.editedAttributes], range: range, changeInLength: 0)
         endEditing()
-    }
-    
-    // Remove every attribute the the paragraph containing the last edit.
-    fileprivate func removeParagraphAttributes() {
-        let paragraphRange = (string as NSString).paragraphRange(for: self.editedRange)
-        imp.removeAttribute(NSForegroundColorAttributeName, range: paragraphRange)
-        imp.addAttribute(NSFontAttributeName, value: MarklightFont.systemFont(ofSize: textSize), range: paragraphRange)
-        imp.addAttribute(NSParagraphStyleAttributeName, value: NSParagraphStyle(), range: paragraphRange)
-    }
-
-    // Remove every attribute to the whole text
-    fileprivate func removeWholeAttributes() {
-        let wholeRange = NSMakeRange(0, (self.string as NSString).length)
-        imp.removeAttribute(NSForegroundColorAttributeName, range: wholeRange)
-        imp.addAttribute(NSFontAttributeName, value: MarklightFont.systemFont(ofSize: textSize), range: wholeRange)
-        imp.addAttribute(NSParagraphStyleAttributeName, value: NSParagraphStyle(), range: wholeRange)
     }
 
     // MARK: - iOS-Only Font Text Style Support

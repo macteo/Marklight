@@ -236,12 +236,14 @@ public struct Marklight {
         `NSTextStorage` subclass and this is the function that is being called 
         for every change in the `UITextView`'s text.
 
-    - parameter textStorage: your `NSTextStorage` subclass as the highlights
+    - parameter textStorage: Your `NSTextStorage` subclass as the highlights
         will be applied to its attributed string through the `-addAttribute:value:range:` method.
+    - parameter affectedRange: The range of paragraphs to apply styling to.
     */
-    public static func processEditing(_ textStorage: NSTextStorage) {
-        let wholeRange = NSMakeRange(0, (textStorage.string as NSString).length)
-        let paragraphRange = (textStorage.string as NSString).paragraphRange(for: textStorage.editedRange)
+    public static func processEditing(_ textStorage: NSTextStorage, affectedRange paragraphRange: NSRange) {
+
+        let textStorageNSString = (textStorage.string as NSString)
+        let wholeRange = NSMakeRange(0, textStorageNSString.length)
 
         let codeFont = Marklight.codeFont(textSize)
         let quoteFont = Marklight.quoteFont(textSize)
@@ -249,15 +251,16 @@ public struct Marklight {
         let italicFont = MarklightFont.italicSystemFont(ofSize: textSize)
         let hiddenFont = MarklightFont.systemFont(ofSize: 0.1)
         let hiddenColor = MarklightColor.clear
-        
+
         // We detect and process underlined headers
         Marklight.headersSetexRegex.matches(textStorage.string, range: wholeRange) { (result) -> Void in
             textStorage.addAttribute(NSFontAttributeName, value: boldFont, range: result!.range)
+
             Marklight.headersSetexUnderlineRegex.matches(textStorage.string, range: paragraphRange) { (innerResult) -> Void in
                 textStorage.addAttribute(NSForegroundColorAttributeName, value: Marklight.syntaxColor, range: innerResult!.range)
             }
         }
-        
+
         // We detect and process dashed headers
         Marklight.headersAtxRegex.matches(textStorage.string, range: paragraphRange) { (result) -> Void in
             textStorage.addAttribute(NSFontAttributeName, value: boldFont, range: result!.range)
@@ -325,7 +328,7 @@ public struct Marklight {
                 range.location = range.location + 1
                 range.length = range.length - 2
                 
-                let substring = (textStorage.string as NSString).substring(with: range)
+                let substring = textStorageNSString.substring(with: range)
                 guard substring.lengthOfBytes(using: .utf8) > 0 else { return }
 
                 destinationLink = substring
@@ -360,7 +363,7 @@ public struct Marklight {
                 range.location = range.location + 1
                 range.length = range.length - 2
                 
-                let substring = (textStorage.string as NSString).substring(with: range)
+                let substring = textStorageNSString.substring(with: range)
                 guard substring.lengthOfBytes(using: .utf8) > 0 else { return }
                 
                 textStorage.addAttribute(NSLinkAttributeName, value: destinationLinkString, range: range)
@@ -445,7 +448,7 @@ public struct Marklight {
         // We detect and process strict italics
         Marklight.strictItalicRegex.matches(textStorage.string, range: paragraphRange) { (result) -> Void in
             textStorage.addAttribute(NSFontAttributeName, value: italicFont, range: result!.range)
-            let substring = (textStorage.string as NSString).substring(with: NSMakeRange(result!.range.location, 1))
+            let substring = textStorageNSString.substring(with: NSMakeRange(result!.range.location, 1))
             var start = 0
             if substring == " " {
                 start = 1
@@ -465,7 +468,7 @@ public struct Marklight {
         // We detect and process strict bolds
         Marklight.strictBoldRegex.matches(textStorage.string, range: paragraphRange) { (result) -> Void in
             textStorage.addAttribute(NSFontAttributeName, value: boldFont, range: result!.range)
-            let substring = (textStorage.string as NSString).substring(with: NSMakeRange(result!.range.location, 1))
+            let substring = textStorageNSString.substring(with: NSMakeRange(result!.range.location, 1))
             var start = 0
             if substring == " " {
                 start = 1
@@ -481,7 +484,7 @@ public struct Marklight {
                 textStorage.addAttribute(NSForegroundColorAttributeName, value: hiddenColor, range: postRange)
             }
         }
-        
+
         // We detect and process italics
         Marklight.italicRegex.matches(textStorage.string, range: paragraphRange) { (result) -> Void in
             textStorage.addAttribute(NSFontAttributeName, value: italicFont, range: result!.range)
@@ -511,10 +514,10 @@ public struct Marklight {
                 textStorage.addAttribute(NSForegroundColorAttributeName, value: hiddenColor, range: postRange)
             }
         }
-        
+
         // We detect and process inline links not formatted
         Marklight.autolinkRegex.matches(textStorage.string, range: paragraphRange) { (result) -> Void in
-            let substring = (textStorage.string as NSString).substring(with: result!.range)
+            let substring = textStorageNSString.substring(with: result!.range)
             guard substring.lengthOfBytes(using: .utf8) > 0 else { return }
             textStorage.addAttribute(NSLinkAttributeName, value: substring, range: result!.range)
             
@@ -528,7 +531,7 @@ public struct Marklight {
         
         // We detect and process inline mailto links not formatted
         Marklight.autolinkEmailRegex.matches(textStorage.string, range: paragraphRange) { (result) -> Void in
-            let substring = (textStorage.string as NSString).substring(with: result!.range)
+            let substring = textStorageNSString.substring(with: result!.range)
             guard substring.lengthOfBytes(using: .utf8) > 0 else { return }
             textStorage.addAttribute(NSLinkAttributeName, value: substring, range: result!.range)
             
@@ -559,7 +562,7 @@ public struct Marklight {
         "^(.+?)",
         "\\p{Z}*",
         "\\n",
-        "(=+|-+)     # $1 = string of ='s or -'s",
+        "(=+|-+)",  // $1 = string of ='s or -'s
         "\\p{Z}*",
         "\\n+"
         ].joined(separator: "\n")
@@ -567,9 +570,8 @@ public struct Marklight {
     fileprivate static let headersSetexRegex = Regex(pattern: headerSetexPattern, options: [.allowCommentsAndWhitespace, .anchorsMatchLines])
     
     fileprivate static let setexUnderlinePattern = [
-        "(=+|-+)     # $1 = string of ='s or -'s",
-        "\\p{Z}*",
-        "\\n+"
+        "(==+|--+)     # $1 = string of ='s or -'s",
+        "\\p{Z}*$"
         ].joined(separator: "\n")
     
     fileprivate static let headersSetexUnderlineRegex = Regex(pattern: setexUnderlinePattern, options: [.allowCommentsAndWhitespace])
