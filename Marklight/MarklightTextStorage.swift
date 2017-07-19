@@ -73,8 +73,10 @@
 
 open class MarklightTextStorage: NSTextStorage {
 
-    // We store here the `NSAttributedString`.
-    fileprivate var imp = NSMutableAttributedString(string: "")
+    /// Delegate from this class cluster to a regular `NSTextStorage` instance
+    /// because it does some additional performance optimizations 
+    /// over `NSMutableAttributedString`.
+    fileprivate let imp = NSTextStorage()
     
     // MARK: Syntax highlight customisation
     
@@ -107,7 +109,6 @@ open class MarklightTextStorage: NSTextStorage {
      Quote indentation in points. Default 20.
      */
     open var quoteIndendation : CGFloat = 20
-    
    
     /**
      If the markdown syntax should be hidden or visible
