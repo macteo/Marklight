@@ -164,7 +164,8 @@ Enjoy.
 
 ## Acknowledgements
 
-Matteo Gavagnin – [@macteo](https://twitter.com/macteo)
+* Matteo Gavagnin – [@macteo](https://twitter.com/macteo)
+* Christian Tietze (macOS Port) - [@ctietze](https://twitter.com/ctietze), [GitHub](http://github.com/DivineDominion)
 
 ---
 
