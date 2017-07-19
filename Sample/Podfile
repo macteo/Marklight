@@ -9,6 +9,6 @@ abstract_target 'Marklight' do
   end
   
   target 'Marklight Sample macOS' do
-    platform :osx, '10.10'
+    platform :osx, '10.11'
   end
 end

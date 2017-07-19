@@ -14,7 +14,7 @@
   "social_media_url": "https://twitter.com/macteo",
   "platforms": {
     "ios": "8.0",
-    "osx": "10.10"
+    "osx": "10.11"
   },
   "source": {
     "git": "https://github.com/macteo/Marklight.git",

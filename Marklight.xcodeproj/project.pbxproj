@@ -391,7 +391,7 @@
 				INFOPLIST_FILE = "Marklight macOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dolomate.marklight-macos";
 				PRODUCT_NAME = Marklight;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -419,7 +419,7 @@
 				INFOPLIST_FILE = "Marklight macOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dolomate.marklight-macos";
 				PRODUCT_NAME = Marklight;
 				PROVISIONING_PROFILE_SPECIFIER = "";
