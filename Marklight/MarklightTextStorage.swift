@@ -116,7 +116,11 @@ open class MarklightTextStorage: NSTextStorage {
     open var hideSyntax = false
         
     // MARK: Syntax highlighting
-    
+
+    /// Switch used to prevent `processEditing` callbacks from 
+    /// within `processEditing`.
+    fileprivate var isBusyProcessing = false
+
     /**
     To customise the appearance of the markdown syntax highlights you should
      subclass this class (or create your own direct `NSTextStorage` subclass)
@@ -131,6 +135,9 @@ open class MarklightTextStorage: NSTextStorage {
     [`NSTextStorage`](xcdoc://?url=developer.apple.com/library/ios/documentation/UIKit/Reference/NSTextStorage_Class_TextKit/index.html#//apple_ref/doc/uid/TP40013282)
     */
     override open func processEditing() {
+
+        self.isBusyProcessing = true
+        defer { self.isBusyProcessing = false }
 
         // removeParagraphAttributes()
         removeWholeAttributes()
@@ -228,6 +235,13 @@ open class MarklightTextStorage: NSTextStorage {
     
     
     open override func setAttributes(_ attrs: [String : Any]?, range: NSRange) {
+        // When we are processing, using the regular callback triggers will 
+        // result in the caret jumping to the end of the document.
+        guard !isBusyProcessing else {
+            imp.setAttributes(attrs, range: range)
+            return
+        }
+
         beginEditing()
         imp.setAttributes(attrs, range: range)
         edited([.editedAttributes], range: range, changeInLength: 0)
