@@ -139,8 +139,8 @@ open class MarklightTextStorage: NSTextStorage {
         self.isBusyProcessing = true
         defer { self.isBusyProcessing = false }
 
-        // removeParagraphAttributes()
-        removeWholeAttributes()
+        removeParagraphAttributes()
+//        removeWholeAttributes()
 
         Marklight.syntaxColor = syntaxColor
         Marklight.codeFontName = codeFontName
