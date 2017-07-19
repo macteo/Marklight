@@ -128,8 +128,25 @@
 //    negligence or otherwise) arising in any way out of the use of this
 //    software, even if advised of the possibility of such damage.
 
-import Foundation
-import UIKit
+#if os(iOS)
+    import UIKit
+
+    typealias MarklightColor = UIColor
+    typealias MarklightFont = UIFont
+    typealias MarklightFontDescriptor = UIFontDescriptor
+#elseif os(macOS)
+    import AppKit
+
+    typealias MarklightColor = NSColor
+    typealias MarklightFont = NSFont
+    typealias MarklightFontDescriptor = NSFontDescriptor
+
+    extension NSFont {
+        static func italicSystemFont(ofSize size: CGFloat) -> NSFont {
+            return NSFontManager().convert(NSFont.systemFont(ofSize: size), toHaveTrait: .italicFontMask)
+        }
+    }
+#endif
 
 /**
     Marklight struct that parses a `String` inside a `NSTextStorage`
@@ -143,9 +160,9 @@ import UIKit
 */
 public struct Marklight {
     /**
-    `UIColor` used to highlight markdown syntax. Default value is light grey.
+    Color used to highlight markdown syntax. Default value is light grey.
      */
-    public static var syntaxColor = UIColor.lightGray
+    public static var syntaxColor = MarklightColor.lightGray
     
     /**
     Font used for blocks and inline code. Default value is *Menlo*.
@@ -153,9 +170,9 @@ public struct Marklight {
     public static var codeFontName = "Menlo"
     
     /**
-     `UIColor` used for blocks and inline code. Default value is dark grey.
+     Color used for blocks and inline code. Default value is dark grey.
      */
-    public static var codeColor = UIColor.darkGray
+    public static var codeColor = MarklightColor.darkGray
     
     /**
     Font used for quote blocks. Default value is *Menlo*.
@@ -163,9 +180,9 @@ public struct Marklight {
     public static var quoteFontName = "Menlo"
     
     /**
-    `UIColor` used for quote blocks. Default value is dark grey.
+    Color used for quote blocks. Default value is dark grey.
      */
-    public static var quoteColor = UIColor.darkGray
+    public static var quoteColor = MarklightColor.darkGray
     
     /**
     Quote indentation in points. Default 20.
@@ -173,66 +190,25 @@ public struct Marklight {
     public static var quoteIndendation : CGFloat = 20
     
     /**
-     Dynamic type font text style, default `UIFontTextStyleBody`.
-     
-     - see: 
-     [Text 
-     Styles](xcdoc://?url=developer.apple.com/library/ios/documentation/UIKit/Reference/UIFontDescriptor_Class/index.html#//apple_ref/doc/constant_group/Text_Styles)
-     */
-    public static var fontTextStyle : String = UIFontTextStyle.body.rawValue
-    
-    /**
      If the markdown syntax should be hidden or visible
      */
     public static var hideSyntax = false
-    
-    // We are validating the user provided fontTextStyle `String` to match the
-    // system supported ones.
-    fileprivate static var fontTextStyleValidated : String {
 
-        let supportedTextStyles: [String] = {
-
-            let baseStyles = [
-                UIFontTextStyle.headline.rawValue,
-                UIFontTextStyle.subheadline.rawValue,
-                UIFontTextStyle.body.rawValue,
-                UIFontTextStyle.footnote.rawValue,
-                UIFontTextStyle.caption1.rawValue,
-                UIFontTextStyle.caption2.rawValue
-            ]
-
-            guard #available(iOS 9.0, *) else { return baseStyles }
-
-            return baseStyles.appending(contentsOf: [
-                UIFontTextStyle.title1.rawValue,
-                UIFontTextStyle.title2.rawValue,
-                UIFontTextStyle.title3.rawValue,
-                UIFontTextStyle.callout.rawValue
-                ])
-        }()
-
-        guard supportedTextStyles.contains(Marklight.fontTextStyle) else {
-            return MarklightFontTextStyle.body.rawValue
-        }
-
-        return Marklight.fontTextStyle
-    }
-    
     // We transform the user provided `codeFontName` `String` to a `NSFont`
-    fileprivate static func codeFont(_ size: CGFloat) -> UIFont {
-        if let font = UIFont(name: Marklight.codeFontName, size: size) {
+    fileprivate static func codeFont(_ size: CGFloat) -> MarklightFont {
+        if let font = MarklightFont(name: Marklight.codeFontName, size: size) {
             return font
         } else {
-            return UIFont.systemFont(ofSize: size)
+            return MarklightFont.systemFont(ofSize: size)
         }
     }
 
     // We transform the user provided `quoteFontName` `String` to a `NSFont`
-    fileprivate static func quoteFont(_ size: CGFloat) -> UIFont {
-        if let font = UIFont(name: Marklight.quoteFontName, size: size) {
+    fileprivate static func quoteFont(_ size: CGFloat) -> MarklightFont {
+        if let font = MarklightFont(name: Marklight.quoteFontName, size: size) {
             return font
         } else {
-            return UIFont.systemFont(ofSize: size)
+            return MarklightFont.systemFont(ofSize: size)
         }
     }
     
@@ -257,14 +233,13 @@ public struct Marklight {
     public static func processEditing(_ textStorage: NSTextStorage) {
         let wholeRange = NSMakeRange(0, (textStorage.string as NSString).length)
         let paragraphRange = (textStorage.string as NSString).paragraphRange(for: textStorage.editedRange)
-        
-        let textSize = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyle(rawValue: Marklight.fontTextStyleValidated)).pointSize
+
         let codeFont = Marklight.codeFont(textSize)
         let quoteFont = Marklight.quoteFont(textSize)
-        let boldFont = UIFont.boldSystemFont(ofSize: textSize)
-        let italicFont = UIFont.italicSystemFont(ofSize: textSize)
-        let hiddenFont = UIFont.systemFont(ofSize: 0.1)
-        let hiddenColor = UIColor.clear
+        let boldFont = MarklightFont.boldSystemFont(ofSize: textSize)
+        let italicFont = MarklightFont.italicSystemFont(ofSize: textSize)
+        let hiddenFont = MarklightFont.systemFont(ofSize: 0.1)
+        let hiddenColor = MarklightColor.clear
         
         // We detect and process underlined headers
         Marklight.headersSetexRegex.matches(textStorage.string, range: wholeRange) { (result) -> Void in
@@ -1045,4 +1020,63 @@ public struct Marklight {
     fileprivate static func repeatString(_ text: String, _ count: Int) -> String {
         return Array(repeating: text, count: count).reduce("", +)
     }
+
+    // MARK: - iOS-Only Font Text Style Support
+
+    #if os(iOS)
+
+    /// Text size measured in points.
+    public static var textSize: CGFloat {
+        return MarklightFontDescriptor
+            .preferredFontDescriptor(withTextStyle: UIFontTextStyle(rawValue: Marklight.fontTextStyleValidated))
+            .pointSize
+    }
+
+    /**
+     Dynamic type font text style, default `UIFontTextStyleBody`.
+
+     - see:
+     [Text
+     Styles](xcdoc://?url=developer.apple.com/library/ios/documentation/UIKit/Reference/MarklightFontDescriptor_Class/index.html#//apple_ref/doc/constant_group/Text_Styles)
+     */
+    public static var fontTextStyle : String = UIFontTextStyle.body.rawValue
+
+    // We are validating the user provided fontTextStyle `String` to match the
+    // system supported ones.
+    fileprivate static var fontTextStyleValidated : String {
+
+        let supportedTextStyles: [String] = {
+
+            let baseStyles = [
+                UIFontTextStyle.headline.rawValue,
+                UIFontTextStyle.subheadline.rawValue,
+                UIFontTextStyle.body.rawValue,
+                UIFontTextStyle.footnote.rawValue,
+                UIFontTextStyle.caption1.rawValue,
+                UIFontTextStyle.caption2.rawValue
+            ]
+
+            guard #available(iOS 9.0, *) else { return baseStyles }
+
+            return baseStyles.appending(contentsOf: [
+                UIFontTextStyle.title1.rawValue,
+                UIFontTextStyle.title2.rawValue,
+                UIFontTextStyle.title3.rawValue,
+                UIFontTextStyle.callout.rawValue
+                ])
+        }()
+
+        guard supportedTextStyles.contains(Marklight.fontTextStyle) else {
+            return UIFontTextStyle.body.rawValue
+        }
+        
+        return Marklight.fontTextStyle
+    }
+
+    #elseif os(macOS)
+    /// Text size measured in points.
+    public static var textSize: CGFloat {
+        fatalError()
+    }
+    #endif
 }
