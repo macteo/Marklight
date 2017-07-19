@@ -240,7 +240,7 @@ open class MarklightTextStorage: NSTextStorage {
         let paragraphRange = (string as NSString).paragraphRange(for: self.editedRange)
         imp.removeAttribute(NSForegroundColorAttributeName, range: paragraphRange)
         imp.addAttribute(NSFontAttributeName, value: MarklightFont.systemFont(ofSize: textSize), range: paragraphRange)
-        imp.addAttribute(NSParagraphStyleAttributeName, value: NSMutableParagraphStyle.default, range: paragraphRange)
+        imp.addAttribute(NSParagraphStyleAttributeName, value: NSParagraphStyle(), range: paragraphRange)
     }
 
     // Remove every attribute to the whole text
@@ -249,7 +249,7 @@ open class MarklightTextStorage: NSTextStorage {
         let wholeRange = NSMakeRange(0, (self.string as NSString).length)
         imp.removeAttribute(NSForegroundColorAttributeName, range: wholeRange)
         imp.addAttribute(NSFontAttributeName, value: MarklightFont.systemFont(ofSize: textSize), range: wholeRange)
-        imp.addAttribute(NSParagraphStyleAttributeName, value: NSMutableParagraphStyle.default, range: wholeRange)
+        imp.addAttribute(NSParagraphStyleAttributeName, value: NSParagraphStyle(), range: wholeRange)
     }
 
     // MARK: - iOS-Only Font Text Style Support
