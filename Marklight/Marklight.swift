@@ -255,11 +255,6 @@ public struct Marklight {
             textStorage.addAttribute(NSFontAttributeName, value: boldFont, range: result!.range)
             Marklight.headersSetexUnderlineRegex.matches(textStorage.string, range: paragraphRange) { (innerResult) -> Void in
                 textStorage.addAttribute(NSForegroundColorAttributeName, value: Marklight.syntaxColor, range: innerResult!.range)
-                if Marklight.hideSyntax {
-                    let preRange = NSMakeRange(innerResult!.range.location, innerResult!.range.length + 1)
-                    textStorage.addAttribute(NSFontAttributeName, value: hiddenFont, range: preRange)
-                    textStorage.addAttribute(NSForegroundColorAttributeName, value: hiddenColor, range: preRange)
-                }
             }
         }
         
