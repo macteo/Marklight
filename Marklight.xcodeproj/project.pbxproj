@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		500DC5561F1F4BDC00FE8C3E /* Array+appending.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500DC5551F1F4BDC00FE8C3E /* Array+appending.swift */; };
 		95C46D6C1C33E11A0070AEDC /* Marklight.h in Headers */ = {isa = PBXBuildFile; fileRef = 95C46D6B1C33E11A0070AEDC /* Marklight.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		95C46D731C33E11A0070AEDC /* Marklight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95C46D681C33E11A0070AEDC /* Marklight.framework */; };
 		95C46D781C33E11A0070AEDC /* MarklightTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C46D771C33E11A0070AEDC /* MarklightTests.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		500DC5551F1F4BDC00FE8C3E /* Array+appending.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+appending.swift"; sourceTree = "<group>"; };
 		95C46D681C33E11A0070AEDC /* Marklight.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Marklight.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95C46D6B1C33E11A0070AEDC /* Marklight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Marklight.h; sourceTree = "<group>"; };
 		95C46D6D1C33E11A0070AEDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 			children = (
 				95C46D821C33E1300070AEDC /* Marklight.swift */,
 				95C46D831C33E1300070AEDC /* MarklightTextStorage.swift */,
+				500DC5551F1F4BDC00FE8C3E /* Array+appending.swift */,
 				95C46D6B1C33E11A0070AEDC /* Marklight.h */,
 				95C46D6D1C33E11A0070AEDC /* Info.plist */,
 			);
@@ -209,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				95C46D851C33E1300070AEDC /* MarklightTextStorage.swift in Sources */,
+				500DC5561F1F4BDC00FE8C3E /* Array+appending.swift in Sources */,
 				95C46D841C33E1300070AEDC /* Marklight.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

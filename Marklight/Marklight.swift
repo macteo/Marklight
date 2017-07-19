@@ -186,36 +186,36 @@ public struct Marklight {
      */
     public static var hideSyntax = false
     
-    
-    // We are validating the user provided fontTextStyle `String` to match the 
+    // We are validating the user provided fontTextStyle `String` to match the
     // system supported ones.
     fileprivate static var fontTextStyleValidated : String {
-        if Marklight.fontTextStyle == UIFontTextStyle.headline.rawValue {
-            return UIFontTextStyle.headline.rawValue
-        } else if Marklight.fontTextStyle == UIFontTextStyle.subheadline.rawValue {
-            return UIFontTextStyle.subheadline.rawValue
-        } else if Marklight.fontTextStyle == UIFontTextStyle.body.rawValue {
-            return UIFontTextStyle.body.rawValue
-        } else if Marklight.fontTextStyle == UIFontTextStyle.footnote.rawValue {
-            return UIFontTextStyle.footnote.rawValue
-        } else if Marklight.fontTextStyle == UIFontTextStyle.caption1.rawValue {
-            return UIFontTextStyle.caption1.rawValue
-        } else if Marklight.fontTextStyle == UIFontTextStyle.caption2.rawValue {
-            return UIFontTextStyle.caption2.rawValue
+
+        let supportedTextStyles: [String] = {
+
+            let baseStyles = [
+                UIFontTextStyle.headline.rawValue,
+                UIFontTextStyle.subheadline.rawValue,
+                UIFontTextStyle.body.rawValue,
+                UIFontTextStyle.footnote.rawValue,
+                UIFontTextStyle.caption1.rawValue,
+                UIFontTextStyle.caption2.rawValue
+            ]
+
+            guard #available(iOS 9.0, *) else { return baseStyles }
+
+            return baseStyles.appending(contentsOf: [
+                UIFontTextStyle.title1.rawValue,
+                UIFontTextStyle.title2.rawValue,
+                UIFontTextStyle.title3.rawValue,
+                UIFontTextStyle.callout.rawValue
+                ])
+        }()
+
+        guard supportedTextStyles.contains(Marklight.fontTextStyle) else {
+            return MarklightFontTextStyle.body.rawValue
         }
 
-        if #available(iOS 9.0, *) {
-            if Marklight.fontTextStyle == UIFontTextStyle.title1.rawValue {
-                return UIFontTextStyle.title1.rawValue
-            } else if Marklight.fontTextStyle == UIFontTextStyle.title2.rawValue {
-                return UIFontTextStyle.title2.rawValue
-            } else if Marklight.fontTextStyle == UIFontTextStyle.title3.rawValue {
-                return UIFontTextStyle.title3.rawValue
-            } else if Marklight.fontTextStyle == UIFontTextStyle.callout.rawValue {
-                return UIFontTextStyle.callout.rawValue
-            }
-        }
-        return UIFontTextStyle.body.rawValue
+        return Marklight.fontTextStyle
     }
     
     // We transform the user provided `codeFontName` `String` to a `NSFont`
