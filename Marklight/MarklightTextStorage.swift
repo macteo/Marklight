@@ -131,9 +131,10 @@ open class MarklightTextStorage: NSTextStorage {
     [`NSTextStorage`](xcdoc://?url=developer.apple.com/library/ios/documentation/UIKit/Reference/NSTextStorage_Class_TextKit/index.html#//apple_ref/doc/uid/TP40013282)
     */
     override open func processEditing() {
+
         // removeParagraphAttributes()
         removeWholeAttributes()
-        
+
         Marklight.syntaxColor = syntaxColor
         Marklight.codeFontName = codeFontName
         Marklight.codeColor = codeColor
@@ -144,7 +145,7 @@ open class MarklightTextStorage: NSTextStorage {
         Marklight.hideSyntax = hideSyntax
         
         Marklight.processEditing(self)
-        
+
         super.processEditing()
     }
 
@@ -180,7 +181,7 @@ open class MarklightTextStorage: NSTextStorage {
 
     
     open override func attributes(at location: Int, effectiveRange range: NSRangePointer?) -> [String : Any] {
-        return imp.attributes(at: location, effectiveRange: range) as [String : AnyObject]
+        return imp.attributes(at: location, effectiveRange: range)
     }
     
     // MARK: Text Editing
@@ -233,22 +234,22 @@ open class MarklightTextStorage: NSTextStorage {
         endEditing()
     }
     
-    // Remove every attribute to the whole text
+    // Remove every attribute the the paragraph containing the last edit.
     fileprivate func removeParagraphAttributes() {
         let textSize = MarklightTextStorage.unstyledTextSize
         let paragraphRange = (string as NSString).paragraphRange(for: self.editedRange)
-        self.removeAttribute(NSForegroundColorAttributeName, range: paragraphRange)
-        self.addAttribute(NSFontAttributeName, value: MarklightFont.systemFont(ofSize: textSize), range: paragraphRange)
-        self.addAttribute(NSParagraphStyleAttributeName, value: NSMutableParagraphStyle.default, range: paragraphRange)
+        imp.removeAttribute(NSForegroundColorAttributeName, range: paragraphRange)
+        imp.addAttribute(NSFontAttributeName, value: MarklightFont.systemFont(ofSize: textSize), range: paragraphRange)
+        imp.addAttribute(NSParagraphStyleAttributeName, value: NSMutableParagraphStyle.default, range: paragraphRange)
     }
-    
-    // Remove every attribute the the paragraph containing the last edit.
+
+    // Remove every attribute to the whole text
     fileprivate func removeWholeAttributes() {
         let textSize = MarklightTextStorage.unstyledTextSize
         let wholeRange = NSMakeRange(0, (self.string as NSString).length)
-        self.removeAttribute(NSForegroundColorAttributeName, range: wholeRange)
-        self.addAttribute(NSFontAttributeName, value: MarklightFont.systemFont(ofSize: textSize), range: wholeRange)
-        self.addAttribute(NSParagraphStyleAttributeName, value: NSMutableParagraphStyle.default, range: wholeRange)
+        imp.removeAttribute(NSForegroundColorAttributeName, range: wholeRange)
+        imp.addAttribute(NSFontAttributeName, value: MarklightFont.systemFont(ofSize: textSize), range: wholeRange)
+        imp.addAttribute(NSParagraphStyleAttributeName, value: NSMutableParagraphStyle.default, range: wholeRange)
     }
 
     // MARK: - iOS-Only Font Text Style Support
