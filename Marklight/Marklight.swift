@@ -253,10 +253,10 @@ public struct Marklight {
         let hiddenColor = MarklightColor.clear
 
         // We detect and process underlined headers
-        Marklight.headersSetexRegex.matches(textStorage.string, range: wholeRange) { (result) -> Void in
+        Marklight.headersSetextRegex.matches(textStorage.string, range: wholeRange) { (result) -> Void in
             textStorage.addAttribute(NSFontAttributeName, value: boldFont, range: result!.range)
 
-            Marklight.headersSetexUnderlineRegex.matches(textStorage.string, range: paragraphRange) { (innerResult) -> Void in
+            Marklight.headersSetextUnderlineRegex.matches(textStorage.string, range: paragraphRange) { (innerResult) -> Void in
                 textStorage.addAttribute(NSForegroundColorAttributeName, value: Marklight.syntaxColor, range: innerResult!.range)
             }
         }
@@ -558,7 +558,7 @@ public struct Marklight {
         -------
     */
 
-    fileprivate static let headerSetexPattern = [
+    fileprivate static let headerSetextPattern = [
         "^(.+?)",
         "\\p{Z}*",
         "\\n",
@@ -567,14 +567,14 @@ public struct Marklight {
         "\\n+"
         ].joined(separator: "\n")
     
-    fileprivate static let headersSetexRegex = Regex(pattern: headerSetexPattern, options: [.allowCommentsAndWhitespace, .anchorsMatchLines])
+    fileprivate static let headersSetextRegex = Regex(pattern: headerSetextPattern, options: [.allowCommentsAndWhitespace, .anchorsMatchLines])
     
-    fileprivate static let setexUnderlinePattern = [
+    fileprivate static let setextUnderlinePattern = [
         "(==+|--+)     # $1 = string of ='s or -'s",
         "\\p{Z}*$"
         ].joined(separator: "\n")
     
-    fileprivate static let headersSetexUnderlineRegex = Regex(pattern: setexUnderlinePattern, options: [.allowCommentsAndWhitespace])
+    fileprivate static let headersSetextUnderlineRegex = Regex(pattern: setextUnderlinePattern, options: [.allowCommentsAndWhitespace])
     
     /*
         # Head
