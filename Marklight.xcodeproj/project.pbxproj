@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		500DC5461F1F473400FE8C3E /* Marklight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 500DC53D1F1F473300FE8C3E /* Marklight.framework */; };
 		500DC5561F1F4BDC00FE8C3E /* Array+appending.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500DC5551F1F4BDC00FE8C3E /* Array+appending.swift */; };
 		95C46D6C1C33E11A0070AEDC /* Marklight.h in Headers */ = {isa = PBXBuildFile; fileRef = 95C46D6B1C33E11A0070AEDC /* Marklight.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		95C46D731C33E11A0070AEDC /* Marklight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95C46D681C33E11A0070AEDC /* Marklight.framework */; };
@@ -16,6 +17,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		500DC5471F1F473400FE8C3E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 95C46D5F1C33E11A0070AEDC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 500DC53C1F1F473300FE8C3E;
+			remoteInfo = "Marklight macOS";
+		};
 		95C46D741C33E11A0070AEDC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 95C46D5F1C33E11A0070AEDC /* Project object */;
@@ -26,6 +34,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		500DC53D1F1F473300FE8C3E /* Marklight.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Marklight.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		500DC5401F1F473300FE8C3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		500DC5451F1F473300FE8C3E /* Marklight macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Marklight macOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		500DC54C1F1F473400FE8C3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		500DC5551F1F4BDC00FE8C3E /* Array+appending.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+appending.swift"; sourceTree = "<group>"; };
 		95C46D681C33E11A0070AEDC /* Marklight.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Marklight.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95C46D6B1C33E11A0070AEDC /* Marklight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Marklight.h; sourceTree = "<group>"; };
@@ -41,6 +53,21 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		500DC5391F1F473300FE8C3E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		500DC5421F1F473300FE8C3E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				500DC5461F1F473400FE8C3E /* Marklight.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		95C46D641C33E11A0070AEDC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -59,6 +86,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		500DC53E1F1F473300FE8C3E /* Marklight macOS */ = {
+			isa = PBXGroup;
+			children = (
+				500DC5401F1F473300FE8C3E /* Info.plist */,
+			);
+			path = "Marklight macOS";
+			sourceTree = "<group>";
+		};
+		500DC5491F1F473400FE8C3E /* Marklight macOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				500DC54C1F1F473400FE8C3E /* Info.plist */,
+			);
+			path = "Marklight macOSTests";
+			sourceTree = "<group>";
+		};
 		95C46D5E1C33E11A0070AEDC = {
 			isa = PBXGroup;
 			children = (
@@ -67,6 +110,8 @@
 				95C46D881C33E3B40070AEDC /* Marklight.podspec */,
 				95C46D6A1C33E11A0070AEDC /* Marklight */,
 				95C46D761C33E11A0070AEDC /* MarklightTests */,
+				500DC53E1F1F473300FE8C3E /* Marklight macOS */,
+				500DC5491F1F473400FE8C3E /* Marklight macOSTests */,
 				95C46D691C33E11A0070AEDC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -76,6 +121,8 @@
 			children = (
 				95C46D681C33E11A0070AEDC /* Marklight.framework */,
 				95C46D721C33E11A0070AEDC /* MarklightTests.xctest */,
+				500DC53D1F1F473300FE8C3E /* Marklight.framework */,
+				500DC5451F1F473300FE8C3E /* Marklight macOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -104,6 +151,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		500DC53A1F1F473300FE8C3E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		95C46D651C33E11A0070AEDC /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -115,6 +169,42 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		500DC53C1F1F473300FE8C3E /* Marklight macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 500DC5521F1F473400FE8C3E /* Build configuration list for PBXNativeTarget "Marklight macOS" */;
+			buildPhases = (
+				500DC5381F1F473300FE8C3E /* Sources */,
+				500DC5391F1F473300FE8C3E /* Frameworks */,
+				500DC53A1F1F473300FE8C3E /* Headers */,
+				500DC53B1F1F473300FE8C3E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Marklight macOS";
+			productName = "Marklight macOS";
+			productReference = 500DC53D1F1F473300FE8C3E /* Marklight.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		500DC5441F1F473300FE8C3E /* Marklight macOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 500DC5531F1F473400FE8C3E /* Build configuration list for PBXNativeTarget "Marklight macOSTests" */;
+			buildPhases = (
+				500DC5411F1F473300FE8C3E /* Sources */,
+				500DC5421F1F473300FE8C3E /* Frameworks */,
+				500DC5431F1F473300FE8C3E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				500DC5481F1F473400FE8C3E /* PBXTargetDependency */,
+			);
+			name = "Marklight macOSTests";
+			productName = "Marklight macOSTests";
+			productReference = 500DC5451F1F473300FE8C3E /* Marklight macOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		95C46D671C33E11A0070AEDC /* Marklight */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 95C46D7C1C33E11A0070AEDC /* Build configuration list for PBXNativeTarget "Marklight" */;
@@ -157,10 +247,19 @@
 		95C46D5F1C33E11A0070AEDC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Dolomate;
 				TargetAttributes = {
+					500DC53C1F1F473300FE8C3E = {
+						CreatedOnToolsVersion = 8.3.2;
+						ProvisioningStyle = Manual;
+					};
+					500DC5441F1F473300FE8C3E = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = FRMDA3XRGC;
+						ProvisioningStyle = Automatic;
+					};
 					95C46D671C33E11A0070AEDC = {
 						CreatedOnToolsVersion = 7.2;
 						LastSwiftMigration = 0820;
@@ -185,11 +284,27 @@
 			targets = (
 				95C46D671C33E11A0070AEDC /* Marklight */,
 				95C46D711C33E11A0070AEDC /* MarklightTests */,
+				500DC53C1F1F473300FE8C3E /* Marklight macOS */,
+				500DC5441F1F473300FE8C3E /* Marklight macOSTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		500DC53B1F1F473300FE8C3E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		500DC5431F1F473300FE8C3E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		95C46D661C33E11A0070AEDC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -207,6 +322,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		500DC5381F1F473300FE8C3E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		500DC5411F1F473300FE8C3E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		95C46D631C33E11A0070AEDC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -228,6 +357,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		500DC5481F1F473400FE8C3E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 500DC53C1F1F473300FE8C3E /* Marklight macOS */;
+			targetProxy = 500DC5471F1F473400FE8C3E /* PBXContainerItemProxy */;
+		};
 		95C46D751C33E11A0070AEDC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 95C46D671C33E11A0070AEDC /* Marklight */;
@@ -236,6 +370,100 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		500DC54E1F1F473400FE8C3E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "Marklight macOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dolomate.marklight-macos";
+				PRODUCT_NAME = Marklight;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		500DC54F1F1F473400FE8C3E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "Marklight macOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dolomate.marklight-macos";
+				PRODUCT_NAME = Marklight;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		500DC5501F1F473400FE8C3E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = FRMDA3XRGC;
+				INFOPLIST_FILE = "Marklight macOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = "de.christiantietze.Marklight-macOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		500DC5511F1F473400FE8C3E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = FRMDA3XRGC;
+				INFOPLIST_FILE = "Marklight macOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = "de.christiantietze.Marklight-macOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 		95C46D7A1C33E11A0070AEDC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -398,6 +626,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		500DC5521F1F473400FE8C3E /* Build configuration list for PBXNativeTarget "Marklight macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				500DC54E1F1F473400FE8C3E /* Debug */,
+				500DC54F1F1F473400FE8C3E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		500DC5531F1F473400FE8C3E /* Build configuration list for PBXNativeTarget "Marklight macOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				500DC5501F1F473400FE8C3E /* Debug */,
+				500DC5511F1F473400FE8C3E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		95C46D621C33E11A0070AEDC /* Build configuration list for PBXProject "Marklight" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
