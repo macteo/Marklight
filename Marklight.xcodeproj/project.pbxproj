@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		500DC5461F1F473400FE8C3E /* Marklight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 500DC53D1F1F473300FE8C3E /* Marklight.framework */; };
 		500DC5561F1F4BDC00FE8C3E /* Array+appending.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500DC5551F1F4BDC00FE8C3E /* Array+appending.swift */; };
+		500DC5571F1F508500FE8C3E /* MarklightTextStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C46D831C33E1300070AEDC /* MarklightTextStorage.swift */; };
+		500DC5581F1F50B100FE8C3E /* Marklight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C46D821C33E1300070AEDC /* Marklight.swift */; };
 		95C46D6C1C33E11A0070AEDC /* Marklight.h in Headers */ = {isa = PBXBuildFile; fileRef = 95C46D6B1C33E11A0070AEDC /* Marklight.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		95C46D731C33E11A0070AEDC /* Marklight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95C46D681C33E11A0070AEDC /* Marklight.framework */; };
 		95C46D781C33E11A0070AEDC /* MarklightTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C46D771C33E11A0070AEDC /* MarklightTests.swift */; };
@@ -326,6 +328,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				500DC5571F1F508500FE8C3E /* MarklightTextStorage.swift in Sources */,
+				500DC5581F1F50B100FE8C3E /* Marklight.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,6 +432,7 @@
 		500DC5501F1F473400FE8C3E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -448,6 +453,7 @@
 		500DC5511F1F473400FE8C3E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;

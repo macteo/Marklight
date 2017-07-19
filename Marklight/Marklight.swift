@@ -194,6 +194,15 @@ public struct Marklight {
      */
     public static var hideSyntax = false
 
+    /**
+     Text size measured in points.
+     */
+    #if os(iOS)
+    public static var textSize: CGFloat = MarklightFont.systemFontSize
+    #elseif os(macOS)
+    public static var textSize: CGFloat = MarklightFont.systemFontSize()
+    #endif
+
     // We transform the user provided `codeFontName` `String` to a `NSFont`
     fileprivate static func codeFont(_ size: CGFloat) -> MarklightFont {
         if let font = MarklightFont(name: Marklight.codeFontName, size: size) {
@@ -1021,62 +1030,4 @@ public struct Marklight {
         return Array(repeating: text, count: count).reduce("", +)
     }
 
-    // MARK: - iOS-Only Font Text Style Support
-
-    #if os(iOS)
-
-    /// Text size measured in points.
-    public static var textSize: CGFloat {
-        return MarklightFontDescriptor
-            .preferredFontDescriptor(withTextStyle: UIFontTextStyle(rawValue: Marklight.fontTextStyleValidated))
-            .pointSize
-    }
-
-    /**
-     Dynamic type font text style, default `UIFontTextStyleBody`.
-
-     - see:
-     [Text
-     Styles](xcdoc://?url=developer.apple.com/library/ios/documentation/UIKit/Reference/MarklightFontDescriptor_Class/index.html#//apple_ref/doc/constant_group/Text_Styles)
-     */
-    public static var fontTextStyle : String = UIFontTextStyle.body.rawValue
-
-    // We are validating the user provided fontTextStyle `String` to match the
-    // system supported ones.
-    fileprivate static var fontTextStyleValidated : String {
-
-        let supportedTextStyles: [String] = {
-
-            let baseStyles = [
-                UIFontTextStyle.headline.rawValue,
-                UIFontTextStyle.subheadline.rawValue,
-                UIFontTextStyle.body.rawValue,
-                UIFontTextStyle.footnote.rawValue,
-                UIFontTextStyle.caption1.rawValue,
-                UIFontTextStyle.caption2.rawValue
-            ]
-
-            guard #available(iOS 9.0, *) else { return baseStyles }
-
-            return baseStyles.appending(contentsOf: [
-                UIFontTextStyle.title1.rawValue,
-                UIFontTextStyle.title2.rawValue,
-                UIFontTextStyle.title3.rawValue,
-                UIFontTextStyle.callout.rawValue
-                ])
-        }()
-
-        guard supportedTextStyles.contains(Marklight.fontTextStyle) else {
-            return UIFontTextStyle.body.rawValue
-        }
-        
-        return Marklight.fontTextStyle
-    }
-
-    #elseif os(macOS)
-    /// Text size measured in points.
-    public static var textSize: CGFloat {
-        fatalError()
-    }
-    #endif
 }
