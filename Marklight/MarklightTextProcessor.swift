@@ -100,7 +100,6 @@ open class MarklightTextProcessor {
         ) -> MarklightProcessingResult {
 
         let editedAndAdjacentParagraphRange = self.editedAndAdjacentParagraphRange(editedRange: editedRange)
-        let editedParagraphRange = self.editedParagraphRange(editedRange: editedRange)
 
         resetMarklightAttributes(range: editedAndAdjacentParagraphRange)
 
@@ -118,10 +117,6 @@ open class MarklightTextProcessor {
         return MarklightProcessingResult(
             editedRange: editedRange,
             affectedRange: editedAndAdjacentParagraphRange)
-    }
-
-    fileprivate func editedParagraphRange(editedRange: NSRange) -> NSRange {
-        return (self.string as NSString).paragraphRange(for: editedRange)
     }
 
     fileprivate func editedAndAdjacentParagraphRange(editedRange: NSRange) -> NSRange {
