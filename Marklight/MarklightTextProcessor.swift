@@ -12,13 +12,6 @@
     import AppKit
 #endif
 
-extension NSTextStorage {
-    func resetMarklightTextAttributes(textSize: CGFloat, range: NSRange) {
-        self.removeAttribute(NSForegroundColorAttributeName, range: range)
-        self.addAttribute(NSFontAttributeName, value: MarklightFont.systemFont(ofSize: textSize), range: range)
-        self.addAttribute(NSParagraphStyleAttributeName, value: NSParagraphStyle(), range: range)
-    }
-}
 
 open class MarklightTextProcessor {
 
@@ -63,12 +56,12 @@ open class MarklightTextProcessor {
     // MARK: Syntax highlighting
 
     open func processEditing(
-        textStorage: NSTextStorage,
-        editedRange: NSRange,
-        string: String
+        styleApplier: MarklightStyleApplier,
+        string: String,
+        editedRange: NSRange
         ) -> MarklightProcessingResult {
 
-        let editedAndAdjacentParagraphRange = self.editedAndAdjacentParagraphRange(editedRange: editedRange, in: string)
+        let editedAndAdjacentParagraphRange = self.editedAndAdjacentParagraphRange(in: string, editedRange: editedRange)
 
         Marklight.syntaxColor = syntaxColor
         Marklight.codeFontName = codeFontName
@@ -79,29 +72,34 @@ open class MarklightTextProcessor {
         Marklight.textSize = textSize
         Marklight.hideSyntax = hideSyntax
 
-        resetMarklightAttributes(range: editedAndAdjacentParagraphRange, for: textStorage)
-        Marklight.processEditing(textStorage, affectedRange: editedAndAdjacentParagraphRange)
+        resetMarklightAttributes(
+            styleApplier: styleApplier,
+            range: editedAndAdjacentParagraphRange)
+        Marklight.applyMarkdownStyle(
+            styleApplier,
+            string: string,
+            affectedRange: editedAndAdjacentParagraphRange)
 
         return MarklightProcessingResult(
             editedRange: editedRange,
             affectedRange: editedAndAdjacentParagraphRange)
     }
 
-    fileprivate func editedAndAdjacentParagraphRange(editedRange: NSRange, in string: String) -> NSRange {
-        let textStorageNSString = string as NSString
-        let editedParagraphRange = textStorageNSString.paragraphRange(for: editedRange)
+    fileprivate func editedAndAdjacentParagraphRange(in string: String, editedRange: NSRange) -> NSRange {
+        let nsString = string as NSString
+        let editedParagraphRange = nsString.paragraphRange(for: editedRange)
 
         let previousParagraphRange: NSRange
         if editedParagraphRange.location > 0 {
-            previousParagraphRange = textStorageNSString.paragraphRange(at: editedParagraphRange.location - 1)
+            previousParagraphRange = nsString.paragraphRange(at: editedParagraphRange.location - 1)
         } else {
             previousParagraphRange = NSRange(location: editedParagraphRange.location, length: 0)
         }
 
         let nextParagraphRange: NSRange
         let locationAfterEditedParagraph = editedParagraphRange.location + editedParagraphRange.length
-        if locationAfterEditedParagraph < textStorageNSString.length {
-            nextParagraphRange = textStorageNSString.paragraphRange(at: locationAfterEditedParagraph + 1)
+        if locationAfterEditedParagraph < nsString.length {
+            nextParagraphRange = nsString.paragraphRange(at: locationAfterEditedParagraph + 1)
         } else {
             nextParagraphRange = NSRange.init(location: 0, length: 0)
         }
@@ -111,9 +109,9 @@ open class MarklightTextProcessor {
             length: [previousParagraphRange, editedParagraphRange, nextParagraphRange].map { $0.length }.reduce(0, +))
     }
 
-    fileprivate func resetMarklightAttributes(range: NSRange, for textStorage: NSTextStorage) {
+    fileprivate func resetMarklightAttributes(styleApplier: MarklightStyleApplier, range: NSRange) {
 
-        textStorage.resetMarklightTextAttributes(
+        styleApplier.resetMarklightTextAttributes(
             textSize: self.textSize,
             range: range)
     }

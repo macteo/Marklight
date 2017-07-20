@@ -104,9 +104,9 @@ open class MarklightTextStorage: NSTextStorage {
         defer { self.isBusyProcessing = false }
 
         let processingResult = marklightTextProcessor.processEditing(
-            textStorage: self,
-            editedRange: editedRange,
-            string: self.string)
+            styleApplier: self,
+            string: self.string,
+            editedRange: editedRange)
 
         defer {
             // Include surrounding paragraphs in layout manager's styling pass
@@ -117,7 +117,9 @@ open class MarklightTextStorage: NSTextStorage {
         super.processEditing()
     }
 
-    override func resetMarklightTextAttributes(textSize: CGFloat, range: NSRange) {
+    override public func resetMarklightTextAttributes(textSize: CGFloat, range: NSRange) {
+        // Use `imp` directly instead of `self` to avoid changing the edited range
+        // after attribute fixing, affecting the insertion point on macOS.
         imp.removeAttribute(NSForegroundColorAttributeName, range: range)
         imp.addAttribute(NSFontAttributeName, value: MarklightFont.systemFont(ofSize: textSize), range: range)
         imp.addAttribute(NSParagraphStyleAttributeName, value: NSParagraphStyle(), range: range)
