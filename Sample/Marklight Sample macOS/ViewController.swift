@@ -17,25 +17,21 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        textStorage.codeColor = NSColor.orange
-        textStorage.quoteColor = NSColor.darkGray
-        textStorage.syntaxColor = NSColor.blue
-        textStorage.codeFontName = "Courier"
-        textStorage.textSize = 18.0
-        textStorage.hideSyntax = true
+        textStorage.marklightTextProcessor.codeColor = NSColor.orange
+        textStorage.marklightTextProcessor.quoteColor = NSColor.darkGray
+        textStorage.marklightTextProcessor.syntaxColor = NSColor.blue
+        textStorage.marklightTextProcessor.codeFontName = "Courier"
+        textStorage.marklightTextProcessor.textSize = 18.0
+        textStorage.marklightTextProcessor.hideSyntax = true
 
         textView.layoutManager?.replaceTextStorage(textStorage)
 
         textView.textContainerInset = NSSize(width: 10, height: 8)
 
-        if let samplePath = Bundle.main.path(forResource: "Sample", ofType:  "md"){
-            do {
-                let string = try String(contentsOfFile: samplePath)
-                let attributedString = NSAttributedString(string: string)
-                textStorage.append(attributedString)
-            } catch _ {
-                print("Cannot read Sample.md file")
-            }
+        if let samplePath = Bundle.main.path(forResource: "Sample", ofType: "md"),
+            let string = try? String(contentsOfFile: samplePath) {
+            let attributedString = NSAttributedString(string: string)
+            textStorage.append(attributedString)
         }
     }
 }

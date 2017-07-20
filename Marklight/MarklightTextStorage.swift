@@ -11,18 +11,6 @@
     import AppKit
 #endif
 
-extension NSLayoutManager {
-    func processEditing(for textStorage: NSTextStorage, processingResult: MarklightProcessingResult) {
-
-        self.processEditing(
-            for: textStorage,
-            edited: .editedAttributes,
-            range: processingResult.editedRange,
-            changeInLength: 0,
-            invalidatedRange: processingResult.affectedRange)
-    }
-}
-
 /**
     `NSTextStorage` subclass that uses `Marklight` to highlight markdown syntax
     on a `UITextView`.
@@ -84,7 +72,7 @@ extension NSLayoutManager {
 
 open class MarklightTextStorage: NSTextStorage {
 
-    open weak var marklightTextProcessor: MarklightTextProcessor?
+    open lazy var marklightTextProcessor: MarklightTextProcessor = MarklightTextProcessor()
 
     /// Delegate from this class cluster to a regular `NSTextStorage` instance
     /// because it does some additional performance optimizations 
@@ -115,18 +103,15 @@ open class MarklightTextStorage: NSTextStorage {
         self.isBusyProcessing = true
         defer { self.isBusyProcessing = false }
 
-        if let marklightTextProcessor = marklightTextProcessor {
-            let processingResult = marklightTextProcessor.processEditing(editedRange: self.editedRange)
+        let processingResult = marklightTextProcessor.processEditing(
+            textStorage: self,
+            editedRange: editedRange,
+            string: self.string)
 
-            defer {
-                // Include surrounding paragraphs in layout manager's styling pass
-                // after finishing the real edit. Mostly needed for Setex headings.
-                self.layoutManagers.forEach {
-                    $0.processEditing(
-                        for: self,
-                        processingResult: processingResult)
-                }
-            }
+        defer {
+            // Include surrounding paragraphs in layout manager's styling pass
+            // after finishing the real edit. Mostly needed for Setex headings.
+            processingResult.updateLayoutManagers(for: self)
         }
 
         super.processEditing()
@@ -230,4 +215,45 @@ open class MarklightTextStorage: NSTextStorage {
         edited([.editedAttributes], range: range, changeInLength: 0)
         endEditing()
     }
+
+    #if os(iOS)
+
+    // MARK: - Dynamic text sizing
+
+    required override public init() {
+        super.init()
+        observeTextSize()
+    }
+
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        observeTextSize()
+    }
+
+    /**
+     Internal method to register to notifications determined by dynamic type size
+     changes and redraw the attributed text with the appropriate text size.
+
+     - note: Currently it works only after the user adds or removes some chars inside the
+     `UITextView`.
+     */
+    // TODO: Make this work without needing to type in the text view.
+    func observeTextSize() {
+        NotificationCenter.default.addObserver(forName: .UIContentSizeCategoryDidChange, object: nil, queue: OperationQueue.main) { [weak self] (notification) -> Void in
+            self?.invalidateTextSizeForWholeRange()
+        }
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    fileprivate func invalidateTextSizeForWholeRange() {
+        let wholeRange = NSMakeRange(0, (self.string as NSString).length)
+        self.invalidateAttributes(in: wholeRange)
+        for layoutManager in self.layoutManagers {
+            layoutManager.invalidateDisplay(forCharacterRange: wholeRange)
+        }
+    }
+    #endif
 }

@@ -18,16 +18,18 @@ extension NSTextStorage {
         self.addAttribute(NSFontAttributeName, value: MarklightFont.systemFont(ofSize: textSize), range: range)
         self.addAttribute(NSParagraphStyleAttributeName, value: NSParagraphStyle(), range: range)
     }
+}
 
-    #if os(iOS)
-    func invalidateTextSizeForWholeRange() {
-        let wholeRange = NSMakeRange(0, (self.string as NSString).length)
-        self.invalidateAttributes(in: wholeRange)
-        for layoutManager in self.layoutManagers {
-            layoutManager.invalidateDisplay(forCharacterRange: wholeRange)
-        }
+extension NSLayoutManager {
+    func processEditing(for textStorage: NSTextStorage, processingResult: MarklightProcessingResult) {
+
+        self.processEditing(
+            for: textStorage,
+            edited: .editedAttributes,
+            range: processingResult.editedRange,
+            changeInLength: 0,
+            invalidatedRange: processingResult.affectedRange)
     }
-    #endif
 }
 
 public struct MarklightProcessingResult {
@@ -39,21 +41,18 @@ public struct MarklightProcessingResult {
         self.editedRange = editedRange
         self.affectedRange = affectedRange
     }
+
+    public func updateLayoutManagers(for textStorage: NSTextStorage) {
+
+        textStorage.layoutManagers.forEach {
+            $0.processEditing(
+                for: textStorage,
+                processingResult: self)
+        }
+    }
 }
 
 open class MarklightTextProcessor {
-
-    let textStorage: NSTextStorage
-
-    open var string : String { return textStorage.string }
-
-    public init(textStorage: NSTextStorage) {
-        self.textStorage = textStorage
-
-        #if os(iOS)
-            observeTextSize()
-        #endif
-    }
 
     // MARK: Syntax highlight customisation
 
@@ -96,12 +95,12 @@ open class MarklightTextProcessor {
     // MARK: Syntax highlighting
 
     open func processEditing(
-        editedRange: NSRange
+        textStorage: NSTextStorage,
+        editedRange: NSRange,
+        string: String
         ) -> MarklightProcessingResult {
 
-        let editedAndAdjacentParagraphRange = self.editedAndAdjacentParagraphRange(editedRange: editedRange)
-
-        resetMarklightAttributes(range: editedAndAdjacentParagraphRange)
+        let editedAndAdjacentParagraphRange = self.editedAndAdjacentParagraphRange(editedRange: editedRange, in: string)
 
         Marklight.syntaxColor = syntaxColor
         Marklight.codeFontName = codeFontName
@@ -112,15 +111,16 @@ open class MarklightTextProcessor {
         Marklight.textSize = textSize
         Marklight.hideSyntax = hideSyntax
 
-        Marklight.processEditing(self.textStorage, affectedRange: editedAndAdjacentParagraphRange)
+        resetMarklightAttributes(range: editedAndAdjacentParagraphRange, for: textStorage)
+        Marklight.processEditing(textStorage, affectedRange: editedAndAdjacentParagraphRange)
 
         return MarklightProcessingResult(
             editedRange: editedRange,
             affectedRange: editedAndAdjacentParagraphRange)
     }
 
-    fileprivate func editedAndAdjacentParagraphRange(editedRange: NSRange) -> NSRange {
-        let textStorageNSString = (self.string as NSString)
+    fileprivate func editedAndAdjacentParagraphRange(editedRange: NSRange, in string: String) -> NSRange {
+        let textStorageNSString = string as NSString
         let editedParagraphRange = textStorageNSString.paragraphRange(for: editedRange)
 
         let previousParagraphRange: NSRange
@@ -143,7 +143,7 @@ open class MarklightTextProcessor {
             length: [previousParagraphRange, editedParagraphRange, nextParagraphRange].map { $0.length }.reduce(0, +))
     }
 
-    fileprivate func resetMarklightAttributes(range: NSRange) {
+    fileprivate func resetMarklightAttributes(range: NSRange, for textStorage: NSTextStorage) {
 
         textStorage.resetMarklightTextAttributes(
             textSize: self.textSize,
@@ -151,22 +151,6 @@ open class MarklightTextProcessor {
     }
 
     #if os(iOS)
-
-    /**
-     Internal method to register to notifications determined by dynamic type size
-     changes and redraw the attributed text with the appropriate text size.
-     Currently it works only after the user adds or removes some chars inside the
-     `UITextView`.
-     */
-    func observeTextSize() {
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIContentSizeCategoryDidChange, object: nil, queue: OperationQueue.main) { [weak self] (notification) -> Void in
-            self?.textStorage.invalidateTextSizeForWholeRange()
-        }
-    }
-
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
 
     // MARK: Font Style Settings
 
