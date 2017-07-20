@@ -130,22 +130,8 @@
 
 #if os(iOS)
     import UIKit
-
-    typealias MarklightColor = UIColor
-    typealias MarklightFont = UIFont
-    typealias MarklightFontDescriptor = UIFontDescriptor
 #elseif os(macOS)
     import AppKit
-
-    typealias MarklightColor = NSColor
-    typealias MarklightFont = NSFont
-    typealias MarklightFontDescriptor = NSFontDescriptor
-
-    extension NSFont {
-        static func italicSystemFont(ofSize size: CGFloat) -> NSFont {
-            return NSFontManager().convert(NSFont.systemFont(ofSize: size), toHaveTrait: .italicFontMask)
-        }
-    }
 #endif
 
 /**
