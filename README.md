@@ -31,9 +31,9 @@ Regular expressions are taken from [Markingbird](https://github.com/kristopherjo
 - [x] Choose dynamic type font text style.
 - [x] Quote indentation.
 - [x] Documented.
+- [x] macOS compatibility.
 - [ ] Parsing tests.
 - [ ] Performance tests.
-- [x] macOS compatibility.
 
 ## Requirements
 
