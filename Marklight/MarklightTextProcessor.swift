@@ -20,38 +20,6 @@ extension NSTextStorage {
     }
 }
 
-extension NSLayoutManager {
-    func processEditing(for textStorage: NSTextStorage, processingResult: MarklightProcessingResult) {
-
-        self.processEditing(
-            for: textStorage,
-            edited: .editedAttributes,
-            range: processingResult.editedRange,
-            changeInLength: 0,
-            invalidatedRange: processingResult.affectedRange)
-    }
-}
-
-public struct MarklightProcessingResult {
-    public let editedRange: NSRange
-    public let affectedRange: NSRange
-
-    public init(editedRange: NSRange, affectedRange: NSRange) {
-
-        self.editedRange = editedRange
-        self.affectedRange = affectedRange
-    }
-
-    public func updateLayoutManagers(for textStorage: NSTextStorage) {
-
-        textStorage.layoutManagers.forEach {
-            $0.processEditing(
-                for: textStorage,
-                processingResult: self)
-        }
-    }
-}
-
 open class MarklightTextProcessor {
 
     // MARK: Syntax highlight customisation
