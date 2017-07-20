@@ -106,7 +106,7 @@ class MarklightTests: XCTestCase {
         let string = ["* First", "* Second", "* Third"].joined(separator: "\n")
         let attributedString = NSAttributedString(string: string)
         self.textStorage.replaceCharacters(in: NSMakeRange(0, 0), with: attributedString)
-        var range : NSRange? = NSMakeRange(0, 1)
+        var range : NSRange? = NSMakeRange(0, string.lengthOfBytes(using: .utf8))
         if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, at: 0, effectiveRange: &range!) as? UIColor {
             XCTAssert(attribute == UIColor.lightGray)
             XCTAssert(range?.length == 1)
@@ -134,7 +134,8 @@ class MarklightTests: XCTestCase {
         }
         if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, at: 8, effectiveRange: &range!) as? UIColor {
             XCTAssert(attribute == UIColor.lightGray)
-            XCTAssert(range?.length == 25)
+            // TODO: exetend test
+            XCTAssert(range?.length == 2)
         } else {
             XCTFail()
         }
@@ -146,7 +147,7 @@ class MarklightTests: XCTestCase {
         let string = ["![Example](http://www.example.com/image.png)",""].joined(separator: "\n")
         let attributedString = NSAttributedString(string: string)
         self.textStorage.replaceCharacters(in: NSMakeRange(0, 0), with: attributedString)
-        var range : NSRange? = NSMakeRange(0, 1)
+        var range : NSRange? = NSMakeRange(0, string.lengthOfBytes(using: .utf8))
         if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, at: 0, effectiveRange: &range!) as? UIColor {
             XCTAssert(attribute == UIColor.lightGray)
             XCTAssert(range?.length == 2)
@@ -155,7 +156,8 @@ class MarklightTests: XCTestCase {
         }
         if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, at: 9, effectiveRange: &range!) as? UIColor {
             XCTAssert(attribute == UIColor.lightGray)
-            XCTAssert(range?.length == 35)
+            // TODO: exetend test
+            XCTAssert(range?.length == 2)
         } else {
             XCTFail()
         }
@@ -256,7 +258,7 @@ class MarklightTests: XCTestCase {
         let string = ["*italic* word", ""].joined(separator: "\n")
         let attributedString = NSAttributedString(string: string)
         self.textStorage.replaceCharacters(in: NSMakeRange(0, 0), with: attributedString)
-        var range : NSRange? = NSMakeRange(0, 1)
+        var range : NSRange? = NSMakeRange(0, string.lengthOfBytes(using: .utf8))
         if let attribute = self.textStorage.attribute(NSForegroundColorAttributeName, at: 0, effectiveRange: &range!) as? UIColor {
             XCTAssert(attribute == UIColor.lightGray)
             XCTAssert(range?.length == 1)

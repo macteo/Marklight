@@ -7,17 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		47AF302272D4802D59A77CEC /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7B5AD7F31F1165D0393DAAB /* Pods.framework */; };
+		500DC5601F1F54DA00FE8C3E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500DC55F1F1F54DA00FE8C3E /* AppDelegate.swift */; };
+		500DC5621F1F54DA00FE8C3E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500DC5611F1F54DA00FE8C3E /* ViewController.swift */; };
+		500DC5641F1F54DA00FE8C3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 500DC5631F1F54DA00FE8C3E /* Assets.xcassets */; };
+		500DC5671F1F54DA00FE8C3E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 500DC5651F1F54DA00FE8C3E /* Main.storyboard */; };
+		500DC56D1F1F578B00FE8C3E /* Sample.md in Resources */ = {isa = PBXBuildFile; fileRef = 95F6691D1C33EA870046634D /* Sample.md */; };
+		919078F5C60B1E016728F29D /* Pods_Marklight_Marklight_Sample_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E912E23EEC14E5B68AD1C8F9 /* Pods_Marklight_Marklight_Sample_macOS.framework */; };
 		95C46D961C33E7F40070AEDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C46D951C33E7F40070AEDC /* AppDelegate.swift */; };
 		95C46D981C33E7F40070AEDC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C46D971C33E7F40070AEDC /* ViewController.swift */; };
 		95C46D9B1C33E7F40070AEDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95C46D991C33E7F40070AEDC /* Main.storyboard */; };
 		95C46D9D1C33E7F40070AEDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95C46D9C1C33E7F40070AEDC /* Assets.xcassets */; };
 		95C46DA01C33E7F40070AEDC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95C46D9E1C33E7F40070AEDC /* LaunchScreen.storyboard */; };
 		95F6691F1C33EC310046634D /* Sample.md in Resources */ = {isa = PBXBuildFile; fileRef = 95F6691D1C33EA870046634D /* Sample.md */; };
+		E3E8E899459218A635EF73A8 /* Pods_Marklight_Marklight_Sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A3D30D47F46F43946225A6B /* Pods_Marklight_Marklight_Sample.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7968FC36C886F5EBECAA1298 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		500DC55D1F1F54DA00FE8C3E /* Marklight Sample macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Marklight Sample macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		500DC55F1F1F54DA00FE8C3E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		500DC5611F1F54DA00FE8C3E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		500DC5631F1F54DA00FE8C3E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		500DC5661F1F54DA00FE8C3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		500DC5681F1F54DA00FE8C3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8FB8831AE22B87CE9ACAC138 /* Pods-Marklight-Marklight Sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Marklight-Marklight Sample.release.xcconfig"; path = "Pods/Target Support Files/Pods-Marklight-Marklight Sample/Pods-Marklight-Marklight Sample.release.xcconfig"; sourceTree = "<group>"; };
 		95C46D921C33E7F40070AEDC /* Marklight Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Marklight Sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		95C46D951C33E7F40070AEDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95C46D971C33E7F40070AEDC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -25,41 +37,58 @@
 		95C46D9C1C33E7F40070AEDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		95C46D9F1C33E7F40070AEDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95C46DA11C33E7F40070AEDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		95F6691C1C33E86E0046634D /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		95F6691C1C33E86E0046634D /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		95F6691D1C33EA870046634D /* Sample.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Sample.md; sourceTree = SOURCE_ROOT; };
-		E51FE1EB1FAE20E6BEBD8FA5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		9A3D30D47F46F43946225A6B /* Pods_Marklight_Marklight_Sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Marklight_Marklight_Sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4A0500258753356FDA71127 /* Pods-Marklight-Marklight Sample macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Marklight-Marklight Sample macOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Marklight-Marklight Sample macOS/Pods-Marklight-Marklight Sample macOS.debug.xcconfig"; sourceTree = "<group>"; };
+		B50C57C0E062B4DC725E1247 /* Pods-Marklight-Marklight Sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Marklight-Marklight Sample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Marklight-Marklight Sample/Pods-Marklight-Marklight Sample.debug.xcconfig"; sourceTree = "<group>"; };
+		C030B286564B371720A36CEF /* Pods-Marklight-Marklight Sample macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Marklight-Marklight Sample macOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Marklight-Marklight Sample macOS/Pods-Marklight-Marklight Sample macOS.release.xcconfig"; sourceTree = "<group>"; };
 		E7B5AD7F31F1165D0393DAAB /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E912E23EEC14E5B68AD1C8F9 /* Pods_Marklight_Marklight_Sample_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Marklight_Marklight_Sample_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		500DC55A1F1F54DA00FE8C3E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				919078F5C60B1E016728F29D /* Pods_Marklight_Marklight_Sample_macOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		95C46D8F1C33E7F40070AEDC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47AF302272D4802D59A77CEC /* Pods.framework in Frameworks */,
+				E3E8E899459218A635EF73A8 /* Pods_Marklight_Marklight_Sample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4F1DC71F7BE82A6A412A104C /* Pods */ = {
+		500DC55E1F1F54DA00FE8C3E /* Marklight Sample macOS */ = {
 			isa = PBXGroup;
 			children = (
-				7968FC36C886F5EBECAA1298 /* Pods.debug.xcconfig */,
-				E51FE1EB1FAE20E6BEBD8FA5 /* Pods.release.xcconfig */,
+				500DC55F1F1F54DA00FE8C3E /* AppDelegate.swift */,
+				500DC5611F1F54DA00FE8C3E /* ViewController.swift */,
+				500DC5631F1F54DA00FE8C3E /* Assets.xcassets */,
+				500DC5651F1F54DA00FE8C3E /* Main.storyboard */,
+				500DC5681F1F54DA00FE8C3E /* Info.plist */,
 			);
-			name = Pods;
+			path = "Marklight Sample macOS";
 			sourceTree = "<group>";
 		};
 		95C46D891C33E7F40070AEDC = {
 			isa = PBXGroup;
 			children = (
 				95F6691C1C33E86E0046634D /* Podfile */,
-				95C46D941C33E7F40070AEDC /* Marklight Sample */,
+				95F6691D1C33EA870046634D /* Sample.md */,
+				95C46D941C33E7F40070AEDC /* Marklight Sample iOS */,
+				500DC55E1F1F54DA00FE8C3E /* Marklight Sample macOS */,
 				95C46D931C33E7F40070AEDC /* Products */,
-				4F1DC71F7BE82A6A412A104C /* Pods */,
 				DF3BFB8986C18E1B2221FD2F /* Frameworks */,
+				A18305C5DC687A5398AFB84A /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,11 +96,12 @@
 			isa = PBXGroup;
 			children = (
 				95C46D921C33E7F40070AEDC /* Marklight Sample.app */,
+				500DC55D1F1F54DA00FE8C3E /* Marklight Sample macOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		95C46D941C33E7F40070AEDC /* Marklight Sample */ = {
+		95C46D941C33E7F40070AEDC /* Marklight Sample iOS */ = {
 			isa = PBXGroup;
 			children = (
 				95C46D951C33E7F40070AEDC /* AppDelegate.swift */,
@@ -79,16 +109,29 @@
 				95C46D991C33E7F40070AEDC /* Main.storyboard */,
 				95C46D9C1C33E7F40070AEDC /* Assets.xcassets */,
 				95C46D9E1C33E7F40070AEDC /* LaunchScreen.storyboard */,
-				95F6691D1C33EA870046634D /* Sample.md */,
 				95C46DA11C33E7F40070AEDC /* Info.plist */,
 			);
+			name = "Marklight Sample iOS";
 			path = "Marklight Sample";
+			sourceTree = "<group>";
+		};
+		A18305C5DC687A5398AFB84A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B50C57C0E062B4DC725E1247 /* Pods-Marklight-Marklight Sample.debug.xcconfig */,
+				8FB8831AE22B87CE9ACAC138 /* Pods-Marklight-Marklight Sample.release.xcconfig */,
+				B4A0500258753356FDA71127 /* Pods-Marklight-Marklight Sample macOS.debug.xcconfig */,
+				C030B286564B371720A36CEF /* Pods-Marklight-Marklight Sample macOS.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		DF3BFB8986C18E1B2221FD2F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				E7B5AD7F31F1165D0393DAAB /* Pods.framework */,
+				9A3D30D47F46F43946225A6B /* Pods_Marklight_Marklight_Sample.framework */,
+				E912E23EEC14E5B68AD1C8F9 /* Pods_Marklight_Marklight_Sample_macOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -96,16 +139,36 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		500DC55C1F1F54DA00FE8C3E /* Marklight Sample macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 500DC56B1F1F54DA00FE8C3E /* Build configuration list for PBXNativeTarget "Marklight Sample macOS" */;
+			buildPhases = (
+				50FD6DE8437C507DB3AF33B3 /* [CP] Check Pods Manifest.lock */,
+				500DC5591F1F54DA00FE8C3E /* Sources */,
+				500DC55A1F1F54DA00FE8C3E /* Frameworks */,
+				500DC55B1F1F54DA00FE8C3E /* Resources */,
+				ACE49F946C06224520571535 /* [CP] Embed Pods Frameworks */,
+				38F87CDBAA10CE613D23B83A /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Marklight Sample macOS";
+			productName = "Marklight Sample macOS";
+			productReference = 500DC55D1F1F54DA00FE8C3E /* Marklight Sample macOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 		95C46D911C33E7F40070AEDC /* Marklight Sample */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 95C46DA41C33E7F40070AEDC /* Build configuration list for PBXNativeTarget "Marklight Sample" */;
 			buildPhases = (
-				981FE2A2FB9B78F9237ECB90 /* Check Pods Manifest.lock */,
+				4A6FDF0524CCED5164F49259 /* [CP] Check Pods Manifest.lock */,
 				95C46D8E1C33E7F40070AEDC /* Sources */,
 				95C46D8F1C33E7F40070AEDC /* Frameworks */,
 				95C46D901C33E7F40070AEDC /* Resources */,
-				1EF7B766294E11C527ABAF2C /* Embed Pods Frameworks */,
-				E78A3D62BB73DA88482FC5F6 /* Copy Pods Resources */,
+				C4907E0A4C0DF1DFF82912CE /* [CP] Embed Pods Frameworks */,
+				EA0B9ADA2E55E4CF07CDE369 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -122,13 +185,19 @@
 		95C46D8A1C33E7F40070AEDC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Dolomate;
 				TargetAttributes = {
+					500DC55C1F1F54DA00FE8C3E = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = FRMDA3XRGC;
+						ProvisioningStyle = Automatic;
+					};
 					95C46D911C33E7F40070AEDC = {
 						CreatedOnToolsVersion = 7.2;
 						LastSwiftMigration = 0820;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -146,11 +215,22 @@
 			projectRoot = "";
 			targets = (
 				95C46D911C33E7F40070AEDC /* Marklight Sample */,
+				500DC55C1F1F54DA00FE8C3E /* Marklight Sample macOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		500DC55B1F1F54DA00FE8C3E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				500DC5641F1F54DA00FE8C3E /* Assets.xcassets in Resources */,
+				500DC5671F1F54DA00FE8C3E /* Main.storyboard in Resources */,
+				500DC56D1F1F578B00FE8C3E /* Sample.md in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		95C46D901C33E7F40070AEDC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -165,54 +245,108 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1EF7B766294E11C527ABAF2C /* Embed Pods Frameworks */ = {
+		38F87CDBAA10CE613D23B83A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Marklight-Marklight Sample macOS/Pods-Marklight-Marklight Sample macOS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		981FE2A2FB9B78F9237ECB90 /* Check Pods Manifest.lock */ = {
+		4A6FDF0524CCED5164F49259 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		E78A3D62BB73DA88482FC5F6 /* Copy Pods Resources */ = {
+		50FD6DE8437C507DB3AF33B3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		ACE49F946C06224520571535 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Marklight-Marklight Sample macOS/Pods-Marklight-Marklight Sample macOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C4907E0A4C0DF1DFF82912CE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Marklight-Marklight Sample/Pods-Marklight-Marklight Sample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EA0B9ADA2E55E4CF07CDE369 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Marklight-Marklight Sample/Pods-Marklight-Marklight Sample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		500DC5591F1F54DA00FE8C3E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				500DC5621F1F54DA00FE8C3E /* ViewController.swift in Sources */,
+				500DC5601F1F54DA00FE8C3E /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		95C46D8E1C33E7F40070AEDC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -225,6 +359,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		500DC5651F1F54DA00FE8C3E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				500DC5661F1F54DA00FE8C3E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		95C46D991C33E7F40070AEDC /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -244,6 +386,50 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		500DC5691F1F54DA00FE8C3E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B4A0500258753356FDA71127 /* Pods-Marklight-Marklight Sample macOS.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = FRMDA3XRGC;
+				INFOPLIST_FILE = "Marklight Sample macOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dolomate.marklight.Marklight-Sample-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		500DC56A1F1F54DA00FE8C3E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C030B286564B371720A36CEF /* Pods-Marklight-Marklight Sample macOS.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = FRMDA3XRGC;
+				INFOPLIST_FILE = "Marklight Sample macOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dolomate.marklight.Marklight-Sample-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 		95C46DA21C33E7F40070AEDC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -333,30 +519,34 @@
 		};
 		95C46DA51C33E7F40070AEDC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7968FC36C886F5EBECAA1298 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = B50C57C0E062B4DC725E1247 /* Pods-Marklight-Marklight Sample.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Marklight Sample/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dolomate.marklight.Marklight-Sample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		95C46DA61C33E7F40070AEDC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E51FE1EB1FAE20E6BEBD8FA5 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 8FB8831AE22B87CE9ACAC138 /* Pods-Marklight-Marklight Sample.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Marklight Sample/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dolomate.marklight.Marklight-Sample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
 			};
@@ -365,6 +555,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		500DC56B1F1F54DA00FE8C3E /* Build configuration list for PBXNativeTarget "Marklight Sample macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				500DC5691F1F54DA00FE8C3E /* Debug */,
+				500DC56A1F1F54DA00FE8C3E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		95C46D8D1C33E7F40070AEDC /* Build configuration list for PBXProject "Marklight Sample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
