@@ -4,9 +4,13 @@
 import XCTest
 @testable import Marklight
 
-extension NSRange: Equatable {
+extension NSRange: Equatable, CustomStringConvertible {
     public static func ==(lhs: NSRange, rhs: NSRange) -> Bool {
         return lhs.location == rhs.location && lhs.length == rhs.length
+    }
+
+    public var description: String {
+        return "NSRange(\(location), \(length))"
     }
 }
 
@@ -73,6 +77,24 @@ class MarklightTextProcessorTests: XCTestCase {
         let result = MarklightTextProcessor().processEditing(styleApplier: styleApplierDouble, string: string, editedRange: editedRange)
 
         let expectedAffectedRange = NSRange(location: 0, length: 4)
+        XCTAssertNotNil(styleApplierDouble.didResetMarklightTextAttributes)
+        if let values = styleApplierDouble.didResetMarklightTextAttributes {
+            XCTAssertEqual(values.range, expectedAffectedRange)
+        }
+
+        XCTAssertEqual(result.editedRange, editedRange)
+        XCTAssertEqual(result.affectedRange, expectedAffectedRange)
+    }
+
+    func testProcess_EditedLineWithEmptyLinesAround_ResetsAttributesForEmptyLines() {
+
+        let string = "_\n\nxx\n\n_\n"
+        //               ^ ^^^ ^
+        let editedRange = NSRange(location: 4, length: 0)
+
+        let result = MarklightTextProcessor().processEditing(styleApplier: styleApplierDouble, string: string, editedRange: editedRange)
+
+        let expectedAffectedRange = NSRange(location: 2, length: 5)
         XCTAssertNotNil(styleApplierDouble.didResetMarklightTextAttributes)
         if let values = styleApplierDouble.didResetMarklightTextAttributes {
             XCTAssertEqual(values.range, expectedAffectedRange)
