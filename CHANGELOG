@@ -1,3 +1,16 @@
+## 1.3.0 (2017-08-11)
+* Marklight becomes pluggable [#8](https://github.com/macteo/Marklight/issues/8)
+* Support for bold-italic [#6](https://github.com/macteo/Marklight/issues/6)
+
+## 1.2.0 (2017-07-20)
+* macOS support [#5](https://github.com/macteo/Marklight/issues/5)
+
+## 1.0.0 (2017-02-09)
+* Converted to Swift 3
+
+## 0.1.4 (2016-05-20)
+* Added some tests
+
 ## 0.1.3 (2016-01-02)
 
 * Added few tests.
