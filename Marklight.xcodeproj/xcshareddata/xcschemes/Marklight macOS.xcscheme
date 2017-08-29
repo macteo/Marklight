@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "95C46D911C33E7F40070AEDC"
-               BuildableName = "Marklight Sample.app"
-               BlueprintName = "Marklight Sample"
-               ReferencedContainer = "container:Marklight Sample.xcodeproj">
+               BlueprintIdentifier = "500DC53C1F1F473300FE8C3E"
+               BuildableName = "Marklight.framework"
+               BlueprintName = "Marklight macOS"
+               ReferencedContainer = "container:Marklight.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,14 +29,24 @@
       language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "500DC5441F1F473300FE8C3E"
+               BuildableName = "Marklight macOSTests.xctest"
+               BlueprintName = "Marklight macOSTests"
+               ReferencedContainer = "container:Marklight.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "95C46D911C33E7F40070AEDC"
-            BuildableName = "Marklight Sample.app"
-            BlueprintName = "Marklight Sample"
-            ReferencedContainer = "container:Marklight Sample.xcodeproj">
+            BlueprintIdentifier = "500DC53C1F1F473300FE8C3E"
+            BuildableName = "Marklight.framework"
+            BlueprintName = "Marklight macOS"
+            ReferencedContainer = "container:Marklight.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -53,16 +63,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "95C46D911C33E7F40070AEDC"
-            BuildableName = "Marklight Sample.app"
-            BlueprintName = "Marklight Sample"
-            ReferencedContainer = "container:Marklight Sample.xcodeproj">
+            BlueprintIdentifier = "500DC53C1F1F473300FE8C3E"
+            BuildableName = "Marklight.framework"
+            BlueprintName = "Marklight macOS"
+            ReferencedContainer = "container:Marklight.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -72,16 +81,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "95C46D911C33E7F40070AEDC"
-            BuildableName = "Marklight Sample.app"
-            BlueprintName = "Marklight Sample"
-            ReferencedContainer = "container:Marklight Sample.xcodeproj">
+            BlueprintIdentifier = "500DC53C1F1F473300FE8C3E"
+            BuildableName = "Marklight.framework"
+            BlueprintName = "Marklight macOS"
+            ReferencedContainer = "container:Marklight.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

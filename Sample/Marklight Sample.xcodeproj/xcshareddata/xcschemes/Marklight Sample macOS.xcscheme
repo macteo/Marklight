@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "95C46D911C33E7F40070AEDC"
-               BuildableName = "Marklight Sample.app"
-               BlueprintName = "Marklight Sample"
+               BlueprintIdentifier = "500DC55C1F1F54DA00FE8C3E"
+               BuildableName = "Marklight Sample macOS.app"
+               BlueprintName = "Marklight Sample macOS"
                ReferencedContainer = "container:Marklight Sample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,9 +33,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "95C46D911C33E7F40070AEDC"
-            BuildableName = "Marklight Sample.app"
-            BlueprintName = "Marklight Sample"
+            BlueprintIdentifier = "500DC55C1F1F54DA00FE8C3E"
+            BuildableName = "Marklight Sample macOS.app"
+            BlueprintName = "Marklight Sample macOS"
             ReferencedContainer = "container:Marklight Sample.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -57,9 +57,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "95C46D911C33E7F40070AEDC"
-            BuildableName = "Marklight Sample.app"
-            BlueprintName = "Marklight Sample"
+            BlueprintIdentifier = "500DC55C1F1F54DA00FE8C3E"
+            BuildableName = "Marklight Sample macOS.app"
+            BlueprintName = "Marklight Sample macOS"
             ReferencedContainer = "container:Marklight Sample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -76,9 +76,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "95C46D911C33E7F40070AEDC"
-            BuildableName = "Marklight Sample.app"
-            BlueprintName = "Marklight Sample"
+            BlueprintIdentifier = "500DC55C1F1F54DA00FE8C3E"
+            BuildableName = "Marklight Sample macOS.app"
+            BlueprintName = "Marklight Sample macOS"
             ReferencedContainer = "container:Marklight Sample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

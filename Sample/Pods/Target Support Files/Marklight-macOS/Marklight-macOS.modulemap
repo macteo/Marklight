@@ -1,0 +1,6 @@
+framework module Marklight {
+  umbrella header "Marklight-macOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

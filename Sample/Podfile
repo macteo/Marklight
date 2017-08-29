@@ -1,3 +1,14 @@
-platform :ios, '8.0'
+project 'Marklight Sample'
 use_frameworks!
-pod 'Marklight', :path => '..'
+
+abstract_target 'Marklight' do
+  pod 'Marklight', :path => '..'
+  
+  target 'Marklight Sample' do
+    platform :ios, '8.0'
+  end
+  
+  target 'Marklight Sample macOS' do
+    platform :osx, '10.11'
+  end
+end

@@ -1,5 +1,6 @@
 # Marklight
-Markdown syntax highlighter for iOS.
+
+Markdown syntax highlighter for iOS and macOS.
 
 [![License MIT](https://img.shields.io/cocoapods/l/Marklight.svg)](https://raw.githubusercontent.com/macteo/marklight/master/LICENSE) [![Version](https://img.shields.io/cocoapods/v/Marklight.svg)](https://cocoapods.org/?q=marklight) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![travis-ci](https://travis-ci.org/macteo/Marklight.svg?branch=master)](https://travis-ci.org/macteo/Marklight)
 [![codecov.io](https://codecov.io/github/macteo/Marklight/coverage.svg?branch=feature/swift4)](https://codecov.io/github/macteo/Marklight?branch=feature/swift4)
@@ -7,10 +8,10 @@ Markdown syntax highlighter for iOS.
 
 ## Description
 
-Marklight is a drop in component to easily add realtime markdown syntax highlight on any user editable text view on iOS applications.
-Marklight doesn't include html generation from markdown, but you can use one of the many other components available like [Markingbird](https://github.com/kristopherjohnson/Markingbird).
+Marklight is a drop in component to easily add realtime Markdown syntax highlight on any user editable text view in iOS and macOS applications.
+Marklight doesn't include HTML generation from Markdown, but you can use one of the many other components available like [Markingbird](https://github.com/kristopherjohnson/Markingbird).
 
-Regular expressions are taken from [Markingbird](https://github.com/kristopherjohnson/Markingbird): markdown parser and html generator.
+Regular expressions are taken from [Markingbird](https://github.com/kristopherjohnson/Markingbird), a Markdown parser and html generator.
 
 ![Marklight Gif](https://raw.githubusercontent.com/macteo/Marklight/master/Assets/marklight.gif)![Screenshot 0](https://raw.githubusercontent.com/macteo/Marklight/master/Assets/screenshot-0.png)
 
@@ -27,14 +28,15 @@ Regular expressions are taken from [Markingbird](https://github.com/kristopherjo
 - [x] Choose dynamic type font text style.
 - [x] Quote indentation.
 - [x] Documented.
+- [x] macOS compatibility.
 - [ ] Parsing tests.
 - [ ] Performance tests.
-- [ ] OS X compatibility.
 
 ## Requirements
 
 - iOS 8.0+
 - Xcode 9.0+
+- macOS 10.11+
 
 ## Installation
 
@@ -159,7 +161,8 @@ Enjoy.
 
 ## Acknowledgements
 
-Matteo Gavagnin – [@macteo](https://twitter.com/macteo)
+* Matteo Gavagnin – [@macteo](https://twitter.com/macteo)
+* Christian Tietze (macOS Port) - [@ctietze](https://twitter.com/ctietze), [GitHub](http://github.com/DivineDominion)
 
 ---
 

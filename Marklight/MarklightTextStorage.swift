@@ -5,7 +5,11 @@
 //  Copyright © 2016 MacTeo. LICENSE for details.
 //
 
-import UIKit
+#if os(iOS)
+    import UIKit
+#elseif os(macOS)
+    import AppKit
+#endif
 
 /**
     `NSTextStorage` subclass that uses `Marklight` to highlight markdown syntax
@@ -66,63 +70,25 @@ import UIKit
     - see: `Marklight`
  */
 
-open class MarklightTextStorage: NSTextStorage {
+open class MarklightTextStorage: NSTextStorage, MarklightStyleApplier {
 
-    // We store here the `NSAttributedString`.
-    fileprivate var imp = NSMutableAttributedString(string: "")
-    
-    // MARK: Syntax highlight customisation
-    
-    /**
-    `UIColor` used to highlight markdown syntax. Default value is light grey.
-    */
-    open var syntaxColor = UIColor.lightGray
-    
-    /**
-     Font used for blocks and inline code. Default value is *Menlo*.
-     */
-    open var codeFontName = "Menlo"
-    
-    /**
-     `UIColor` used for blocks and inline code. Default value is dark grey.
-     */
-    open var codeColor = UIColor.darkGray
-    
-    /**
-     Font used for quote blocks. Default value is *Menlo*.
-     */
-    open var quoteFontName = "Menlo"
-    
-    /**
-     `UIColor` used for quote blocks. Default value is dark grey.
-     */
-    open var quoteColor = UIColor.darkGray
-    
-    /**
-     Quote indentation in points. Default 20.
-     */
-    open var quoteIndendation : CGFloat = 20
-    
-    /**
-     Dynamic type font text style, default `UIFontTextStyleBody`.
-     
-     - see: 
-       [Text 
-       Styles](xcdoc://?url=developer.apple.com/library/ios/documentation/UIKit/Reference/UIFontDescriptor_Class/index.html#//apple_ref/doc/constant_group/Text_Styles)
-     */
-    open var fontTextStyle : String = UIFontTextStyle.body.rawValue
-    
-    /**
-     If the markdown syntax should be hidden or visible
-     */
-    open var hideSyntax = false
+    open lazy var marklightTextProcessor: MarklightTextProcessor = MarklightTextProcessor()
+
+    /// Delegate from this class cluster to a regular `NSTextStorage` instance
+    /// because it does some additional performance optimizations 
+    /// over `NSMutableAttributedString`.
+    fileprivate let imp = NSTextStorage()
+
         
     // MARK: Syntax highlighting
-    
+
+    /// Switch used to prevent `processEditing` callbacks from 
+    /// within `processEditing`.
+    fileprivate var isBusyProcessing = false
+
     /**
     To customise the appearance of the markdown syntax highlights you should
-     subclass this class (or create your own direct `NSTextStorage` subclass)
-     and set the customisations in this method implementation. Sends out
+     subclass `MarklightTextProcessor`. Sends out
      `-textStorage:willProcessEditing`, fixes the attributes, sends out
      `-textStorage:didProcessEditing`, and notifies the layout managers of
      change with the
@@ -133,77 +99,33 @@ open class MarklightTextStorage: NSTextStorage {
     [`NSTextStorage`](xcdoc://?url=developer.apple.com/library/ios/documentation/UIKit/Reference/NSTextStorage_Class_TextKit/index.html#//apple_ref/doc/uid/TP40013282)
     */
     override open func processEditing() {
-        // removeParagraphAttributes()
-        removeWholeAttributes()
-        
-        Marklight.syntaxColor = syntaxColor
-        Marklight.codeFontName = codeFontName
-        Marklight.codeColor = codeColor
-        Marklight.quoteFontName = quoteFontName
-        Marklight.quoteColor = quoteColor
-        Marklight.quoteIndendation = quoteIndendation
-        Marklight.fontTextStyle = fontTextStyle
-        Marklight.hideSyntax = hideSyntax
-        
-        Marklight.processEditing(self)
-        
+
+        self.isBusyProcessing = true
+        defer { self.isBusyProcessing = false }
+
+        let processingResult = marklightTextProcessor.processEditing(
+            styleApplier: self,
+            string: self.string,
+            editedRange: editedRange)
+
+        defer {
+            // Include surrounding paragraphs in layout manager's styling pass
+            // after finishing the real edit. Mostly needed for Setex headings.
+            processingResult.updateLayoutManagers(for: self)
+        }
+
         super.processEditing()
     }
-    
-    // MARK: Initialisers
-    
-    /**
-    The designated initialiser. If you subclass `MarklightTextStorage`, you
-     must call the super implementation of this method.
-    */
-    override public init() {
-        super.init()
-        observeTextSize()
+
+    public func resetMarklightTextAttributes(textSize: CGFloat, range: NSRange) {
+        // Use `imp` directly instead of `self` to avoid changing the edited range
+        // after attribute fixing, affecting the insertion point on macOS.
+        imp.removeAttribute(NSAttributedStringKey.foregroundColor, range: range)
+        imp.addAttribute(NSAttributedStringKey.font, value: MarklightFont.systemFont(ofSize: textSize), range: range)
+        imp.addAttribute(NSAttributedStringKey.paragraphStyle, value: NSParagraphStyle(), range: range)
     }
 
-    /**
-    The designated initialiser. If you subclass `MarklightTextStorage`, you must
-    call the super implementation of this method.
-     */
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        observeTextSize()
-    }
-    
-    @available(iOSApplicationExtension 11.0, *)
-    required public init(itemProviderData data: Data, typeIdentifier: String) throws {
-        if #available(iOS 11.0, *) {
-            try super.init(itemProviderData: data, typeIdentifier: typeIdentifier)
-        } else {
-            // TODO: return an appropriate error
-            throw NSError(domain: "Marklight", code: 1, userInfo: nil)
-        }
-    }
-    
-    /**
-    Internal method to register to notifications determined by dynamic type size
-    changes and redraw the attributed text with the appropriate text size.
-    Currently it works only after the user adds or removes some chars inside the
-    `UITextView`.
-     */
-    func observeTextSize() {
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIContentSizeCategoryDidChange, object: nil, queue: OperationQueue.main) { (notification) -> Void in
-            let wholeRange = NSMakeRange(0, (self.string as NSString).length)
-            self.invalidateAttributes(in: wholeRange)
-            for layoutManager in self.layoutManagers {
-                layoutManager.invalidateDisplay(forCharacterRange: wholeRange)
-            }
-        }
-    }
-    
-    /**
-    Designated deinitialised. Never call this directly. We just unregister to
-    internal notifications.
-     */
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-        
+
     // MARK: Reading Text
     
     /**
@@ -234,9 +156,8 @@ open class MarklightTextStorage: NSTextStorage {
      [`NSTextStorage`](xcdoc://?url=developer.apple.com/library/ios/documentation/UIKit/Reference/NSTextStorage_Class_TextKit/index.html#//apple_ref/doc/uid/TP40013282)
      */
 
-    
     open override func attributes(at location: Int, effectiveRange range: NSRangePointer?) -> [NSAttributedStringKey : Any] {
-        return imp.attributes(at: location, effectiveRange: range) as [NSAttributedStringKey : AnyObject]
+        return imp.attributes(at: location, effectiveRange: range)
     }
     
     // MARK: Text Editing
@@ -281,29 +202,58 @@ open class MarklightTextStorage: NSTextStorage {
         [`NSTextStorage`](xcdoc://?url=developer.apple.com/library/ios/documentation/UIKit/Reference/NSTextStorage_Class_TextKit/index.html#//apple_ref/doc/uid/TP40013282)
      */
     
-    
-    open override func setAttributes(_ attrs: [NSAttributedStringKey : Any]?, range: NSRange) {
+    override open func setAttributes(_ attrs: [NSAttributedStringKey : Any]?, range: NSRange) {
+        // When we are processing, using the regular callback triggers will
+        // result in the caret jumping to the end of the document.
+        guard !isBusyProcessing else {
+            imp.setAttributes(attrs, range: range)
+            return
+        }
+
         beginEditing()
         imp.setAttributes(attrs, range: range)
         edited([.editedAttributes], range: range, changeInLength: 0)
         endEditing()
     }
-    
-    // Remove every attribute to the whole text
-    fileprivate func removeParagraphAttributes() {
-        let textSize = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyle.body).pointSize
-        let paragraphRange = (string as NSString).paragraphRange(for: self.editedRange)
-        self.removeAttribute(NSAttributedStringKey.foregroundColor, range: paragraphRange)
-        self.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: textSize), range: paragraphRange)
-        self.addAttribute(NSAttributedStringKey.paragraphStyle, value: NSMutableParagraphStyle.default, range: paragraphRange)
+
+    #if os(iOS)
+
+    // MARK: - Dynamic text sizing
+
+    required override public init() {
+        super.init()
+        observeTextSize()
     }
-    
-    // Remove every attribute the the paragraph containing the last edit.
-    fileprivate func removeWholeAttributes() {
-        let textSize = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyle.body).pointSize
+
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        observeTextSize()
+    }
+
+    /**
+     Internal method to register to notifications determined by dynamic type size
+     changes and redraw the attributed text with the appropriate text size.
+
+     - note: Currently it works only after the user adds or removes some chars inside the
+     `UITextView`.
+     */
+    // TODO: Make this work without needing to type in the text view.
+    func observeTextSize() {
+        NotificationCenter.default.addObserver(forName: .UIContentSizeCategoryDidChange, object: nil, queue: OperationQueue.main) { [weak self] (notification) -> Void in
+            self?.invalidateTextSizeForWholeRange()
+        }
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    fileprivate func invalidateTextSizeForWholeRange() {
         let wholeRange = NSMakeRange(0, (self.string as NSString).length)
-        self.removeAttribute(NSAttributedStringKey.foregroundColor, range: wholeRange)
-        self.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: textSize), range: wholeRange)
-        self.addAttribute(NSAttributedStringKey.paragraphStyle, value: NSMutableParagraphStyle.default, range: wholeRange)
+        self.invalidateAttributes(in: wholeRange)
+        for layoutManager in self.layoutManagers {
+            layoutManager.invalidateDisplay(forCharacterRange: wholeRange)
+        }
     }
+    #endif
 }
