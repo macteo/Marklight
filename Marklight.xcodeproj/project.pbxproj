@@ -283,7 +283,6 @@
 					};
 					500DC5441F1F473300FE8C3E = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = FRMDA3XRGC;
 						ProvisioningStyle = Automatic;
 					};
 					95C46D671C33E11A0070AEDC = {
@@ -474,7 +473,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = FRMDA3XRGC;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Marklight macOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
@@ -495,7 +494,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = FRMDA3XRGC;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Marklight macOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
