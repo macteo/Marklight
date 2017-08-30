@@ -128,7 +128,7 @@
 //    negligence or otherwise) arising in any way out of the use of this
 //    software, even if advised of the possibility of such damage.
 
-#if os(iOS)
+#if os(macOS)
     import UIKit
 #elseif os(macOS)
     import AppKit
@@ -183,11 +183,7 @@ public struct Marklight {
     /**
      Text size measured in points.
      */
-    #if os(iOS)
     public static var textSize: CGFloat = MarklightFont.systemFontSize
-    #elseif os(macOS)
-    public static var textSize: CGFloat = MarklightFont.systemFontSize
-    #endif
 
     // We transform the user provided `codeFontName` `String` to a `NSFont`
     fileprivate static func codeFont(_ size: CGFloat) -> MarklightFont {
@@ -506,7 +502,7 @@ public struct Marklight {
     
     /// Tabs are automatically converted to spaces as part of the transform
     /// this constant determines how "wide" those tabs become in spaces
-    fileprivate static let _tabWidth = 4
+    public static let _tabWidth = 4
     
     // MARK: Headers
 
@@ -527,14 +523,14 @@ public struct Marklight {
         "\\n+"
         ].joined(separator: "\n")
     
-    fileprivate static let headersSetextRegex = Regex(pattern: headerSetextPattern, options: [.allowCommentsAndWhitespace, .anchorsMatchLines])
+    public static let headersSetextRegex = MarklightRegex(pattern: headerSetextPattern, options: [.allowCommentsAndWhitespace, .anchorsMatchLines])
     
     fileprivate static let setextUnderlinePattern = [
         "(==+|--+)     # $1 = string of ='s or -'s",
         "\\p{Z}*$"
         ].joined(separator: "\n")
     
-    fileprivate static let headersSetextUnderlineRegex = Regex(pattern: setextUnderlinePattern, options: [.allowCommentsAndWhitespace])
+    public static let headersSetextUnderlineRegex = MarklightRegex(pattern: setextUnderlinePattern, options: [.allowCommentsAndWhitespace])
     
     /*
         # Head
@@ -551,19 +547,19 @@ public struct Marklight {
         "\\n+"
         ].joined(separator: "\n")
     
-    fileprivate static let headersAtxRegex = Regex(pattern: headerAtxPattern, options: [.allowCommentsAndWhitespace, .anchorsMatchLines])
+    public static let headersAtxRegex = MarklightRegex(pattern: headerAtxPattern, options: [.allowCommentsAndWhitespace, .anchorsMatchLines])
 
     fileprivate static let headersAtxOpeningPattern = [
         "^(\\#{1,6})"
         ].joined(separator: "\n")
     
-    fileprivate static let headersAtxOpeningRegex = Regex(pattern: headersAtxOpeningPattern, options: [.allowCommentsAndWhitespace, .anchorsMatchLines])
+    public static let headersAtxOpeningRegex = MarklightRegex(pattern: headersAtxOpeningPattern, options: [.allowCommentsAndWhitespace, .anchorsMatchLines])
     
     fileprivate static let headersAtxClosingPattern = [
         "\\#{1,6}\\n+"
         ].joined(separator: "\n")
     
-    fileprivate static let headersAtxClosingRegex = Regex(pattern: headersAtxClosingPattern, options: [.allowCommentsAndWhitespace, .anchorsMatchLines])
+    public static let headersAtxClosingRegex = MarklightRegex(pattern: headersAtxClosingPattern, options: [.allowCommentsAndWhitespace, .anchorsMatchLines])
     
     // MARK: Reference links
     
@@ -590,7 +586,7 @@ public struct Marklight {
         "(?:\\n+|\\Z)"
         ].joined(separator: "")
     
-    fileprivate static let referenceLinkRegex = Regex(pattern: referenceLinkPattern, options: [.allowCommentsAndWhitespace, .anchorsMatchLines])
+    public static let referenceLinkRegex = MarklightRegex(pattern: referenceLinkPattern, options: [.allowCommentsAndWhitespace, .anchorsMatchLines])
     
     // MARK: Lists
     
@@ -626,8 +622,8 @@ public struct Marklight {
     
     fileprivate static let listPattern = "(?:(?<=\\n\\n)|\\A\\n?)" + _wholeList
     
-    fileprivate static let listRegex = Regex(pattern: listPattern, options: [.allowCommentsAndWhitespace, .anchorsMatchLines])
-    fileprivate static let listOpeningRegex = Regex(pattern: _listMarker, options: [.allowCommentsAndWhitespace])
+    public static let listRegex = MarklightRegex(pattern: listPattern, options: [.allowCommentsAndWhitespace, .anchorsMatchLines])
+    public static let listOpeningRegex = MarklightRegex(pattern: _listMarker, options: [.allowCommentsAndWhitespace])
     
     // MARK: Anchors
     
@@ -650,31 +646,31 @@ public struct Marklight {
         ")"
         ].joined(separator: "\n")
     
-    fileprivate static let anchorRegex = Regex(pattern: anchorPattern, options: [.allowCommentsAndWhitespace, .dotMatchesLineSeparators])
+    public static let anchorRegex = MarklightRegex(pattern: anchorPattern, options: [.allowCommentsAndWhitespace, .dotMatchesLineSeparators])
     
     fileprivate static let opneningSquarePattern = [
         "(\\[)"
         ].joined(separator: "\n")
     
-    fileprivate static let openingSquareRegex = Regex(pattern: opneningSquarePattern, options: [.allowCommentsAndWhitespace])
+    public static let openingSquareRegex = MarklightRegex(pattern: opneningSquarePattern, options: [.allowCommentsAndWhitespace])
     
     fileprivate static let closingSquarePattern = [
         "\\]"
         ].joined(separator: "\n")
     
-    fileprivate static let closingSquareRegex = Regex(pattern: closingSquarePattern, options: [.allowCommentsAndWhitespace])
+    public static let closingSquareRegex = MarklightRegex(pattern: closingSquarePattern, options: [.allowCommentsAndWhitespace])
     
     fileprivate static let coupleSquarePattern = [
         "\\[(.*?)\\]"
         ].joined(separator: "\n")
     
-    fileprivate static let coupleSquareRegex = Regex(pattern: coupleSquarePattern, options: [])
+    public static let coupleSquareRegex = MarklightRegex(pattern: coupleSquarePattern, options: [])
     
     fileprivate static let coupleRoundPattern = [
         "\\((.*?)\\)"
         ].joined(separator: "\n")
     
-    fileprivate static let coupleRoundRegex = Regex(pattern: coupleRoundPattern, options: [])
+    public static let coupleRoundRegex = MarklightRegex(pattern: coupleRoundPattern, options: [])
     
     fileprivate static let parenPattern = [
         "(",
@@ -692,7 +688,7 @@ public struct Marklight {
         ")"
         ].joined(separator: "\n")
     
-    fileprivate static let parenRegex = Regex(pattern: parenPattern, options: [.allowCommentsAndWhitespace])
+    public static let parenRegex = MarklightRegex(pattern: parenPattern, options: [.allowCommentsAndWhitespace])
     
     fileprivate static let anchorInlinePattern = [
         "(                           # wrap whole match in $1",
@@ -713,7 +709,7 @@ public struct Marklight {
         ")"
         ].joined(separator: "\n")
     
-    fileprivate static let anchorInlineRegex = Regex(pattern: anchorInlinePattern, options: [.allowCommentsAndWhitespace, .dotMatchesLineSeparators])
+    public static let anchorInlineRegex = MarklightRegex(pattern: anchorInlinePattern, options: [.allowCommentsAndWhitespace, .dotMatchesLineSeparators])
     
     // Mark: Images
     
@@ -737,19 +733,19 @@ public struct Marklight {
         ")"
         ].joined(separator: "\n")
     
-    fileprivate static let imageRegex = Regex(pattern: imagePattern, options: [.allowCommentsAndWhitespace, .dotMatchesLineSeparators])
+    public static let imageRegex = MarklightRegex(pattern: imagePattern, options: [.allowCommentsAndWhitespace, .dotMatchesLineSeparators])
     
     fileprivate static let imageOpeningSquarePattern = [
         "(!\\[)"
         ].joined(separator: "\n")
     
-    fileprivate static let imageOpeningSquareRegex = Regex(pattern: imageOpeningSquarePattern, options: [.allowCommentsAndWhitespace])
+    public static let imageOpeningSquareRegex = MarklightRegex(pattern: imageOpeningSquarePattern, options: [.allowCommentsAndWhitespace])
     
     fileprivate static let imageClosingSquarePattern = [
         "(\\])"
         ].joined(separator: "\n")
     
-    fileprivate static let imageClosingSquareRegex = Regex(pattern: imageClosingSquarePattern, options: [.allowCommentsAndWhitespace])
+    public static let imageClosingSquareRegex = MarklightRegex(pattern: imageClosingSquarePattern, options: [.allowCommentsAndWhitespace])
     
     fileprivate static let imageInlinePattern = [
         "(                     # wrap whole match in $1",
@@ -771,7 +767,7 @@ public struct Marklight {
         ")"
         ].joined(separator: "\n")
     
-    fileprivate static let imageInlineRegex = Regex(pattern: imageInlinePattern, options: [.allowCommentsAndWhitespace, .dotMatchesLineSeparators])
+    public static let imageInlineRegex = MarklightRegex(pattern: imageInlinePattern, options: [.allowCommentsAndWhitespace, .dotMatchesLineSeparators])
     
     // MARK: Code
     
@@ -794,7 +790,7 @@ public struct Marklight {
         "((?=^\\p{Z}{0,\(_tabWidth)}[^ \\t\\n])|\\Z) # Lookahead for non-space at line-start, or end of doc"
         ].joined(separator: "\n")
     
-    fileprivate static let codeBlockRegex = Regex(pattern: codeBlockPattern, options: [.allowCommentsAndWhitespace, .anchorsMatchLines])
+    public static let codeBlockRegex = MarklightRegex(pattern: codeBlockPattern, options: [.allowCommentsAndWhitespace, .anchorsMatchLines])
     
     fileprivate static let codeSpanPattern = [
         "(?<![\\\\`])   # Character before opening ` can't be a backslash or backtick",
@@ -806,21 +802,21 @@ public struct Marklight {
         "(?!`)"
         ].joined(separator: "\n")
     
-    fileprivate static let codeSpanRegex = Regex(pattern: codeSpanPattern, options: [.allowCommentsAndWhitespace, .dotMatchesLineSeparators])
+    public static let codeSpanRegex = MarklightRegex(pattern: codeSpanPattern, options: [.allowCommentsAndWhitespace, .dotMatchesLineSeparators])
     
     fileprivate static let codeSpanOpeningPattern = [
         "(?<![\\\\`])   # Character before opening ` can't be a backslash or backtick",
         "(`+)           # $1 = Opening run of `"
         ].joined(separator: "\n")
     
-    fileprivate static let codeSpanOpeningRegex = Regex(pattern: codeSpanOpeningPattern, options: [.allowCommentsAndWhitespace, .dotMatchesLineSeparators])
+    public static let codeSpanOpeningRegex = MarklightRegex(pattern: codeSpanOpeningPattern, options: [.allowCommentsAndWhitespace, .dotMatchesLineSeparators])
     
     fileprivate static let codeSpanClosingPattern = [
         "(?<![\\\\`])   # Character before opening ` can't be a backslash or backtick",
         "(`+)           # $1 = Opening run of `"
         ].joined(separator: "\n")
     
-    fileprivate static let codeSpanClosingRegex = Regex(pattern: codeSpanClosingPattern, options: [.allowCommentsAndWhitespace, .dotMatchesLineSeparators])
+    public static let codeSpanClosingRegex = MarklightRegex(pattern: codeSpanClosingPattern, options: [.allowCommentsAndWhitespace, .dotMatchesLineSeparators])
     
     // MARK: Block quotes
     
@@ -839,13 +835,13 @@ public struct Marklight {
         ")"
         ].joined(separator: "\n")
     
-    fileprivate static let blockQuoteRegex = Regex(pattern: blockQuotePattern, options: [.allowCommentsAndWhitespace, .anchorsMatchLines])
+    public static let blockQuoteRegex = MarklightRegex(pattern: blockQuotePattern, options: [.allowCommentsAndWhitespace, .anchorsMatchLines])
 
     fileprivate static let blockQuoteOpeningPattern = [
         "(^\\p{Z}*>\\p{Z})"
         ].joined(separator: "\n")
 
-    fileprivate static let blockQuoteOpeningRegex = Regex(pattern: blockQuoteOpeningPattern, options: [.anchorsMatchLines])
+    public static let blockQuoteOpeningRegex = MarklightRegex(pattern: blockQuoteOpeningPattern, options: [.anchorsMatchLines])
     
     // MARK: Bold
     
@@ -856,11 +852,11 @@ public struct Marklight {
     
     fileprivate static let strictBoldPattern = "(^|[\\W_])(?:(?!\\1)|(?=^))(\\*|_)\\2(?=\\S)(.*?\\S)\\2\\2(?!\\2)(?=[\\W_]|$)"
     
-    fileprivate static let strictBoldRegex = Regex(pattern: strictBoldPattern, options: [.anchorsMatchLines])
+    public static let strictBoldRegex = MarklightRegex(pattern: strictBoldPattern, options: [.anchorsMatchLines])
     
     fileprivate static let boldPattern = "(\\*\\*|__) (?=\\S) (.+?[*_]*) (?<=\\S) \\1"
     
-    fileprivate static let boldRegex = Regex(pattern: boldPattern, options: [.allowCommentsAndWhitespace, .anchorsMatchLines])
+    public static let boldRegex = MarklightRegex(pattern: boldPattern, options: [.allowCommentsAndWhitespace, .anchorsMatchLines])
     
     // MARK: Italic
     
@@ -871,19 +867,19 @@ public struct Marklight {
 
     fileprivate static let strictItalicPattern = "(^|[\\W_])(?:(?!\\1)|(?=^))(\\*|_)(?=\\S)((?:(?!\\2).)*?\\S)\\2(?!\\2)(?=[\\W_]|$)"
     
-    fileprivate static let strictItalicRegex = Regex(pattern: strictItalicPattern, options: [.anchorsMatchLines])
+    public static let strictItalicRegex = MarklightRegex(pattern: strictItalicPattern, options: [.anchorsMatchLines])
     
     fileprivate static let italicPattern = "(\\*|_) (?=\\S) (.+?) (?<=\\S) \\1"
     
-    fileprivate static let italicRegex = Regex(pattern: italicPattern, options: [.allowCommentsAndWhitespace, .anchorsMatchLines])
+    public static let italicRegex = MarklightRegex(pattern: italicPattern, options: [.allowCommentsAndWhitespace, .anchorsMatchLines])
     
     fileprivate static let autolinkPattern = "((https?|ftp):[^'\">\\s]+)"
     
-    fileprivate static let autolinkRegex = Regex(pattern: autolinkPattern, options: [.allowCommentsAndWhitespace, .dotMatchesLineSeparators])
+    public static let autolinkRegex = MarklightRegex(pattern: autolinkPattern, options: [.allowCommentsAndWhitespace, .dotMatchesLineSeparators])
     
     fileprivate static let autolinkPrefixPattern = "((https?|ftp)://)"
     
-    fileprivate static let autolinkPrefixRegex = Regex(pattern: autolinkPrefixPattern, options: [.allowCommentsAndWhitespace, .dotMatchesLineSeparators])
+    public static let autolinkPrefixRegex = MarklightRegex(pattern: autolinkPrefixPattern, options: [.allowCommentsAndWhitespace, .dotMatchesLineSeparators])
     
     fileprivate static let autolinkEmailPattern = [
         "(?:mailto:)?",
@@ -894,52 +890,11 @@ public struct Marklight {
         ")"
         ].joined(separator: "\n")
     
-    fileprivate static let autolinkEmailRegex = Regex(pattern: autolinkEmailPattern, options: [.allowCommentsAndWhitespace, .dotMatchesLineSeparators])
+    public static let autolinkEmailRegex = MarklightRegex(pattern: autolinkEmailPattern, options: [.allowCommentsAndWhitespace, .dotMatchesLineSeparators])
     
     fileprivate static let mailtoPattern = "mailto:"
     
-    fileprivate static let mailtoRegex = Regex(pattern: mailtoPattern, options: [.allowCommentsAndWhitespace, .dotMatchesLineSeparators])
-    
-    fileprivate struct Regex {
-        fileprivate let regularExpression: NSRegularExpression!
-        
-        fileprivate init(pattern: String, options: NSRegularExpression.Options = NSRegularExpression.Options(rawValue: 0)) {
-            var error: NSError?
-            let re: NSRegularExpression?
-            do {
-                re = try NSRegularExpression(pattern: pattern,
-                    options: options)
-            } catch let error1 as NSError {
-                error = error1
-                re = nil
-            }
-            
-            // If re is nil, it means NSRegularExpression didn't like
-            // the pattern we gave it.  All regex patterns used by Markdown
-            // should be valid, so this probably means that a pattern
-            // valid for .NET Regex is not valid for NSRegularExpression.
-            if re == nil {
-                if let error = error {
-                    print("Regular expression error: \(error.userInfo)")
-                }
-                assert(re != nil)
-            }
-            
-            self.regularExpression = re
-        }
-        
-        fileprivate func matches(_ input: String, range: NSRange,
-            completion: @escaping (_ result: NSTextCheckingResult?) -> Void) {
-            let s = input as NSString
-            let options = NSRegularExpression.MatchingOptions(rawValue: 0)
-            regularExpression.enumerateMatches(in: s as String,
-                options: options,
-                range: range,
-                using: { (result, flags, stop) -> Void in
-                    completion(result)
-            })
-        }
-    }
+    public static let mailtoRegex = MarklightRegex(pattern: mailtoPattern, options: [.allowCommentsAndWhitespace, .dotMatchesLineSeparators])
     
     /// maximum nested depth of [] and () supported by the transform; 
     /// implementation detail

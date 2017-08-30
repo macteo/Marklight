@@ -6,9 +6,9 @@
 //  Copyright © 2017 MacTeo. See LICENSE for details.
 //
 
-#if os(iOS)
-    import UIKit
-#elseif os(macOS)
+import Foundation
+
+#if os(macOS)
     import AppKit
 #endif
 

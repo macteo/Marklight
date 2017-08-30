@@ -6,11 +6,8 @@
 //  Copyright © 2017 MacTeo. See LICENSE for details.
 //
 
-#if os(iOS)
-    import UIKit
-#elseif os(macOS)
-    import AppKit
-#endif
+import Foundation
+import CoreGraphics
 
 public protocol MarklightStyleApplier {
     func addAttribute(_ name: NSAttributedStringKey, value: Any, range: NSRange)
