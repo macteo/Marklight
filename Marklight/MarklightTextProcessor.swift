@@ -55,11 +55,7 @@ open class MarklightTextProcessor {
 
     // MARK: Syntax highlighting
 
-    open func processEditing(
-        styleApplier: MarklightStyleApplier,
-        string: String,
-        editedRange: NSRange
-        ) -> MarklightProcessingResult {
+    open func processEditing(styleApplier: MarklightStyleApplier, string: String, editedRange: NSRange, componentsStorage: MarklightComponentsStorage? = nil) -> MarklightProcessingResult {
 
         let editedAndAdjacentParagraphRange = self.editedAndAdjacentParagraphRange(in: string, editedRange: editedRange)
 
@@ -78,7 +74,8 @@ open class MarklightTextProcessor {
         Marklight.applyMarkdownStyle(
             styleApplier,
             string: string,
-            affectedRange: editedAndAdjacentParagraphRange)
+            affectedRange: editedAndAdjacentParagraphRange,
+            componentsStorage: componentsStorage)
 
         return MarklightProcessingResult(
             editedRange: editedRange,

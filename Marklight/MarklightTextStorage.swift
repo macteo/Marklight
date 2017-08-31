@@ -70,9 +70,9 @@
     - see: `Marklight`
  */
 
-open class MarklightTextStorage: NSTextStorage, MarklightStyleApplier {
-
-    open lazy var marklightTextProcessor: MarklightTextProcessor = MarklightTextProcessor()
+open class MarklightTextStorage: NSTextStorage, MarklightStyleApplier, MarklightComponentsStorage {
+    
+    open lazy var marklightTextProcessor = MarklightTextProcessor()
 
     /// Delegate from this class cluster to a regular `NSTextStorage` instance
     /// because it does some additional performance optimizations 
@@ -99,14 +99,16 @@ open class MarklightTextStorage: NSTextStorage, MarklightStyleApplier {
     [`NSTextStorage`](xcdoc://?url=developer.apple.com/library/ios/documentation/UIKit/Reference/NSTextStorage_Class_TextKit/index.html#//apple_ref/doc/uid/TP40013282)
     */
     override open func processEditing() {
-
         self.isBusyProcessing = true
         defer { self.isBusyProcessing = false }
 
+        // TODO: add an option to request components directly on Marklight with
+        // a MarklightComponentsStorage isntance
         let processingResult = marklightTextProcessor.processEditing(
             styleApplier: self,
             string: self.string,
-            editedRange: editedRange)
+            editedRange: editedRange,
+            componentsStorage: self)
 
         defer {
             // Include surrounding paragraphs in layout manager's styling pass
@@ -256,4 +258,14 @@ open class MarklightTextStorage: NSTextStorage, MarklightStyleApplier {
         }
     }
     #endif
+
+    // TODO: add documentation
+    // TODO: should this have only stubs?
+    open func addComponent(_ string: String) {
+        print("Added Component: '\(string)'")
+    }
+    
+    open func addComponent(_ attributedString: NSAttributedString) {
+        print("Added Attributed Component: '\(attributedString.string)'")
+    }
 }
