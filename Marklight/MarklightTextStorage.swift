@@ -262,10 +262,10 @@ open class MarklightTextStorage: NSTextStorage, MarklightStyleApplier, Marklight
     // TODO: add documentation
     // TODO: should this have only stubs?
     open func addComponent(_ string: String) {
-        print("Added Component: '\(string)'")
+        // print("Added Component: '\(string)'")
     }
     
     open func addComponent(_ attributedString: NSAttributedString) {
-        print("Added Attributed Component: '\(attributedString.string)'")
+        // print("Added Attributed Component: '\(attributedString.string)'")
     }
 }

@@ -370,14 +370,14 @@ public struct Marklight {
                 syntaxRanges.append(innerRange.shift(range.location))
             }
             
-            Marklight.openingSquareRegex.matches(string, range: result!.range) { (innerResult) -> Void in
+            Marklight.openingSquareRegex.matches(string, range: range) { (innerResult) -> Void in
                 guard let innerRange = innerResult?.range else { return }
                 styleApplier.addAttribute(.foregroundColor, value: Marklight.syntaxColor, range: innerRange)
                 hideSyntaxIfNecessary(range: innerRange)
                 syntaxRanges.append(innerRange.shift(range.location))
             }
             
-            Marklight.closingSquareRegex.matches(string, range: result!.range) { (innerResult) -> Void in
+            Marklight.closingSquareRegex.matches(string, range: range) { (innerResult) -> Void in
                 guard let innerRange = innerResult?.range else { return }
                 styleApplier.addAttribute(.foregroundColor, value: Marklight.syntaxColor, range: innerRange)
                 hideSyntaxIfNecessary(range: innerRange)
@@ -386,7 +386,7 @@ public struct Marklight {
             
             guard let destinationLinkString = destinationLink else { return }
             
-            Marklight.coupleSquareRegex.matches(string, range: result!.range) { (innerResult) -> Void in
+            Marklight.coupleSquareRegex.matches(string, range: range) { (innerResult) -> Void in
                 guard let innerRange = innerResult?.range else { return }
                 var _range = innerRange
                 _range.location = _range.location + 1
@@ -425,7 +425,7 @@ public struct Marklight {
         // We detect and process inline images
         Marklight.imageInlineRegex.matches(string, range: paragraphRange) { (result) -> Void in
             guard let range = result?.range else { return }
-            var syntaxRanges = [NSRange]()
+            let syntaxRanges = [NSRange]()
             
             styleApplier.addAttribute(.font, value: codeFont, range: range)
 
@@ -456,128 +456,141 @@ public struct Marklight {
         
         // We detect and process inline code
         Marklight.codeSpanRegex.matches(string, range: wholeRange) { (result) -> Void in
-            styleApplier.addAttribute(.font, value: codeFont, range: result!.range)
-            styleApplier.addAttribute(.foregroundColor, value: codeColor, range: result!.range)
+            guard let range = result?.range else { return }
+            styleApplier.addAttribute(.font, value: codeFont, range: range)
+            styleApplier.addAttribute(.foregroundColor, value: codeColor, range: range)
             
             Marklight.codeSpanOpeningRegex.matches(string, range: paragraphRange) { (innerResult) -> Void in
-                styleApplier.addAttribute(.foregroundColor, value: Marklight.syntaxColor, range: innerResult!.range)
-                hideSyntaxIfNecessary(range: innerResult!.range)
+                guard let innerRange = innerResult?.range else { return }
+                styleApplier.addAttribute(.foregroundColor, value: Marklight.syntaxColor, range: innerRange)
+                hideSyntaxIfNecessary(range: innerRange)
             }
             Marklight.codeSpanClosingRegex.matches(string, range: paragraphRange) { (innerResult) -> Void in
-                styleApplier.addAttribute(.foregroundColor, value: Marklight.syntaxColor, range: innerResult!.range)
-                hideSyntaxIfNecessary(range: innerResult!.range)
+                guard let innerRange = innerResult?.range else { return }
+                styleApplier.addAttribute(.foregroundColor, value: Marklight.syntaxColor, range: innerRange)
+                hideSyntaxIfNecessary(range: innerRange)
             }
         }
         
         // We detect and process code blocks
         Marklight.codeBlockRegex.matches(string, range: wholeRange) { (result) -> Void in
-            let componentRange = result!.range
-            styleApplier.addAttribute(.font, value: codeFont, range: result!.range)
-            styleApplier.addAttribute(.foregroundColor, value: codeColor, range: result!.range)
+            guard let range = result?.range else { return }
+            let componentRange = range
+            styleApplier.addAttribute(.font, value: codeFont, range: range)
+            styleApplier.addAttribute(.foregroundColor, value: codeColor, range: range)
             addComponent(range: componentRange)
         }
         
         // We detect and process quotes
         Marklight.blockQuoteRegex.matches(string, range: wholeRange) { (result) -> Void in
-            var componentRange = result!.range
+            guard let range = result?.range else { return }
             var syntaxRanges = [NSRange]()
-            styleApplier.addAttribute(.font, value: quoteFont, range: result!.range)
-            styleApplier.addAttribute(.foregroundColor, value: quoteColor, range: result!.range)
-            styleApplier.addAttribute(.paragraphStyle, value: quoteIndendationStyle, range: result!.range)
-            Marklight.blockQuoteOpeningRegex.matches(string, range: result!.range) { (innerResult) -> Void in
-                styleApplier.addAttribute(.foregroundColor, value: Marklight.syntaxColor, range: innerResult!.range)
-                hideSyntaxIfNecessary(range: innerResult!.range)
-                syntaxRanges.append(innerResult!.range.shift(result!.range.location))
+            styleApplier.addAttribute(.font, value: quoteFont, range: range)
+            styleApplier.addAttribute(.foregroundColor, value: quoteColor, range: range)
+            styleApplier.addAttribute(.paragraphStyle, value: quoteIndendationStyle, range: range)
+            Marklight.blockQuoteOpeningRegex.matches(string, range: range) { (innerResult) -> Void in
+                guard let innerRange = innerResult?.range else { return }
+                styleApplier.addAttribute(.foregroundColor, value: Marklight.syntaxColor, range: innerRange)
+                hideSyntaxIfNecessary(range: innerRange)
+                syntaxRanges.append(innerRange.shift(range.location))
             }
-            addComponent(range: componentRange, syntaxRanges: syntaxRanges)
+            addComponent(range: range, syntaxRanges: syntaxRanges)
         }
 
         // We detect and process strict italics
         Marklight.strictItalicRegex.matches(string, range: paragraphRange) { (result) -> Void in
-            styleApplier.addAttribute(.font, value: italicFont, range: result!.range)
-            let substring = textStorageNSString.substring(with: NSMakeRange(result!.range.location, 1))
+            guard let range = result?.range else { return }
+            styleApplier.addAttribute(.font, value: italicFont, range: range)
+            let substring = textStorageNSString.substring(with: NSMakeRange(range.location, 1))
             var start = 0
             if substring == " " {
                 start = 1
             }
 
-            let preRange = NSMakeRange(result!.range.location + start, 1)
+            let preRange = NSMakeRange(range.location + start, 1)
             hideSyntaxIfNecessary(range: preRange)
             styleApplier.addAttribute(.foregroundColor, value: Marklight.syntaxColor, range: preRange)
 
-            let postRange = NSMakeRange(result!.range.location + result!.range.length - 1, 1)
+            let postRange = NSMakeRange(range.location + range.length - 1, 1)
             styleApplier.addAttribute(.foregroundColor, value: Marklight.syntaxColor, range: postRange)
             hideSyntaxIfNecessary(range: postRange)
         }
         
         // We detect and process strict bolds
         Marklight.strictBoldRegex.matches(string, range: paragraphRange) { (result) -> Void in
-            styleApplier.addAttribute(.font, value: boldFont, range: result!.range)
-            let substring = textStorageNSString.substring(with: NSMakeRange(result!.range.location, 1))
+            guard let range = result?.range else { return }
+            styleApplier.addAttribute(.font, value: boldFont, range: range)
+            let substring = textStorageNSString.substring(with: NSMakeRange(range.location, 1))
             var start = 0
             if substring == " " {
                 start = 1
             }
 
-            let preRange = NSMakeRange(result!.range.location + start, 2)
+            let preRange = NSMakeRange(range.location + start, 2)
             styleApplier.addAttribute(.foregroundColor, value: Marklight.syntaxColor, range: preRange)
             hideSyntaxIfNecessary(range: preRange)
 
-            let postRange = NSMakeRange(result!.range.location + result!.range.length - 2, 2)
+            let postRange = NSMakeRange(range.location + range.length - 2, 2)
             styleApplier.addAttribute(.foregroundColor, value: Marklight.syntaxColor, range: postRange)
             hideSyntaxIfNecessary(range: postRange)
         }
 
         // We detect and process italics
         Marklight.italicRegex.matches(string, range: paragraphRange) { (result) -> Void in
-            styleApplier.addAttribute(.font, value: italicFont, range: result!.range)
+            guard let range = result?.range else { return }
+            styleApplier.addAttribute(.font, value: italicFont, range: range)
 
-            let preRange = NSMakeRange(result!.range.location, 1)
+            let preRange = NSMakeRange(range.location, 1)
             styleApplier.addAttribute(.foregroundColor, value: Marklight.syntaxColor, range: preRange)
             hideSyntaxIfNecessary(range: preRange)
 
-            let postRange = NSMakeRange(result!.range.location + result!.range.length - 1, 1)
+            let postRange = NSMakeRange(range.location + range.length - 1, 1)
             styleApplier.addAttribute(.foregroundColor, value: Marklight.syntaxColor, range: postRange)
             hideSyntaxIfNecessary(range: postRange)
         }
         
         // We detect and process bolds
         Marklight.boldRegex.matches(string, range: paragraphRange) { (result) -> Void in
-            styleApplier.addAttribute(.font, value: boldFont, range: result!.range)
+            guard let range = result?.range else { return }
+            styleApplier.addAttribute(.font, value: boldFont, range: range)
 
-            let preRange = NSMakeRange(result!.range.location, 2)
+            let preRange = NSMakeRange(range.location, 2)
             styleApplier.addAttribute(.foregroundColor, value: Marklight.syntaxColor, range: preRange)
             hideSyntaxIfNecessary(range: preRange)
 
-            let postRange = NSMakeRange(result!.range.location + result!.range.length - 2, 2)
+            let postRange = NSMakeRange(range.location + range.length - 2, 2)
             styleApplier.addAttribute(.foregroundColor, value: Marklight.syntaxColor, range: postRange)
             hideSyntaxIfNecessary(range: postRange)
         }
 
         // We detect and process inline links not formatted
         Marklight.autolinkRegex.matches(string, range: paragraphRange) { (result) -> Void in
-            let substring = textStorageNSString.substring(with: result!.range)
+            guard let range = result?.range else { return }
+            let substring = textStorageNSString.substring(with: range)
             guard substring.lengthOfBytes(using: .utf8) > 0 else { return }
-            styleApplier.addAttribute(.link, value: substring, range: result!.range)
+            styleApplier.addAttribute(.link, value: substring, range: range)
             
             if Marklight.hideSyntax {
-                Marklight.autolinkPrefixRegex.matches(string, range: result!.range) { (innerResult) -> Void in
-                    styleApplier.addAttribute(.font, value: hiddenFont, range: innerResult!.range)
-                    styleApplier.addAttribute(.foregroundColor, value: hiddenColor, range: innerResult!.range)
+                Marklight.autolinkPrefixRegex.matches(string, range: range) { (innerResult) -> Void in
+                    guard let innerRange = innerResult?.range else { return }
+                    styleApplier.addAttribute(.font, value: hiddenFont, range: innerRange)
+                    styleApplier.addAttribute(.foregroundColor, value: hiddenColor, range: innerRange)
                 }
             }
         }
         
         // We detect and process inline mailto links not formatted
         Marklight.autolinkEmailRegex.matches(string, range: paragraphRange) { (result) -> Void in
-            let substring = textStorageNSString.substring(with: result!.range)
+            guard let range = result?.range else { return }
+            let substring = textStorageNSString.substring(with: range)
             guard substring.lengthOfBytes(using: .utf8) > 0 else { return }
-            styleApplier.addAttribute(.link, value: substring, range: result!.range)
+            styleApplier.addAttribute(.link, value: substring, range: range)
             
             if Marklight.hideSyntax {
-                Marklight.mailtoRegex.matches(string, range: result!.range) { (innerResult) -> Void in
-                    styleApplier.addAttribute(.font, value: hiddenFont, range: innerResult!.range)
-                    styleApplier.addAttribute(.foregroundColor, value: hiddenColor, range: innerResult!.range)
+                Marklight.mailtoRegex.matches(string, range: range) { (innerResult) -> Void in
+                    guard let innerRange = innerResult?.range else { return }
+                    styleApplier.addAttribute(.font, value: hiddenFont, range: innerRange)
+                    styleApplier.addAttribute(.foregroundColor, value: hiddenColor, range: innerRange)
                 }
             }
         }
