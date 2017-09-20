@@ -23,6 +23,8 @@
 		503683FA1F209689006A7344 /* MarklightTextProcessorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503683F81F209665006A7344 /* MarklightTextProcessorTests.swift */; };
 		503683FC1F209F33006A7344 /* MarklightStyleApplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503683FB1F209F33006A7344 /* MarklightStyleApplier.swift */; };
 		503683FD1F209F33006A7344 /* MarklightStyleApplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503683FB1F209F33006A7344 /* MarklightStyleApplier.swift */; };
+		954847721F72781500C7C080 /* MarklightRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9594D2401F56F22E00ED641C /* MarklightRegex.swift */; };
+		954847731F72781E00C7C080 /* Array+appending.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500DC5551F1F4BDC00FE8C3E /* Array+appending.swift */; };
 		9594D2411F56F22E00ED641C /* MarklightRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9594D2401F56F22E00ED641C /* MarklightRegex.swift */; };
 		95C46D6C1C33E11A0070AEDC /* Marklight.h in Headers */ = {isa = PBXBuildFile; fileRef = 95C46D6B1C33E11A0070AEDC /* Marklight.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		95C46D731C33E11A0070AEDC /* Marklight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95C46D681C33E11A0070AEDC /* Marklight.framework */; };
@@ -358,7 +360,9 @@
 				503683EE1F207DCD006A7344 /* MarklightTextProcessor.swift in Sources */,
 				503683FD1F209F33006A7344 /* MarklightStyleApplier.swift in Sources */,
 				503683F11F208690006A7344 /* UniversalTypes.swift in Sources */,
+				954847731F72781E00C7C080 /* Array+appending.swift in Sources */,
 				500DC5571F1F508500FE8C3E /* MarklightTextStorage.swift in Sources */,
+				954847721F72781500C7C080 /* MarklightRegex.swift in Sources */,
 				503683F71F2095E3006A7344 /* MarklightTextProcessingResult.swift in Sources */,
 				500DC5581F1F50B100FE8C3E /* Marklight.swift in Sources */,
 			);
