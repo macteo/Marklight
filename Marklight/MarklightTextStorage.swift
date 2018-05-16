@@ -70,7 +70,7 @@
     - see: `Marklight`
  */
 
-open class MarklightTextStorage: NSTextStorage {
+open class MarklightTextStorage: NSTextStorage, MarklightStyleApplier {
 
     open lazy var marklightTextProcessor: MarklightTextProcessor = MarklightTextProcessor()
 
@@ -117,12 +117,12 @@ open class MarklightTextStorage: NSTextStorage {
         super.processEditing()
     }
 
-    override public func resetMarklightTextAttributes(textSize: CGFloat, range: NSRange) {
+    public func resetMarklightTextAttributes(textSize: CGFloat, range: NSRange) {
         // Use `imp` directly instead of `self` to avoid changing the edited range
         // after attribute fixing, affecting the insertion point on macOS.
-        imp.removeAttribute(NSForegroundColorAttributeName, range: range)
-        imp.addAttribute(NSFontAttributeName, value: MarklightFont.systemFont(ofSize: textSize), range: range)
-        imp.addAttribute(NSParagraphStyleAttributeName, value: NSParagraphStyle(), range: range)
+        imp.removeAttribute(NSAttributedStringKey.foregroundColor, range: range)
+        imp.addAttribute(NSAttributedStringKey.font, value: MarklightFont.systemFont(ofSize: textSize), range: range)
+        imp.addAttribute(NSAttributedStringKey.paragraphStyle, value: NSParagraphStyle(), range: range)
     }
 
 
@@ -156,8 +156,7 @@ open class MarklightTextStorage: NSTextStorage {
      [`NSTextStorage`](xcdoc://?url=developer.apple.com/library/ios/documentation/UIKit/Reference/NSTextStorage_Class_TextKit/index.html#//apple_ref/doc/uid/TP40013282)
      */
 
-    
-    open override func attributes(at location: Int, effectiveRange range: NSRangePointer?) -> [String : Any] {
+    open override func attributes(at location: Int, effectiveRange range: NSRangePointer?) -> [NSAttributedStringKey : Any] {
         return imp.attributes(at: location, effectiveRange: range)
     }
     
@@ -203,9 +202,8 @@ open class MarklightTextStorage: NSTextStorage {
         [`NSTextStorage`](xcdoc://?url=developer.apple.com/library/ios/documentation/UIKit/Reference/NSTextStorage_Class_TextKit/index.html#//apple_ref/doc/uid/TP40013282)
      */
     
-    
-    open override func setAttributes(_ attrs: [String : Any]?, range: NSRange) {
-        // When we are processing, using the regular callback triggers will 
+    override open func setAttributes(_ attrs: [NSAttributedStringKey : Any]?, range: NSRange) {
+        // When we are processing, using the regular callback triggers will
         // result in the caret jumping to the end of the document.
         guard !isBusyProcessing else {
             imp.setAttributes(attrs, range: range)

@@ -1,6 +1,6 @@
 language: objective-c
-osx_image: xcode8.2
-script: xcodebuild -project Marklight.xcodeproj -scheme "Marklight iOS" -destination 'platform=iOS Simulator,OS=10.2,id=BA25BEF2-CAEF-4855-9BB3-63D0D6C4EEDD' -enableCodeCoverage YES clean build test
+osx_image: xcode9
+script: xcodebuild -project Marklight.xcodeproj -scheme 'Marklight iOS' -destination 'platform=iOS Simulator,OS=11.0,id=F0514456-8225-48CF-8CCB-F92C3267CF08' -enableCodeCoverage YES clean build test
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 
