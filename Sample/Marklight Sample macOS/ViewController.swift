@@ -22,11 +22,13 @@ class ViewController: NSViewController {
         textStorage.marklightTextProcessor.syntaxColor = NSColor.blue
         textStorage.marklightTextProcessor.codeFontName = "Courier"
         textStorage.marklightTextProcessor.textSize = 18.0
-        textStorage.marklightTextProcessor.hideSyntax = true
+        textStorage.marklightTextProcessor.hideSyntax = false
 
         textView.layoutManager?.replaceTextStorage(textStorage)
 
         textView.textContainerInset = NSSize(width: 10, height: 8)
+        textView.isAutomaticQuoteSubstitutionEnabled = false
+        textView.isAutomaticDashSubstitutionEnabled = false
 
         if let samplePath = Bundle.main.path(forResource: "Sample", ofType: "md"),
             let string = try? String(contentsOfFile: samplePath) {

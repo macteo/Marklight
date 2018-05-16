@@ -29,7 +29,7 @@ class ViewController: UIViewController, UITextViewDelegate {
         textStorage.marklightTextProcessor.syntaxColor = UIColor.blue
         textStorage.marklightTextProcessor.codeFontName = "Courier"
         textStorage.marklightTextProcessor.fontTextStyle = UIFontTextStyle.subheadline.rawValue
-        textStorage.marklightTextProcessor.hideSyntax = true
+        textStorage.marklightTextProcessor.hideSyntax = false
         
         let layoutManager = NSLayoutManager()
         
@@ -44,6 +44,12 @@ class ViewController: UIViewController, UITextViewDelegate {
         
         textView.frame = view.bounds
         textView.translatesAutoresizingMaskIntoConstraints = false
+        
+        if #available(iOS 11.0, *) {
+            textView.smartDashesType = .no
+            textView.smartQuotesType = .no
+        }        
+        
         view.addSubview(textView)
         
         view.addConstraint(NSLayoutConstraint(item: textView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0))

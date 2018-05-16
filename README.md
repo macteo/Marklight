@@ -2,12 +2,9 @@
 
 Markdown syntax highlighter for iOS and macOS.
 
-[![License MIT](https://img.shields.io/cocoapods/l/Marklight.svg)](https://raw.githubusercontent.com/macteo/marklight/master/LICENSE) 
-[![Version](https://img.shields.io/cocoapods/v/Marklight.svg)](https://cocoapods.org/?q=marklight) 
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) 
-[![travis-ci](https://travis-ci.org/macteo/Marklight.svg?branch=master)](https://travis-ci.org/macteo/Marklight)
-[![codecov.io](https://codecov.io/github/macteo/Marklight/coverage.svg?branch=master)](https://codecov.io/github/macteo/Marklight?branch=master)
-![Swift 3](https://img.shields.io/badge/language-Swift%203-EB7943.svg) ![iOS 8+](https://img.shields.io/badge/iOS-8+-EB7943.svg)
+[![License MIT](https://img.shields.io/cocoapods/l/Marklight.svg)](https://raw.githubusercontent.com/macteo/marklight/master/LICENSE) [![Version](https://img.shields.io/cocoapods/v/Marklight.svg)](https://cocoapods.org/?q=marklight) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![travis-ci](https://travis-ci.org/macteo/Marklight.svg?branch=master)](https://travis-ci.org/macteo/Marklight)
+[![codecov.io](https://codecov.io/github/macteo/Marklight/coverage.svg?branch=feature/swift4)](https://codecov.io/github/macteo/Marklight?branch=master)
+![Swift 4.1](https://img.shields.io/badge/language-Swift%204.1-EB7943.svg) ![iOS 8+](https://img.shields.io/badge/iOS-8+-EB7943.svg)
 
 ## Description
 
@@ -23,7 +20,7 @@ Regular expressions are taken from [Markingbird](https://github.com/kristopherjo
 - [x] Applicable to any `UITextView`.
 - [x] `NSTextStorage` subclass ready to use.
 - [x] Struct optimized for performances.
-- [x] Swift 3.0 compatible.
+- [x] Swift 4.1 compatible.
 - [x] Dynamic text style supported.
 - [x] Choose markdown syntax color.
 - [x] Choose font and color for code blocks.
@@ -38,8 +35,8 @@ Regular expressions are taken from [Markingbird](https://github.com/kristopherjo
 ## Requirements
 
 - iOS 8.0+
+- Xcode 9.3+
 - macOS 10.11+
-- Xcode 8.2+
 
 ## Installation
 

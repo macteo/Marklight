@@ -4,7 +4,7 @@
 import XCTest
 @testable import Marklight
 
-extension NSRange: Equatable, CustomStringConvertible {
+extension NSRange {
     public static func ==(lhs: NSRange, rhs: NSRange) -> Bool {
         return lhs.location == rhs.location && lhs.length == rhs.length
     }
@@ -17,18 +17,19 @@ extension NSRange: Equatable, CustomStringConvertible {
 class MarklightTextProcessorTests: XCTestCase {
 
     class StyleApplierDouble: MarklightStyleApplier {
-        var didAddAttributes: (attributes: [String : Any], range: NSRange)?
-        func addAttributes(_ attrs: [String : Any], range: NSRange) {
+
+        var didAddAttributes: (attributes: [NSAttributedStringKey : Any], range: NSRange)?
+        func addAttributes(_ attrs: [NSAttributedStringKey : Any], range: NSRange) {
             didAddAttributes = (attrs, range)
         }
 
-        var didAddAttribute: (name: String, value: Any, range: NSRange)?
-        func addAttribute(_ name: String, value: Any, range: NSRange) {
+        var didAddAttribute: (name: NSAttributedStringKey, value: Any, range: NSRange)?
+        func addAttribute(_ name: NSAttributedStringKey, value: Any, range: NSRange) {
             didAddAttribute = (name, value, range)
         }
 
-        var didRemoveAttribute: (name: String, range: NSRange)?
-        func removeAttribute(_ name: String, range: NSRange) {
+        var didRemoveAttribute: (name: NSAttributedStringKey, range: NSRange)?
+        func removeAttribute(_ name: NSAttributedStringKey, range: NSRange) {
             didRemoveAttribute = (name, range)
         }
 
