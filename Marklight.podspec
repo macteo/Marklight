@@ -17,5 +17,5 @@ Pod::Spec.new do |s|
   s.source_files          = "Marklight/**/*.{swift}"
   s.requires_arc          = true
   
-  s.swift_version = '>= 4.1'
+  s.swift_version         = '4.1'
 end
