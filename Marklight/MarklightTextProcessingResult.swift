@@ -6,15 +6,10 @@
 //  Copyright © 2017 MacTeo. See LICENSE for details.
 //
 
-<<<<<<< HEAD
 #if os(iOS)
     import UIKit
 #elseif os(macOS)
-=======
-import Foundation
-
-#if os(macOS)
->>>>>>> feature/swift4
+    import Foundation
     import AppKit
 #endif
 
