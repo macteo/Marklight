@@ -52,6 +52,9 @@ open class MarklightTextProcessor {
      */
     open var hideSyntax = false
 
+    // MARK: Initializers
+
+    public init() {}
 
     // MARK: Syntax highlighting
 
