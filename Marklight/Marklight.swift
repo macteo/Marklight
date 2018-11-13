@@ -234,7 +234,7 @@ public struct Marklight {
         
         let hiddenFont = MarklightFont.systemFont(ofSize: 0.1)
         let hiddenColor = MarklightColor.clear
-        let hiddenAttributes: [NSAttributedStringKey : Any] = [
+        let hiddenAttributes: [NSAttributedString.Key : Any] = [
             .font : hiddenFont,
             .foregroundColor : hiddenColor
         ]

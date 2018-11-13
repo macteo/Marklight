@@ -125,12 +125,12 @@ open class MarklightTextProcessor {
 
      - see: [Text Styles](xcdoc://?url=developer.apple.com/library/ios/documentation/UIKit/Reference/UIFontDescriptor_Class/index.html#//apple_ref/doc/constant_group/Text_Styles)
      */
-    open var fontTextStyle : String = UIFontTextStyle.body.rawValue
+    open var fontTextStyle : String = UIFont.TextStyle.body.rawValue
 
     /// Text size measured in points.
     fileprivate var textSize: CGFloat {
         return MarklightFontDescriptor
-            .preferredFontDescriptor(withTextStyle: UIFontTextStyle(rawValue: self.fontTextStyleValidated))
+            .preferredFontDescriptor(withTextStyle: UIFont.TextStyle(rawValue: self.fontTextStyleValidated))
             .pointSize
     }
 
@@ -141,26 +141,26 @@ open class MarklightTextProcessor {
         let supportedTextStyles: [String] = {
 
             let baseStyles = [
-                UIFontTextStyle.headline.rawValue,
-                UIFontTextStyle.subheadline.rawValue,
-                UIFontTextStyle.body.rawValue,
-                UIFontTextStyle.footnote.rawValue,
-                UIFontTextStyle.caption1.rawValue,
-                UIFontTextStyle.caption2.rawValue
+                UIFont.TextStyle.headline.rawValue,
+                UIFont.TextStyle.subheadline.rawValue,
+                UIFont.TextStyle.body.rawValue,
+                UIFont.TextStyle.footnote.rawValue,
+                UIFont.TextStyle.caption1.rawValue,
+                UIFont.TextStyle.caption2.rawValue
             ]
 
             guard #available(iOS 9.0, *) else { return baseStyles }
 
             return baseStyles.appending(contentsOf: [
-                UIFontTextStyle.title1.rawValue,
-                UIFontTextStyle.title2.rawValue,
-                UIFontTextStyle.title3.rawValue,
-                UIFontTextStyle.callout.rawValue
+                UIFont.TextStyle.title1.rawValue,
+                UIFont.TextStyle.title2.rawValue,
+                UIFont.TextStyle.title3.rawValue,
+                UIFont.TextStyle.callout.rawValue
                 ])
         }()
         
         guard supportedTextStyles.contains(self.fontTextStyle) else {
-            return UIFontTextStyle.body.rawValue
+            return UIFont.TextStyle.body.rawValue
         }
         
         return self.fontTextStyle

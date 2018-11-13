@@ -18,18 +18,18 @@ class MarklightTextProcessorTests: XCTestCase {
 
     class StyleApplierDouble: MarklightStyleApplier {
 
-        var didAddAttributes: (attributes: [NSAttributedStringKey : Any], range: NSRange)?
-        func addAttributes(_ attrs: [NSAttributedStringKey : Any], range: NSRange) {
+        var didAddAttributes: (attributes: [NSAttributedString.Key : Any], range: NSRange)?
+        func addAttributes(_ attrs: [NSAttributedString.Key : Any], range: NSRange) {
             didAddAttributes = (attrs, range)
         }
 
-        var didAddAttribute: (name: NSAttributedStringKey, value: Any, range: NSRange)?
-        func addAttribute(_ name: NSAttributedStringKey, value: Any, range: NSRange) {
+        var didAddAttribute: (name: NSAttributedString.Key, value: Any, range: NSRange)?
+        func addAttribute(_ name: NSAttributedString.Key, value: Any, range: NSRange) {
             didAddAttribute = (name, value, range)
         }
 
-        var didRemoveAttribute: (name: NSAttributedStringKey, range: NSRange)?
-        func removeAttribute(_ name: NSAttributedStringKey, range: NSRange) {
+        var didRemoveAttribute: (name: NSAttributedString.Key, range: NSRange)?
+        func removeAttribute(_ name: NSAttributedString.Key, range: NSRange) {
             didRemoveAttribute = (name, range)
         }
 

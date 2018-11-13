@@ -120,9 +120,9 @@ open class MarklightTextStorage: NSTextStorage, MarklightStyleApplier {
     public func resetMarklightTextAttributes(textSize: CGFloat, range: NSRange) {
         // Use `imp` directly instead of `self` to avoid changing the edited range
         // after attribute fixing, affecting the insertion point on macOS.
-        imp.removeAttribute(NSAttributedStringKey.foregroundColor, range: range)
-        imp.addAttribute(NSAttributedStringKey.font, value: MarklightFont.systemFont(ofSize: textSize), range: range)
-        imp.addAttribute(NSAttributedStringKey.paragraphStyle, value: NSParagraphStyle(), range: range)
+        imp.removeAttribute(NSAttributedString.Key.foregroundColor, range: range)
+        imp.addAttribute(NSAttributedString.Key.font, value: MarklightFont.systemFont(ofSize: textSize), range: range)
+        imp.addAttribute(NSAttributedString.Key.paragraphStyle, value: NSParagraphStyle(), range: range)
     }
 
 
@@ -156,7 +156,7 @@ open class MarklightTextStorage: NSTextStorage, MarklightStyleApplier {
      [`NSTextStorage`](xcdoc://?url=developer.apple.com/library/ios/documentation/UIKit/Reference/NSTextStorage_Class_TextKit/index.html#//apple_ref/doc/uid/TP40013282)
      */
 
-    open override func attributes(at location: Int, effectiveRange range: NSRangePointer?) -> [NSAttributedStringKey : Any] {
+    open override func attributes(at location: Int, effectiveRange range: NSRangePointer?) -> [NSAttributedString.Key : Any] {
         return imp.attributes(at: location, effectiveRange: range)
     }
     
@@ -202,7 +202,7 @@ open class MarklightTextStorage: NSTextStorage, MarklightStyleApplier {
         [`NSTextStorage`](xcdoc://?url=developer.apple.com/library/ios/documentation/UIKit/Reference/NSTextStorage_Class_TextKit/index.html#//apple_ref/doc/uid/TP40013282)
      */
     
-    override open func setAttributes(_ attrs: [NSAttributedStringKey : Any]?, range: NSRange) {
+    override open func setAttributes(_ attrs: [NSAttributedString.Key : Any]?, range: NSRange) {
         // When we are processing, using the regular callback triggers will
         // result in the caret jumping to the end of the document.
         guard !isBusyProcessing else {
@@ -239,7 +239,7 @@ open class MarklightTextStorage: NSTextStorage, MarklightStyleApplier {
      */
     // TODO: Make this work without needing to type in the text view.
     func observeTextSize() {
-        NotificationCenter.default.addObserver(forName: .UIContentSizeCategoryDidChange, object: nil, queue: OperationQueue.main) { [weak self] (notification) -> Void in
+        NotificationCenter.default.addObserver(forName: UIContentSizeCategory.didChangeNotification, object: nil, queue: OperationQueue.main) { [weak self] (notification) -> Void in
             self?.invalidateTextSizeForWholeRange()
         }
     }

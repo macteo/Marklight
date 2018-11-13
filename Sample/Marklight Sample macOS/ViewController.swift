@@ -36,4 +36,12 @@ class ViewController: NSViewController {
             textStorage.append(attributedString)
         }
     }
+    
+    func isDarkMode(view: NSView?) -> Bool {
+        if #available(OSX 10.14, *) {
+            let appearance = view?.effectiveAppearance ?? NSAppearance.current!
+            return (appearance.name == .darkAqua)
+        }
+        return false
+    }
 }

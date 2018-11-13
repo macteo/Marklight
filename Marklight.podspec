@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                  = "Marklight"
-  s.version               = "1.4.0"
+  s.version               = "1.5.0"
   s.summary               = "Markdown syntax highlighter for iOS and macOS."
   s.description           = <<-DESC
   Marklight is a drop in component to easily add realtime markdown syntax highlight on any user editable text view on iOS applications.
@@ -17,5 +17,5 @@ Pod::Spec.new do |s|
   s.source_files          = "Marklight/**/*.{swift}"
   s.requires_arc          = true
   
-  s.swift_version         = '4.1'
+  s.swift_version         = '4.2'
 end
